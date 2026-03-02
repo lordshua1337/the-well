@@ -240,9 +240,39 @@ export default function ExplorePage() {
           </div>
         )}
 
+        {/* Total stats */}
+        {!isSearching && (
+          <div className="mt-10 bg-surface rounded-xl border border-border p-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div>
+                <p className="text-2xl font-semibold text-accent">
+                  {domains.length}
+                </p>
+                <p className="text-xs text-text-muted mt-1">Domains</p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold text-accent">
+                  {concepts.length}
+                </p>
+                <p className="text-xs text-text-muted mt-1">Concepts</p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold text-accent">3</p>
+                <p className="text-xs text-text-muted mt-1">Depth Levels</p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold text-accent">
+                  {concepts.length * 3}
+                </p>
+                <p className="text-xs text-text-muted mt-1">Total Entries</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Scripture cards link */}
         {!isSearching && (
-          <div className="mt-10 text-center">
+          <div className="mt-6 text-center">
             <Link
               href="/cards"
               className="text-accent text-sm font-medium hover:text-accent-light transition-colors inline-flex items-center gap-1"

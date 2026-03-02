@@ -335,6 +335,106 @@ export const wordCorrections: WordCorrection[] = [
     whyItMatters:
       "Christianity's war on the body -- its suspicion of pleasure, sexuality, and the physical world -- is built on reading 'sarx' as 'body.' But Paul's list of the 'works of the flesh' is mostly social and psychological: jealousy, rage, faction, envy. The problem is not having a body. The problem is living from ego. Fix the translation, and centuries of body-shame start to unravel.",
   },
+  {
+    id: "pneuma",
+    greek: "\u03C0\u03BD\u03B5\u03CD\u03BC\u03B1",
+    transliteration: "pneuma",
+    commonTranslation: "Spirit (ghost, invisible supernatural entity)",
+    actualMeaning: "Breath, wind, life-force -- the animating presence that connects all living things to the divine",
+    explanation:
+      "Pneuma literally means breath or wind. When Genesis says God breathed into Adam's nostrils, the word is ruach in Hebrew -- the same concept as pneuma in Greek. It is not a ghost floating around. It is the life-breath that makes living things alive. When Jesus says 'the pneuma blows where it wishes' (John 3:8), he is making a deliberate wordplay: the wind/breath/spirit is the same word. You cannot see where it comes from or where it goes, but you can feel it. Translating pneuma as 'Spirit' with a capital S turned a lived experience (being animated, inspired, moved) into a theological abstraction (the third person of the Trinity). The early Christians did not experience the pneuma as a doctrine. They experienced it as a feeling -- the breath of God moving through them, the same force that brought the cosmos into being. Pneuma is not something you believe in. It is something you breathe.",
+    keyVerses: [
+      {
+        ref: "John 3:8",
+        text: "The pneuma blows where it wishes. You hear its sound, but you do not know where it comes from or where it goes. So it is with everyone born of the pneuma.",
+      },
+      {
+        ref: "Genesis 2:7 (LXX)",
+        text: "And God breathed into his nostrils the pnoe of life, and the man became a living soul.",
+      },
+      {
+        ref: "Romans 8:16",
+        text: "The pneuma itself testifies with our pneuma that we are children of God.",
+      },
+    ],
+    whyItMatters:
+      "When spirit becomes a ghost-like entity separate from you, religion becomes about receiving something external. When spirit is breath -- the animating force already inside every living thing -- the question shifts from 'Do you have the Spirit?' to 'Are you paying attention to the life already moving through you?' The breath of God is not a special gift for believers. It is the reason anything is alive at all.",
+  },
+  {
+    id: "charis",
+    greek: "\u03C7\u03AC\u03C1\u03B9\u03C2",
+    transliteration: "charis",
+    commonTranslation: "Grace (unmerited favor, God letting you off the hook)",
+    actualMeaning: "Gift-giving generosity, the natural outpouring of goodness from an abundant source",
+    explanation:
+      "In the Greco-Roman world, charis operated within a well-understood gift economy. A patron gave charis (a generous gift). The recipient responded with gratitude (also charis). The relationship was reciprocal, not transactional -- it was about generous overflow, not debt and payment. When Paul used charis, his audience understood this immediately: the divine is generous by nature, not because you earned it, but because generosity is what abundance does. It overflows. Translating charis as 'unmerited favor' technically captures part of this but adds a layer of unworthiness that distorts everything. The emphasis in 'unmerited favor' falls on your unworthiness: you do not deserve this. The emphasis in the original charis falls on the giver's abundance: this is what generosity looks like. One makes you feel small. The other makes the source look magnificent. They are not the same thing.",
+    keyVerses: [
+      {
+        ref: "Ephesians 2:8-9",
+        text: "For by charis you have been made whole through trust -- and this not from yourselves, it is the gift of God -- not by works, so that no one can boast.",
+      },
+      {
+        ref: "2 Corinthians 9:8",
+        text: "And God is able to make all charis abound to you, so that having all sufficiency in all things at all times, you may abound in every good work.",
+      },
+      {
+        ref: "Romans 5:17",
+        text: "For if by the trespass of the one, death reigned through that one, how much more will those who receive the abundance of charis and the gift of right-relationship reign in life through the one, Jesus the Anointed.",
+      },
+    ],
+    whyItMatters:
+      "The 'unmerited favor' translation has created a Christianity where you must constantly remind yourself you do not deserve God's love. This produces either chronic guilt or cheap complacency ('I can do anything because grace covers it'). The original charis produces neither. It produces gratitude -- the natural response to witnessing extravagant generosity. You do not grovel. You do not exploit. You are moved by beauty and you respond in kind. That is the gift economy Paul was describing.",
+  },
+  {
+    id: "sozo",
+    greek: "\u03C3\u03CE\u03B6\u03C9",
+    transliteration: "sozo",
+    commonTranslation: "Save (rescue from hell, spiritual salvation only)",
+    actualMeaning: "To make whole, to heal, to restore to full functioning -- physical, mental, relational, and spiritual",
+    explanation:
+      "Sozo is used interchangeably in the Gospels for physical healing and spiritual restoration. When Jesus heals the woman with the bleeding issue, he says 'Your pistis has sozo-ed you' -- translators render this as 'Your faith has healed you.' When the jailer in Acts asks 'What must I do to be sozo-ed?', translators render this as 'What must I do to be saved?' Same word. Entirely different English translations based on theological assumptions. The original audience heard no distinction. Sozo meant being restored to wholeness -- your body works, your relationships work, your connection to the divine works, your community works. Salvation was not an escape plan for after death. It was a restoration project for right now. The fracturing of sozo into 'healing' (physical, temporary, this-world) and 'salvation' (spiritual, eternal, next-world) is a translation decision that created two separate religions out of one seamless concept.",
+    keyVerses: [
+      {
+        ref: "Mark 5:34",
+        text: "Daughter, your trust has sozo-ed you. Go in peace and be freed from your suffering.",
+      },
+      {
+        ref: "Acts 16:30-31",
+        text: "He brought them out and said, 'Sirs, what must I do to be sozo-ed?' They said, 'Trust in the Lord Jesus, and you will be sozo-ed.'",
+      },
+      {
+        ref: "James 5:15",
+        text: "And the prayer of trust will sozo the one who is sick, and the Lord will raise them up.",
+      },
+    ],
+    whyItMatters:
+      "If salvation only means going to heaven when you die, then the present world is just a waiting room. If sozo means being made whole right now, then every act of healing, every restored relationship, every moment of deep peace is salvation happening in real time. The question shifts from 'Are you saved?' (past tense, binary, done) to 'Are you being made whole?' (present tense, ongoing, participatory). One is a ticket you punch. The other is a life you live.",
+  },
+  {
+    id: "skandalon",
+    greek: "\u03C3\u03BA\u03AC\u03BD\u03B4\u03B1\u03BB\u03BF\u03BD",
+    transliteration: "skandalon",
+    commonTranslation: "Offense, stumbling block (something that makes you trip or sin)",
+    actualMeaning: "The trigger of a trap -- the bait stick that springs a snare, the thing that lures you into a self-destructive pattern",
+    explanation:
+      "A skandalon was not a rock on the path that you accidentally trip over. It was the trigger mechanism in an animal trap -- the stick that held the bait. The animal sees something it wants, reaches for it, and the trap snaps shut. This is fundamentally different from 'stumbling block,' which implies accidental clumsiness. A skandalon is deliberate entrapment through desire. When Jesus says 'woe to the one through whom skandala come' (Matthew 18:7), he is not talking about someone who left a rock on the path. He is talking about someone who baits traps -- who exploits other people's desires and vulnerabilities to lure them into destruction. And when he says 'if your eye is a skandalon to you, pluck it out,' he means: if your way of seeing is the bait that keeps luring you into the same trap, eliminate that way of seeing. It is radical language about breaking self-destructive patterns, not vague advice about avoiding sin.",
+    keyVerses: [
+      {
+        ref: "Matthew 18:7",
+        text: "Woe to the world because of skandala! It is necessary that skandala come, but woe to the person through whom the skandalon comes.",
+      },
+      {
+        ref: "Matthew 16:23",
+        text: "Jesus turned and said to Peter, 'Get behind me, Satan! You are a skandalon to me; you do not have in mind the concerns of God, but merely human concerns.'",
+      },
+      {
+        ref: "Romans 14:13",
+        text: "Therefore let us stop passing judgment on one another. Instead, make up your mind not to put any skandalon or obstacle in the way of a brother or sister.",
+      },
+    ],
+    whyItMatters:
+      "Stumbling block is passive and accidental. Skandalon is active and intentional. The difference matters because Jesus's teaching on skandala is about systems of entrapment, not individual clumsiness. Religious leaders who exploit faith for profit are skandala. Cultural systems that bait people with false promises are skandala. When you understand the trap metaphor, Jesus's harsh language makes sense: he is not overreacting to minor annoyances. He is identifying predatory systems that lure vulnerable people into destruction by exploiting their desires.",
+  },
 ];
 
 export const scriptureCards: ScriptureCard[] = [
