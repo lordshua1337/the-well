@@ -10,6 +10,7 @@ export function Nav() {
   const links = [
     { href: "/explore", label: "Explore" },
     { href: "/words", label: "Words" },
+    { href: "/cards", label: "Cards" },
     { href: "/ask", label: "Ask" },
   ];
 

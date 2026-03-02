@@ -1,255 +1,255 @@
 "use client";
 
-import { useState, useCallback, useRef, TouchEvent } from "react";
+import { useState, useMemo } from "react";
+import Link from "next/link";
 import {
-  ChevronLeft,
-  ChevronRight,
+  Search,
+  ArrowRight,
   BookOpen,
-  Languages,
   ScrollText,
-  Filter,
+  Languages,
+  Landmark,
+  Compass,
+  Flame,
+  Globe,
+  MapPin,
+  Eye,
+  Users,
+  Heart,
+  ChevronDown,
+  ChevronUp,
+  Archive,
+  Church,
 } from "lucide-react";
-import { scriptureCards, type ScriptureCard } from "@/lib/scripture-data";
+import { domains, type Domain } from "@/lib/domains";
+import { concepts, searchConcepts, getConceptsByDomain } from "@/lib/concepts";
 
-type CategoryFilter = "all" | "word" | "teaching" | "gnostic";
-
-const categoryLabels: Record<CategoryFilter, string> = {
-  all: "All",
-  word: "Word Corrections",
-  teaching: "Teachings",
-  gnostic: "Gnostic Texts",
+const iconMap: Record<string, React.ReactNode> = {
+  ScrollText: <ScrollText className="w-5 h-5" />,
+  BookOpen: <BookOpen className="w-5 h-5" />,
+  Archive: <Archive className="w-5 h-5" />,
+  Languages: <Languages className="w-5 h-5" />,
+  Landmark: <Landmark className="w-5 h-5" />,
+  Compass: <Compass className="w-5 h-5" />,
+  Flame: <Flame className="w-5 h-5" />,
+  Church: <Church className="w-5 h-5" />,
+  Globe: <Globe className="w-5 h-5" />,
+  MapPin: <MapPin className="w-5 h-5" />,
+  Eye: <Eye className="w-5 h-5" />,
+  Users: <Users className="w-5 h-5" />,
+  Heart: <Heart className="w-5 h-5" />,
 };
 
-const categoryIcons: Record<CategoryFilter, React.ReactNode> = {
-  all: <Filter className="w-4 h-4" />,
-  word: <Languages className="w-4 h-4" />,
-  teaching: <BookOpen className="w-4 h-4" />,
-  gnostic: <ScrollText className="w-4 h-4" />,
-};
-
-function ScriptureCardView({
-  card,
-  direction,
+function DomainCard({
+  domain,
+  conceptCount,
 }: {
-  card: ScriptureCard;
-  direction: "left" | "right" | "none";
+  domain: Domain;
+  conceptCount: number;
 }) {
-  const animClass =
-    direction === "none"
-      ? "animate-fade-in"
-      : direction === "right"
-        ? "animate-slide-in"
-        : "animate-fade-in";
+  return (
+    <Link
+      href={`/explore/${domain.slug}`}
+      className="group bg-surface rounded-xl border border-border p-5 card-hover block relative overflow-hidden"
+    >
+      {/* Subtle accent line at top */}
+      <div
+        className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
+        style={{ backgroundColor: domain.color }}
+      />
+
+      <div className="flex items-start gap-3 mb-3">
+        <div
+          className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: `${domain.color}15`, color: domain.color }}
+        >
+          {iconMap[domain.icon]}
+        </div>
+        <div className="min-w-0">
+          <h3 className="text-sm font-semibold leading-tight group-hover:text-accent transition-colors">
+            {domain.shortName}
+          </h3>
+          <p className="text-xs text-text-muted mt-0.5">
+            {conceptCount} {conceptCount === 1 ? "entry" : "entries"}
+          </p>
+        </div>
+      </div>
+
+      <p className="text-xs text-text-secondary leading-relaxed line-clamp-3">
+        {domain.description}
+      </p>
+
+      <div className="flex items-center gap-1 text-accent text-xs font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+        Explore <ArrowRight className="w-3 h-3" />
+      </div>
+    </Link>
+  );
+}
+
+function ConceptResult({
+  concept,
+}: {
+  concept: (typeof concepts)[0];
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const domain = domains.find((d) => d.id === concept.domainId);
 
   return (
-    <div
-      className={`bg-surface rounded-2xl border border-border p-6 sm:p-8 max-w-lg w-full mx-auto ${animClass}`}
-    >
-      {/* Category badge */}
-      <div className="flex items-center justify-between mb-6">
-        <span className="text-xs uppercase tracking-widest text-accent font-medium">
-          {card.category === "word"
-            ? "Word Correction"
-            : card.category === "teaching"
-              ? "Teaching"
-              : "Gnostic Text"}
-        </span>
-        <span className="text-xs text-text-muted">{card.verseRef}</span>
-      </div>
-
-      {/* Greek word (if applicable) */}
-      {card.transliteration && (
-        <div className="mb-6">
-          <p className="text-xs text-text-muted uppercase tracking-widest mb-1">
-            Greek
-          </p>
-          <p className="font-serif italic text-accent text-xl">
-            {card.transliteration}
-          </p>
-          {card.commonTranslation && (
-            <div className="flex items-center gap-3 mt-2">
-              <span className="text-sm text-text-muted line-through">
-                {card.commonTranslation}
+    <div className="bg-surface rounded-xl border border-border overflow-hidden">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full text-left p-4 flex items-start justify-between gap-3"
+      >
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            {domain && (
+              <span
+                className="text-[10px] uppercase tracking-widest font-medium px-1.5 py-0.5 rounded"
+                style={{
+                  backgroundColor: `${domain.color}15`,
+                  color: domain.color,
+                }}
+              >
+                {domain.shortName}
               </span>
-              <span className="text-text-muted">&rarr;</span>
-              <span className="text-sm text-accent font-medium">
-                {card.actualMeaning}
-              </span>
-            </div>
+            )}
+          </div>
+          <h4 className="text-sm font-semibold">{concept.name}</h4>
+          <p className="text-xs text-text-secondary mt-1 line-clamp-2">
+            {concept.summary}
+          </p>
+        </div>
+        <div className="text-text-muted flex-shrink-0 mt-1">
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4" />
+          ) : (
+            <ChevronDown className="w-4 h-4" />
           )}
         </div>
+      </button>
+
+      {isExpanded && (
+        <div className="px-4 pb-4 border-t border-border-light pt-3 animate-fade-in">
+          <p className="text-sm text-text-secondary leading-relaxed">
+            {concept.layers.accessible}
+          </p>
+          <div className="flex items-center gap-3 mt-3">
+            <Link
+              href={`/concepts/${concept.slug}`}
+              className="text-accent text-xs font-medium hover:text-accent-light transition-colors inline-flex items-center gap-1"
+            >
+              Read full entry <ArrowRight className="w-3 h-3" />
+            </Link>
+            {concept.relatedConceptSlugs.length > 0 && (
+              <span className="text-xs text-text-muted">
+                {concept.relatedConceptSlugs.length} related
+              </span>
+            )}
+          </div>
+        </div>
       )}
-
-      {/* Verse */}
-      <blockquote className="font-serif text-lg sm:text-xl leading-relaxed text-text-primary mb-6">
-        &ldquo;{card.verse}&rdquo;
-      </blockquote>
-
-      {/* Context */}
-      <div className="border-t border-border-light pt-4">
-        <p className="text-sm text-text-secondary leading-relaxed">
-          {card.context}
-        </p>
-      </div>
     </div>
   );
 }
 
 export default function ExplorePage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right" | "none">(
-    "none"
-  );
-  const [filter, setFilter] = useState<CategoryFilter>("all");
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredCards =
-    filter === "all"
-      ? scriptureCards
-      : scriptureCards.filter((c) => c.category === filter);
-
-  const currentCard = filteredCards[currentIndex];
-
-  const goNext = useCallback(() => {
-    if (currentIndex < filteredCards.length - 1) {
-      setDirection("right");
-      setCurrentIndex((prev) => prev + 1);
+  const domainConceptCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const domain of domains) {
+      counts[domain.id] = getConceptsByDomain(domain.id).length;
     }
-  }, [currentIndex, filteredCards.length]);
+    return counts;
+  }, []);
 
-  const goPrev = useCallback(() => {
-    if (currentIndex > 0) {
-      setDirection("left");
-      setCurrentIndex((prev) => prev - 1);
-    }
-  }, [currentIndex]);
+  const searchResults = useMemo(() => {
+    if (searchQuery.trim().length < 2) return [];
+    return searchConcepts(searchQuery.trim());
+  }, [searchQuery]);
 
-  const handleTouchStart = (e: TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchMove = (e: TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50;
-
-    if (diff > threshold) {
-      goNext();
-    } else if (diff < -threshold) {
-      goPrev();
-    }
-  };
-
-  const handleFilterChange = (newFilter: CategoryFilter) => {
-    setFilter(newFilter);
-    setCurrentIndex(0);
-    setDirection("none");
-  };
+  const isSearching = searchQuery.trim().length >= 2;
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
-            Explore
+            The Knowledge Universe
           </p>
-          <h1 className="text-3xl sm:text-4xl mb-3">Scripture Cards</h1>
-          <p className="text-text-secondary text-sm">
-            Swipe through teachings with their original meanings. No spin.
+          <h1 className="text-3xl sm:text-4xl mb-3">Explore</h1>
+          <p className="text-text-secondary text-sm max-w-lg mx-auto">
+            13 domains spanning scripture, theology, history, languages,
+            practice, and pastoral application. Enter from any point.
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {(Object.keys(categoryLabels) as CategoryFilter[]).map((cat) => (
+        {/* Search */}
+        <div className="relative max-w-md mx-auto mb-10">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search concepts, texts, traditions..."
+            className="w-full bg-surface border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent/40 transition-colors"
+          />
+          {searchQuery && (
             <button
-              key={cat}
-              onClick={() => handleFilterChange(cat)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                filter === cat
-                  ? "bg-accent text-white"
-                  : "bg-surface border border-border text-text-secondary hover:border-accent/30"
-              }`}
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-secondary text-xs"
             >
-              {categoryIcons[cat]}
-              {categoryLabels[cat]}
+              Clear
             </button>
-          ))}
+          )}
         </div>
 
-        {/* Card display */}
-        {filteredCards.length > 0 ? (
-          <>
-            <div
-              className="swipe-container min-h-[400px] flex items-center"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              <ScriptureCardView
-                key={`${filter}-${currentIndex}`}
-                card={currentCard}
-                direction={direction}
-              />
-            </div>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-center gap-6 mt-8">
-              <button
-                onClick={goPrev}
-                disabled={currentIndex === 0}
-                className="p-2 rounded-full bg-surface border border-border hover:border-accent/30 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                aria-label="Previous card"
-              >
-                <ChevronLeft className="w-5 h-5 text-text-secondary" />
-              </button>
-
-              <span className="text-sm text-text-muted tabular-nums">
-                {currentIndex + 1} / {filteredCards.length}
-              </span>
-
-              <button
-                onClick={goNext}
-                disabled={currentIndex === filteredCards.length - 1}
-                className="p-2 rounded-full bg-surface border border-border hover:border-accent/30 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                aria-label="Next card"
-              >
-                <ChevronRight className="w-5 h-5 text-text-secondary" />
-              </button>
-            </div>
-
-            {/* Progress dots */}
-            <div className="flex justify-center gap-1.5 mt-4">
-              {filteredCards.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setDirection(i > currentIndex ? "right" : "left");
-                    setCurrentIndex(i);
-                  }}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    i === currentIndex
-                      ? "bg-accent w-6"
-                      : "bg-border hover:bg-warm-gray"
-                  }`}
-                  aria-label={`Go to card ${i + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Keyboard hint */}
-            <p className="text-center text-xs text-text-muted mt-6 hidden sm:block">
-              Use arrow keys or swipe to navigate
+        {isSearching ? (
+          /* Search results */
+          <div>
+            <p className="text-xs text-text-muted mb-4">
+              {searchResults.length} result
+              {searchResults.length !== 1 ? "s" : ""} for &ldquo;
+              {searchQuery}&rdquo;
             </p>
-          </>
+            {searchResults.length > 0 ? (
+              <div className="space-y-2">
+                {searchResults.map((concept) => (
+                  <ConceptResult key={concept.id} concept={concept} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 text-text-muted">
+                <p className="text-sm">
+                  No concepts found. Try a different search term.
+                </p>
+              </div>
+            )}
+          </div>
         ) : (
-          <div className="text-center py-16 text-text-muted">
-            No cards in this category yet.
+          /* Domain grid */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {domains.map((domain) => (
+              <DomainCard
+                key={domain.id}
+                domain={domain}
+                conceptCount={domainConceptCounts[domain.id] || 0}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Scripture cards link */}
+        {!isSearching && (
+          <div className="mt-10 text-center">
+            <Link
+              href="/cards"
+              className="text-accent text-sm font-medium hover:text-accent-light transition-colors inline-flex items-center gap-1"
+            >
+              Or browse scripture cards (swipe mode)
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         )}
       </div>
