@@ -6,7 +6,41 @@ import {
   ArrowRight,
   Droplets,
   ChevronDown,
+  ScrollText,
+  Archive,
+  Landmark,
+  Compass,
+  Flame,
+  Globe,
+  MapPin,
+  Eye,
+  Users,
+  Heart,
+  Church,
+  Layers,
 } from "lucide-react";
+import { domains } from "@/lib/domains";
+import { concepts } from "@/lib/concepts";
+
+const domainIconMap: Record<string, React.ReactNode> = {
+  ScrollText: <ScrollText className="w-4 h-4" />,
+  BookOpen: <BookOpen className="w-4 h-4" />,
+  Archive: <Archive className="w-4 h-4" />,
+  Languages: <Languages className="w-4 h-4" />,
+  Landmark: <Landmark className="w-4 h-4" />,
+  Compass: <Compass className="w-4 h-4" />,
+  Flame: <Flame className="w-4 h-4" />,
+  Church: <Church className="w-4 h-4" />,
+  Globe: <Globe className="w-4 h-4" />,
+  MapPin: <MapPin className="w-4 h-4" />,
+  Eye: <Eye className="w-4 h-4" />,
+  Users: <Users className="w-4 h-4" />,
+  Heart: <Heart className="w-4 h-4" />,
+};
+
+function DomainIcon({ name }: { name: string }) {
+  return <>{domainIconMap[name] || null}</>;
+}
 
 function FeatureCard({
   icon,
@@ -201,22 +235,78 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Knowledge Universe */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
+              The Knowledge Universe
+            </p>
+            <h2>13 Domains. {concepts.length} Entries. Three Depths.</h2>
+            <p className="text-text-secondary text-sm mt-3 max-w-lg mx-auto">
+              Scripture, theology, history, languages, practice, and pastoral
+              application. Each entry written at three levels -- from accessible
+              overview to full academic treatment.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+            {domains.slice(0, 8).map((domain) => (
+              <Link
+                key={domain.id}
+                href={`/explore/${domain.slug}`}
+                className="group bg-surface rounded-lg border border-border p-3 card-hover block"
+              >
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center mb-2"
+                  style={{
+                    backgroundColor: `${domain.color}15`,
+                    color: domain.color,
+                  }}
+                >
+                  <DomainIcon name={domain.icon} />
+                </div>
+                <p className="text-xs font-semibold group-hover:text-accent transition-colors">
+                  {domain.shortName}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-6">
+            <Link
+              href="/explore"
+              className="text-accent font-medium text-sm hover:text-accent-light transition-colors inline-flex items-center gap-1"
+            >
+              See all 13 domains
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
-              Features
+              Ways In
             </p>
-            <h2>Three Ways In</h2>
+            <h2>Four Paths to the Source</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <FeatureCard
+              icon={<Layers className="w-5 h-5 text-accent" />}
+              title="Explore Domains"
+              description="13 knowledge domains spanning scripture, theology, history, languages, and practice. Each concept at three depth levels."
+              href="/explore"
+            />
             <FeatureCard
               icon={<BookOpen className="w-5 h-5 text-accent" />}
-              title="Explore Scripture"
-              description="Swipe through teachings with the original Greek meanings. Canonical and Gnostic. No commentary, no spin."
-              href="/explore"
+              title="Scripture Cards"
+              description="Swipe through teachings with their original Greek meanings. Canonical and Gnostic. No commentary, no spin."
+              href="/cards"
             />
             <FeatureCard
               icon={<Languages className="w-5 h-5 text-accent" />}
@@ -227,7 +317,7 @@ export default function HomePage() {
             <FeatureCard
               icon={<MessageCircle className="w-5 h-5 text-accent" />}
               title="Ask a Question"
-              description="Ask anything about scripture and get an answer based on what was actually said -- in Greek, with sources."
+              description="Ask anything about scripture and get an answer grounded in what was actually said -- in Greek, with sources."
               href="/ask"
             />
           </div>
