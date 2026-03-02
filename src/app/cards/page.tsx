@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, TouchEvent } from "react";
+import { useState, useCallback, useRef, useEffect, TouchEvent } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -149,6 +149,22 @@ export default function CardsPage() {
     setCurrentIndex(0);
     setDirection("none");
   };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        goNext();
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        goPrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [goNext, goPrev]);
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
