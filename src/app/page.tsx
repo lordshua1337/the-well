@@ -155,18 +155,18 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <button
-            className="mt-16 text-text-muted hover:text-text-secondary transition-colors animate-bounce"
+          <a
+            href="#word-previews"
+            className="mt-16 block text-text-muted hover:text-text-secondary transition-colors animate-bounce"
             aria-label="Scroll down"
-            onClick={undefined}
           >
             <ChevronDown className="w-6 h-6 mx-auto" />
-          </button>
+          </a>
         </div>
       </section>
 
       {/* Word previews */}
-      <section className="py-16 px-4">
+      <section id="word-previews" className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
