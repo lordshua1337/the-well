@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { domains } from "@/lib/domains";
 import { concepts } from "@/lib/concepts";
+import { scriptureCards } from "@/lib/scripture-data";
 
 const domainIconMap: Record<string, React.ReactNode> = {
   ScrollText: <ScrollText className="w-4 h-4" />,
@@ -235,6 +236,82 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Stats bar */}
+      <section className="py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { value: String(domains.length), label: "Knowledge Domains", sub: "Scripture to Practice" },
+              { value: String(concepts.length), label: "Deep-Dive Entries", sub: "Three depth levels each" },
+              { value: String(scriptureCards.length), label: "Scripture Cards", sub: "Words, teachings, lost texts" },
+              { value: "3", label: "Depth Levels", sub: "Accessible to Advanced" },
+            ].map((stat) => (
+              <div key={stat.label} className="bg-surface rounded-xl border border-border p-4 text-center">
+                <p className="text-2xl font-bold text-accent font-mono">{stat.value}</p>
+                <p className="text-sm font-medium mt-1">{stat.label}</p>
+                <p className="text-xs text-text-muted mt-0.5">{stat.sub}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recently added concepts */}
+      <section className="py-12 px-4 bg-surface-warm">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
+              Newest Entries
+            </p>
+            <h2>Recently Added</h2>
+            <p className="text-text-secondary text-sm mt-2">
+              The latest deep dives added to the knowledge base.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {concepts.slice(-6).reverse().map((concept) => {
+              const domain = domains.find((d) => d.id === concept.domainId);
+              return (
+                <Link
+                  key={concept.id}
+                  href={`/concepts/${concept.slug}`}
+                  className="group bg-surface rounded-lg border border-border p-4 card-hover block"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    {domain && (
+                      <span
+                        className="text-[10px] font-medium px-2 py-0.5 rounded-full"
+                        style={{
+                          backgroundColor: `${domain.color}15`,
+                          color: domain.color,
+                        }}
+                      >
+                        {domain.shortName}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-sm font-semibold group-hover:text-accent transition-colors mb-1">
+                    {concept.name}
+                  </h3>
+                  <p className="text-xs text-text-muted line-clamp-2">
+                    {concept.summary}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="text-center mt-6">
+            <Link
+              href="/explore"
+              className="text-accent font-medium text-sm hover:text-accent-light transition-colors inline-flex items-center gap-1"
+            >
+              See all {concepts.length} entries
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Knowledge Universe */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
@@ -251,7 +328,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-            {domains.slice(0, 8).map((domain) => (
+            {domains.map((domain) => (
               <Link
                 key={domain.id}
                 href={`/explore/${domain.slug}`}
