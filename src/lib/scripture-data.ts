@@ -596,4 +596,134 @@ export const scriptureCards: ScriptureCard[] = [
       "The sheep and goats parable. The criteria for judgment? Not doctrine. Not worship attendance. Not which creed you affirmed. Did you feed the hungry? Visit the prisoner? Clothe the naked? The 'goats' are shocked because they never recognized the divine in the desperate. Jesus locates himself in the marginalized, not in the temple.",
     category: "teaching",
   },
+  {
+    id: "sc-21",
+    greek: "teleios",
+    transliteration: "teleios",
+    commonTranslation: "Perfect",
+    actualMeaning: "Complete, mature, having reached the intended end -- like a ripe fruit",
+    verse:
+      "Be teleios, therefore, as your heavenly Father is teleios.",
+    verseRef: "Matthew 5:48",
+    context:
+      "The most misquoted verse in the Sermon on the Mount. 'Be perfect' has paralyzed millions of people with impossible standards. But teleios means having reached your telos -- your intended purpose or full maturity. A ripe apple is teleios. A grown tree is teleios. It's about becoming fully what you were designed to be, not about making zero mistakes. God's 'perfection' here isn't flawlessness -- it's wholeness, completeness, being fully expressed. Jesus isn't demanding the impossible. He's inviting growth.",
+    category: "word",
+  },
+  {
+    id: "sc-22",
+    greek: "sozo",
+    transliteration: "sozo",
+    commonTranslation: "Save (as in salvation)",
+    actualMeaning: "To make whole, to heal, to restore to full function",
+    verse:
+      "Your faith has made you whole.",
+    verseRef: "Mark 5:34",
+    context:
+      "When Jesus heals the woman with the hemorrhage, the Greek says 'he sozo'd her' -- the same word used for 'salvation.' But sozo doesn't mean rescue from damnation. It means to make whole, to heal, to restore. The same word is used for physical healing and spiritual restoration because the ancients didn't separate them. 'Salvation' in the original language isn't about escaping hell. It's about being restored to wholeness -- body, mind, community, and relationship with the divine. English translations split sozo into 'heal' (for physical contexts) and 'save' (for spiritual contexts), creating a false division the Greek never intended.",
+    category: "word",
+  },
+  {
+    id: "sc-23",
+    greek: "pistis",
+    transliteration: "pistis",
+    commonTranslation: "Faith (belief, mental assent)",
+    actualMeaning: "Trust, loyalty, faithfulness -- a relational commitment, not intellectual agreement",
+    verse:
+      "The righteous shall live by faithfulness.",
+    verseRef: "Habakkuk 2:4 / Romans 1:17",
+    context:
+      "Modern Christianity often defines faith as believing certain propositions are true ('I believe Jesus rose from the dead'). But pistis in Koine Greek -- and its Hebrew equivalent emunah -- meant something closer to trust, loyalty, and steadfastness. A soldier had pistis toward their commander. A wife had pistis toward her husband. It was relational fidelity, not intellectual agreement. 'Faith' as 'correct beliefs' is a post-Enlightenment reframe. The biblical concept is closer to: 'Do you trust this enough to act on it?' rather than 'Do you believe this is factually true?'",
+    category: "word",
+  },
+  {
+    id: "sc-24",
+    greek: "kosmos",
+    transliteration: "kosmos",
+    commonTranslation: "World (as in sinful human society)",
+    actualMeaning: "The ordered system, the arranged whole -- originally meant beauty and adornment",
+    verse:
+      "For God so loved the kosmos that he gave his only Son.",
+    verseRef: "John 3:16",
+    context:
+      "Kosmos originally meant adornment, arrangement, and beauty (it's where we get 'cosmetics'). When Greek thinkers used it for the universe, they meant 'the beautiful arrangement.' John's Gospel uses kosmos in a complex, layered way: sometimes it means the created order (which God loves), sometimes it means the systems of power opposed to God. In John 3:16, the most famous verse in Christianity, kosmos means the entire created order -- all of it, not just believers, not just humans. God loves the whole beautiful arrangement. The popular reading that God loves 'the sinful world despite itself' misses the original nuance: God loves the cosmos because it is beautiful, not despite it being fallen.",
+    category: "word",
+  },
+  {
+    id: "sc-25",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "The kingdom of God is not coming with signs to be observed; nor will they say, 'Look, here it is!' or 'There!' For behold, the kingdom of God is within you.",
+    verseRef: "Luke 17:20-21",
+    context:
+      "The Pharisees ask Jesus WHEN the kingdom comes. He refuses the question. It's not a future event to watch for. It's not a place you go. It's already here, 'within you' or 'among you' (the Greek entos hymon supports both readings). Either way, the kingdom is present and interior/relational, not future and political. This verse has been a problem for apocalyptic Christianity ever since -- it's hard to sell End Times urgency when Jesus himself said the kingdom isn't about observable future signs.",
+    category: "teaching",
+  },
+  {
+    id: "sc-26",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "When you make the two into one, and when you make the inner like the outer and the outer like the inner, and the upper like the lower... then you will enter the kingdom.",
+    verseRef: "Gospel of Thomas, Saying 22",
+    context:
+      "The Gospel of Thomas -- found at Nag Hammadi in 1945 -- presents a radically different Jesus. No crucifixion narrative, no resurrection, no apocalypse. Just 114 sayings. This one describes the kingdom as a state of integrated consciousness: inner and outer unified, above and below reconciled, male and female transcended. It reads more like Buddhist or Vedantic teaching than Pauline Christianity. Some scholars date Thomas's core sayings to the 50s-60s CE -- potentially earlier than the canonical Gospels. Whether or not it's 'authentic Jesus,' it shows an early strand of Christian thought that was contemplative, non-dualistic, and deeply mystical.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-27",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "If those who lead you say to you, 'See, the kingdom is in the sky,' then the birds will get there before you. If they say, 'It is in the sea,' then the fish will get there before you. Rather, the kingdom is inside you and outside you.",
+    verseRef: "Gospel of Thomas, Saying 3",
+    context:
+      "Thomas's Jesus uses humor and irony. If the kingdom is up in the sky, birds are closer. If it's in the sea, fish beat you there. The point: stop looking for the divine in some other location. It's here, now, inside and outside simultaneously. This is strikingly similar to the canonical Luke 17:21 but goes further: the kingdom isn't just 'within you' -- it's both interior and exterior, collapsing the boundary between self and world. This nondual vision was threatening to institutional religion, which needs the kingdom to be somewhere else -- somewhere that requires their mediation to access.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-28",
+    greek: "paradosis",
+    transliteration: "paradosis",
+    commonTranslation: "Tradition",
+    actualMeaning: "What is handed over -- the same word used for Judas 'betraying' Jesus",
+    verse:
+      "You have a fine way of setting aside the commands of God in order to observe your own traditions.",
+    verseRef: "Mark 7:9",
+    context:
+      "The Greek paradosis (handing over, tradition) is the same root word used for Judas 'handing over' (paradidomi) Jesus to the authorities. Mark's irony is devastating: religious tradition -- the very thing meant to preserve faith -- becomes the mechanism of betrayal. The Pharisees 'hand over' God's intent by elevating human tradition above it. Jesus consistently attacks not the Torah itself but the interpretive traditions layered on top that benefit the powerful at the expense of the vulnerable. The target is always institutional religion replacing direct encounter with divine intention.",
+    category: "word",
+  },
+  {
+    id: "sc-29",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "The Sabbath was made for man, not man for the Sabbath.",
+    verseRef: "Mark 2:27",
+    context:
+      "One of the most revolutionary principles Jesus stated. Religious structures exist to serve human flourishing -- not the other way around. When a rule causes harm instead of helping, the rule is wrong, not the human. This inverts the entire framework of religious legalism. The institution serves the person, never the person the institution. Jesus stated this in response to criticism about his disciples picking grain on the Sabbath. The defenders of the system couldn't see that their system had become the very thing it was designed to prevent: a burden on the people it was meant to liberate.",
+    category: "teaching",
+  },
+  {
+    id: "sc-30",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Woe to you, teachers of the law and Pharisees, you hypocrites! You shut the door of the kingdom of heaven in people's faces. You yourselves do not enter, nor will you let those enter who are trying to.",
+    verseRef: "Matthew 23:13",
+    context:
+      "Jesus's most sustained critique in the Gospels -- the 'Seven Woes' -- targets religious gatekeepers. The charge: they've taken the keys to the kingdom and locked the door. They don't go in themselves (they've replaced direct experience with performance), and they prevent others from entering (through guilt, rules, and institutional control). The word 'hypocrites' in Greek is hypokrites -- literally 'stage actors,' people wearing masks. The accusation isn't moral hypocrisy (saying one thing, doing another). It's theatrical religiosity: performing devotion for an audience instead of actually living it.",
+    category: "teaching",
+  },
 ];
