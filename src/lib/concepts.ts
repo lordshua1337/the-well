@@ -46,7 +46,7 @@ export const concepts: Concept[] = [
     summary:
       "The ancient Greek translation of the Hebrew Bible -- the version most NT authors actually quoted.",
     lensTags: ["academic", "orthodox", "catholic"],
-    relatedConceptSlugs: ["textual-criticism", "masoretic-text", "nt-use-of-ot"],
+    relatedConceptSlugs: ["textual-criticism", "torah-overview", "septuagint"],
     relatedTextRefs: ["Isaiah 7:14"],
     layers: {
       accessible:
@@ -66,7 +66,7 @@ export const concepts: Concept[] = [
     summary:
       "Job, Psalms, Proverbs, Ecclesiastes, Song of Songs -- Israel's philosophical tradition questioning everything.",
     lensTags: ["academic", "protestant", "catholic", "jewish"],
-    relatedConceptSlugs: ["theodicy", "psalms-of-lament"],
+    relatedConceptSlugs: ["theodicy", "grief-lament"],
     relatedTextRefs: ["Job 38", "Ecclesiastes 1:2", "Psalm 22"],
     layers: {
       accessible:
@@ -88,7 +88,7 @@ export const concepts: Concept[] = [
     summary:
       "Why do Matthew, Mark, and Luke tell the same stories in the same order with the same words -- and sometimes don't?",
     lensTags: ["academic"],
-    relatedConceptSlugs: ["q-source", "markan-priority", "gospel-of-thomas"],
+    relatedConceptSlugs: ["q-source", "synoptic-problem", "gospel-of-thomas"],
     relatedTextRefs: ["Mark 1:1", "Matthew 1:1", "Luke 1:1"],
     layers: {
       accessible:
@@ -128,7 +128,7 @@ export const concepts: Concept[] = [
     summary:
       "Seven letters are definitely Paul's. Six more claim to be but probably aren't. Why it matters.",
     lensTags: ["academic", "protestant"],
-    relatedConceptSlugs: ["canon-formation", "pseudepigraphy"],
+    relatedConceptSlugs: ["canon-formation", "pauline-authorship"],
     relatedTextRefs: ["Romans 1:1", "1 Timothy 1:1"],
     layers: {
       accessible:
@@ -170,7 +170,7 @@ export const concepts: Concept[] = [
     summary:
       "52 ancient texts buried in a jar in Egypt for 1,600 years. The biggest discovery in early Christian studies since the Dead Sea Scrolls.",
     lensTags: ["academic", "gnostic"],
-    relatedConceptSlugs: ["gospel-of-thomas", "gnostic-cosmology", "gospel-of-mary"],
+    relatedConceptSlugs: ["gospel-of-thomas", "nag-hammadi-library", "nag-hammadi-library"],
     relatedTextRefs: [],
     layers: {
       accessible:
@@ -192,7 +192,7 @@ export const concepts: Concept[] = [
     summary:
       "Why did Jesus die? The church has never agreed on a single answer. Here are the major proposals.",
     lensTags: ["academic", "protestant", "catholic", "orthodox"],
-    relatedConceptSlugs: ["soteriology", "christology", "penal-substitution"],
+    relatedConceptSlugs: ["atonement-theories", "christology", "eschatology"],
     relatedTextRefs: ["Romans 3:25", "1 John 2:2", "Colossians 2:15"],
     layers: {
       accessible:
@@ -216,7 +216,7 @@ export const concepts: Concept[] = [
     summary:
       "An ancient practice of slow, contemplative reading that treats scripture as a living encounter, not a textbook.",
     lensTags: ["catholic", "orthodox", "anglican", "contemplative"],
-    relatedConceptSlugs: ["centering-prayer", "desert-fathers", "rule-of-life"],
+    relatedConceptSlugs: ["centering-prayer", "desert-fathers", "lectio-divina"],
     relatedTextRefs: [],
     layers: {
       accessible:
@@ -238,7 +238,7 @@ export const concepts: Concept[] = [
     summary:
       "The hardest question in theology. The tradition has answers. None of them are completely satisfying. That's honest.",
     lensTags: ["academic", "protestant", "catholic", "orthodox", "pastoral"],
-    relatedConceptSlugs: ["wisdom-literature", "psalms-of-lament", "atonement-theories"],
+    relatedConceptSlugs: ["wisdom-literature", "grief-lament", "atonement-theories"],
     relatedTextRefs: ["Job 38", "Psalm 22", "Romans 8:28"],
     layers: {
       accessible:
@@ -348,7 +348,7 @@ export const concepts: Concept[] = [
     summary:
       "The 16th-century movement that split Western Christianity, driven by Luther's critique of indulgences but rooted in deeper questions about authority, salvation, and the priesthood of all believers.",
     lensTags: ["academic", "protestant", "catholic"],
-    relatedConceptSlugs: ["atonement-theories", "council-of-nicaea", "sola-scriptura"],
+    relatedConceptSlugs: ["atonement-theories", "council-of-nicaea", "reformation"],
     relatedTextRefs: ["Romans 1:17", "Galatians 2:16", "James 2:24"],
     layers: {
       accessible:
@@ -392,7 +392,7 @@ export const concepts: Concept[] = [
     summary:
       "The annual cycle of seasons and feasts that structures Christian worship -- Advent, Christmas, Epiphany, Lent, Easter, Pentecost, and Ordinary Time.",
     lensTags: ["catholic", "orthodox", "anglican", "lutheran"],
-    relatedConceptSlugs: ["eucharistic-traditions", "baptismal-theology"],
+    relatedConceptSlugs: ["eucharistic-traditions", "eucharist-meanings"],
     relatedTextRefs: ["Luke 2:1-20", "Matthew 28:1-10", "Acts 2:1-13"],
     layers: {
       accessible:
@@ -524,7 +524,7 @@ export const concepts: Concept[] = [
     summary:
       "The major approaches to biblical interpretation -- allegorical, historical-critical, literary, liberation, feminist -- and why choosing a method is never neutral.",
     lensTags: ["academic", "protestant", "catholic", "orthodox"],
-    relatedConceptSlugs: ["sola-scriptura", "textual-criticism"],
+    relatedConceptSlugs: ["reformation", "textual-criticism"],
     relatedTextRefs: ["Galatians 4:21-31", "2 Timothy 3:16", "John 20:31"],
     layers: {
       accessible:
@@ -765,7 +765,7 @@ export const concepts: Concept[] = [
     summary:
       "52 texts buried in the Egyptian desert for 1,600 years, rediscovered in 1945. They reveal a Christianity far more diverse than the tradition that won.",
     lensTags: ["academic", "gnostic"],
-    relatedConceptSlugs: ["gospel-of-thomas", "gnostic-creation"],
+    relatedConceptSlugs: ["gospel-of-thomas", "nag-hammadi-library"],
     relatedTextRefs: ["Gospel of Philip", "Apocryphon of John", "Thunder, Perfect Mind"],
     layers: {
       accessible:
@@ -779,21 +779,21 @@ export const concepts: Concept[] = [
 
   {
     id: "c7-03",
-    slug: "desert-fathers",
+    slug: "the-examen",
     domainId: "d7",
-    name: "The Desert Fathers and Mothers",
+    name: "The Examen: Ignatian Daily Review",
     summary:
-      "In the 3rd-4th centuries, thousands of Christians walked into the Egyptian desert to find God through silence, simplicity, and radical self-knowledge.",
-    lensTags: ["catholic", "orthodox", "contemplative"],
+      "A 500-year-old Jesuit practice of reviewing your day for moments of consolation and desolation. Five minutes that can rewire how you see your life.",
+    lensTags: ["catholic", "contemplative", "ecumenical"],
     relatedConceptSlugs: ["centering-prayer", "lectio-divina"],
-    relatedTextRefs: ["Matthew 4:1-11", "Psalm 46:10"],
+    relatedTextRefs: ["Psalm 139:23-24", "Philippians 4:8"],
     layers: {
       accessible:
-        "After Christianity became the official religion of the Roman Empire (380 CE), some Christians felt the faith had become too comfortable. The radical message of Jesus -- leave everything and follow me -- had been domesticated into respectability. So they left. Thousands of men and women walked into the deserts of Egypt, Palestine, and Syria to live alone or in small communities, seeking God through silence, fasting, manual labor, and prayer. They are called the Desert Fathers (Abbas) and Desert Mothers (Ammas). Their sayings, collected over centuries, are some of the most psychologically honest texts in Christian literature. Abba Moses: 'Sit in your cell and your cell will teach you everything.' Amma Syncletica: 'In the beginning there is struggle and a lot of work for those who come near to God. But after that there is indescribable joy.'",
+        "The Examen (also called the Examination of Consciousness) is a daily prayer practice developed by Ignatius of Loyola, the founder of the Jesuits, in the 16th century. It takes about 5-15 minutes and involves reviewing your day in God's presence. You notice moments of consolation (when you felt alive, grateful, connected, at peace) and desolation (when you felt drained, anxious, disconnected, resentful). This is not a guilt exercise -- it is a noticing exercise. You are training yourself to see where God showed up in your ordinary day and where you turned away. Over time, this daily review rewires how you pay attention to your life.",
       intermediate:
-        "The Desert Fathers and Mothers developed a sophisticated psychology centuries before modern psychology existed. Their central concept is the 'logismoi' -- the eight 'thoughts' or patterns of temptation that afflict every person. Evagrius Ponticus (345-399) classified them: gluttony, lust, avarice, sadness, anger, acedia (spiritual apathy), vainglory, and pride. Pope Gregory I later condensed these into the 'seven deadly sins,' but the original list was a diagnostic tool, not a guilt list. The monks observed their own minds with clinical precision and passed on practical strategies for working with each pattern.\n\nThe desert tradition invented the practice of spiritual direction (sharing one's inner life with a more experienced practitioner), communal reading of scripture (which became lectio divina), and many forms of contemplative prayer. John Cassian (360-435) brought desert practices to Western Europe, where they influenced Benedict of Nursia's Rule and shaped Western monasticism for 1,500 years.\n\nThe Desert Mothers are often overlooked but were equally respected. Amma Sarah lived in the desert for 60 years. When monks challenged her authority because she was a woman, she replied: 'According to nature I am a woman, but not according to my thoughts.' Amma Theodora was consulted by bishops on matters of theology and spiritual direction.",
+        "The five steps of the traditional Examen: (1) Become aware of God's presence. Pause. (2) Review the day with gratitude. Start with what went well, what you are thankful for. (3) Pay attention to your emotions. Where did you feel consolation (energy, peace, connection)? Where did you feel desolation (anxiety, numbness, resentment)? (4) Choose one feature of the day and pray about it. Not analyze -- pray. Bring it to God. (5) Look toward tomorrow. What are you anticipating with hope? With dread?\n\nIgnatius believed that consolation and desolation were not just psychological states but spiritual indicators. Consolation points toward God's movement in your life. Desolation signals resistance, misalignment, or a need for change. This is not the same as 'happy = good, sad = bad.' You can experience consolation in grief (if the grief is honest and connected) and desolation in success (if the success is hollow or self-serving). The Examen teaches discernment -- the ability to distinguish between what gives life and what drains it.\n\nThe practice has been adopted far beyond Jesuit circles. Many Protestant churches, twelve-step programs, and secular mindfulness practitioners use versions of the Examen. Its appeal is its simplicity: anyone can do it, anywhere, with no special training.",
       advanced:
-        "The desert tradition represents a radical experiment in self-knowledge that has no parallel in Western culture until modern psychotherapy. The monks' practice of watching thoughts arise and pass without identifying with them anticipates mindfulness-based cognitive therapy by 1,600 years. Their insight that patterns of destructive behavior are rooted in unconscious emotional needs (the 'passions') anticipates Freud and object relations theory.\n\nThe political dimension is equally important. The desert was a protest against imperial Christianity. When the emperor became Christian, the church gained power, wealth, and respectability -- and, the desert Christians believed, lost its soul. By walking into the wilderness, they reenacted Jesus' own desert temptation (Matthew 4) and demonstrated that the kingdom of God was not aligned with any earthly empire. This counter-imperial tradition resurfaces throughout Christian history: the Franciscans, the Anabaptists, Dorothy Day's Catholic Worker movement, and contemporary new monasticism.\n\nFor the modern reader: the desert tradition offers an alternative to both therapeutic culture (which risks reducing all suffering to psychological pathology) and institutional religion (which risks reducing all spiritual life to doctrine and morality). The desert path is about direct encounter with reality -- including the reality of one's own shadow -- in the presence of God."
+        "The Examen is the gateway to Ignatian discernment, which has become one of the most influential decision-making frameworks in Christian spirituality. The Spiritual Exercises of Ignatius (a four-week retreat program) use the Examen as the foundational practice that prepares the retreatant for deeper discernment of vocation and life direction.\n\nIgnatius distinguished between 'discernment of spirits' (noticing the inner movements that lead toward or away from God) and 'discernment of God's will' (making major life decisions). The first is the daily work of the Examen. The second builds on it: after months or years of noticing patterns of consolation and desolation, you develop a spiritual 'palate' -- an intuitive sense of what aligns with your deepest truth and what does not.\n\nContemporary Ignatian scholars (Margaret Silf, Dennis Linn) have connected the Examen to neuroscience and positive psychology. The practice of daily gratitude review has measurable effects on well-being (Emmons and McCullough, 2003). The practice of noticing emotional patterns mirrors the 'affect labeling' technique in cognitive behavioral therapy, which reduces the intensity of negative emotions by naming them. Ignatius intuited in the 16th century what psychology has confirmed in the 21st: paying attention to your inner life, systematically and without judgment, changes how you experience reality."
     },
   },
 
@@ -805,7 +805,7 @@ export const concepts: Concept[] = [
     summary:
       "Bread and wine. Body and blood. Every Christian tradition practices communion, but they disagree profoundly about what actually happens -- and the disagreement reveals deep theological fault lines.",
     lensTags: ["catholic", "orthodox", "protestant", "academic"],
-    relatedConceptSlugs: ["sacraments-overview", "council-of-nicaea"],
+    relatedConceptSlugs: ["eucharist-meanings", "council-of-nicaea"],
     relatedTextRefs: ["Luke 22:14-20", "1 Corinthians 11:23-26", "John 6:51-58"],
     layers: {
       accessible:
@@ -825,7 +825,7 @@ export const concepts: Concept[] = [
     summary:
       "Christianity began as a Jewish movement. Understanding when, how, and why it separated from Judaism transforms how you read the entire New Testament.",
     lensTags: ["academic", "jewish", "ecumenical"],
-    relatedConceptSlugs: ["septuagint", "nt-use-of-ot"],
+    relatedConceptSlugs: ["septuagint", "septuagint"],
     relatedTextRefs: ["Romans 9-11", "Matthew 23", "John 8:44"],
     layers: {
       accessible:
@@ -839,21 +839,21 @@ export const concepts: Concept[] = [
 
   {
     id: "c10-03",
-    slug: "dead-sea-scrolls",
+    slug: "archaeology-and-exodus",
     domainId: "d10",
-    name: "The Dead Sea Scrolls",
+    name: "Archaeology and the Exodus: Did It Happen?",
     summary:
-      "Discovered in 1947, the Dead Sea Scrolls are the oldest biblical manuscripts in existence. They reveal a Judaism more diverse and less settled than anyone expected.",
+      "The foundational story of the Hebrew Bible -- escape from Egypt, wandering in the desert, conquest of Canaan -- has almost no archaeological evidence. What does that mean?",
     lensTags: ["academic", "jewish"],
-    relatedConceptSlugs: ["septuagint", "textual-criticism", "documentary-hypothesis"],
-    relatedTextRefs: ["Isaiah 53", "Habakkuk 2:4"],
+    relatedConceptSlugs: ["documentary-hypothesis", "ancient-near-east"],
+    relatedTextRefs: ["Exodus 12-14", "Joshua 6"],
     layers: {
       accessible:
-        "In 1947, a Bedouin shepherd tossed a stone into a cave near the Dead Sea and heard something shatter. Inside were ancient clay jars containing scrolls that had been hidden for nearly 2,000 years. Over the following decade, 11 caves yielded roughly 900 manuscripts: biblical texts, community rules, hymns, and apocalyptic literature. The Great Isaiah Scroll, dating to about 125 BCE, is 1,000 years older than the next oldest complete copy of Isaiah. These are the oldest surviving biblical manuscripts, and they transformed our understanding of how the Bible was transmitted.",
+        "The Exodus -- Israelites enslaved in Egypt, ten plagues, parting of the Red Sea, forty years in the desert, conquest of Canaan -- is the defining story of the Hebrew Bible. Everything in Jewish identity and theology depends on it. But here is the uncomfortable archaeological reality: there is no Egyptian record of a mass Israelite enslavement or departure. There is no evidence of two million people wandering the Sinai desert for forty years (that many people would leave massive archaeological traces). The cities supposedly conquered by Joshua (Jericho, Ai) either did not exist at the traditional date of the conquest or show no evidence of destruction. This does not mean the Exodus did not happen. It means it almost certainly did not happen in the way the Bible describes it.",
       intermediate:
-        "The scrolls were produced by a Jewish community living at Qumran from roughly 150 BCE to 68 CE (when the Romans destroyed the settlement during the Jewish War). Most scholars identify this community with the Essenes, one of the four major Jewish groups described by Josephus (alongside Pharisees, Sadducees, and Zealots). The Qumran community was apocalyptic (expecting an imminent final battle between the 'Sons of Light' and the 'Sons of Darkness'), priestly (led by a 'Teacher of Righteousness' who opposed the Jerusalem priesthood), and separatist (they withdrew from mainstream Jewish society to maintain ritual purity).\n\nFor biblical studies, the scrolls answered a crucial question: how accurately was the Hebrew Bible transmitted over the centuries? The answer: remarkably well, with qualifications. The Isaiah scroll is nearly identical to the medieval Masoretic text in most places, confirming the general reliability of transmission. But the scrolls also revealed textual diversity: some manuscripts match the Hebrew behind the Septuagint (Greek translation), suggesting that the Masoretic text is one tradition among several, not 'the' original.\n\nFor understanding Jesus: the scrolls show that apocalyptic expectation, messianic hope, ritual immersion (baptism), communal meals, and scriptural interpretation were widespread Jewish practices before Christianity. Jesus and the early church were not inventing these practices -- they were participating in a common Jewish world. The differences between Jesus and Qumran (Jesus' openness to sinners and Gentiles versus Qumran's rigid purity boundaries) highlight what was distinctive about his message.",
+        "The archaeological evidence breaks down as follows: Egyptian records from the 13th century BCE (the most commonly proposed date for the Exodus) mention 'Apiru' -- possibly a cognate of 'Hebrew' -- as troublesome laborers and semi-nomads, but not as a nation held in slavery. The Merneptah Stele (ca. 1208 BCE) is the earliest reference to 'Israel' outside the Bible, mentioning it as a people in Canaan -- but not as recent arrivals from Egypt. The Sinai desert has been extensively surveyed and shows no signs of a large population during the relevant period.\n\nThe conquest model (Joshua's military campaign) has largely been abandoned by archaeologists. Israel Finkelstein and Neil Asher Silberman ('The Bible Unearthed') argue that the Israelites emerged gradually from the indigenous Canaanite population -- they did not invade from outside. Settlement patterns in the central highlands of Canaan show a proliferation of small villages around 1200 BCE, but these villages show cultural continuity with Canaan, not a break from it.\n\nSeveral alternative models exist: (1) a small group of escaped slaves from Egypt whose story was later expanded to represent all Israel; (2) a series of migrations and revolts over centuries, compressed into a single narrative; (3) a foundation myth that encoded real experiences of oppression and liberation but not a single historical event. Each has strengths and weaknesses.\n\nFor the faithful reader: the question is not whether the Exodus happened exactly as described but whether the theological truth it carries -- that God liberates the oppressed -- depends on historical literalism. Most critical scholars (including many who are devout) argue that it does not.",
       advanced:
-        "The publication history of the Dead Sea Scrolls is itself a scandal. For decades, a small team of scholars (the 'scrollery') monopolized access, publishing at glacial speed while denying other researchers access to photographs. Emanuel Tov's editorship and the Huntington Library's decision to release photographs in 1991 broke the monopoly, and complete digital access is now available through the Israel Antiquities Authority.\n\nThe textual evidence from Qumran has forced a paradigm shift in textual criticism. Emanuel Tov identifies five text types represented at Qumran: proto-Masoretic, pre-Samaritan, texts close to the Septuagint Vorlage, 'Qumran practice' texts (with distinctive scribal features), and non-aligned texts that fit no known tradition. This pluriformity demonstrates that there was no single 'original text' of the Hebrew Bible in the Second Temple period -- rather, multiple textual traditions circulated simultaneously.\n\nFor theology: the sectarian scrolls (Community Rule, War Scroll, Thanksgiving Hymns) reveal a Judaism intensely focused on divine election, predestination, and cosmic dualism (light versus darkness, truth versus falsehood). These themes resonate strongly with Paul's letters and John's gospel, suggesting that early Christianity emerged from the same apocalyptic-sectarian matrix as the Qumran community, even if there was no direct connection."
+        "The scholarly debate has shifted from 'did the Exodus happen?' to 'what kind of event might lie behind the narrative?' William Dever ('Who Were the Early Israelites and Where Did They Come From?') argues for a 'mixed multitude' model: some ancestors of Israel may have come from Egypt, while others were indigenous Canaanites, Midianites, or displaced peoples from the Late Bronze Age collapse. The narrative was composed centuries later to give a unified origin story to what was originally a diverse confederation.\n\nThe 'minimalist' school (Thomas Thompson, Philip Davies, Niels Peter Lemche) argues that the biblical narrative is a literary creation of the Persian or Hellenistic period with minimal historical content. The 'maximalist' school (Kenneth Kitchen, James Hoffmeier) defends a substantially historical Exodus, pointing to Egyptian elements in the narrative (names, customs, geography) that would be unlikely inventions. Most scholars fall between these positions.\n\nThe theological stakes: liberation theology (Gustavo Gutierrez, James Cone) reads the Exodus as God's definitive identification with the oppressed. If the Exodus is 'just a story,' does it lose its liberating power? The mature theological answer is no: the Exodus functions as scripture not because it is a newspaper report but because it embodies a truth about reality -- that oppression is not God's will and that liberation is possible. The story creates the community that reads it, and the community that reads it continues to experience liberation. This is what 'inspired' means: not dictated by God but bearing God's truth through human literary craft."
     },
   },
 
@@ -865,7 +865,7 @@ export const concepts: Concept[] = [
     summary:
       "What if meaning does not live in the text alone but is created in the encounter between text and reader? This question transforms how you approach every verse.",
     lensTags: ["academic", "postmodern"],
-    relatedConceptSlugs: ["historical-criticism", "allegorical-interpretation"],
+    relatedConceptSlugs: ["hermeneutical-frameworks", "reader-response-hermeneutics"],
     relatedTextRefs: ["Luke 10:25-37"],
     layers: {
       accessible:
