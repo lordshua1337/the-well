@@ -283,7 +283,7 @@ export default function ConceptDetailPage() {
             href={`/ask?topic=${encodeURIComponent(concept.name)}`}
             className="inline-flex items-center gap-2 bg-accent text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-accent-light transition-colors"
           >
-            Ask the Guide about this <ArrowRight className="w-3.5 h-3.5" />
+            Ask The Well <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
