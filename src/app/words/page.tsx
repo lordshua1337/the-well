@@ -15,7 +15,7 @@ function WordCard({
   onToggle: () => void;
 }) {
   return (
-    <div className="bg-surface rounded-xl border border-border overflow-hidden card-hover">
+    <div id={word.id} className="bg-surface rounded-xl border border-border overflow-hidden card-hover scroll-mt-24">
       {/* Header -- always visible */}
       <button
         onClick={onToggle}
@@ -139,6 +139,24 @@ export default function WordsPage() {
             centuries of institutional interpretation before they reach you.
             Here&apos;s what they actually said.
           </p>
+        </div>
+
+        {/* Quick jump */}
+        <div className="bg-surface border border-border rounded-xl p-5 mb-8">
+          <p className="text-xs text-accent uppercase tracking-widest font-medium mb-3">
+            Jump to Word
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {wordCorrections.map((word) => (
+              <a
+                key={word.id}
+                href={`#${word.id}`}
+                className="text-sm bg-surface-warm px-3 py-1.5 rounded-lg text-text-secondary hover:text-accent hover:bg-accent/10 transition-colors"
+              >
+                <span className="font-serif italic">{word.transliteration}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Search */}
