@@ -726,4 +726,134 @@ export const scriptureCards: ScriptureCard[] = [
       "Jesus's most sustained critique in the Gospels -- the 'Seven Woes' -- targets religious gatekeepers. The charge: they've taken the keys to the kingdom and locked the door. They don't go in themselves (they've replaced direct experience with performance), and they prevent others from entering (through guilt, rules, and institutional control). The word 'hypocrites' in Greek is hypokrites -- literally 'stage actors,' people wearing masks. The accusation isn't moral hypocrisy (saying one thing, doing another). It's theatrical religiosity: performing devotion for an audience instead of actually living it.",
     category: "teaching",
   },
+  {
+    id: "sc-31",
+    greek: "ekklesia",
+    transliteration: "ekklesia",
+    commonTranslation: "Church",
+    actualMeaning: "Assembly / Gathering of citizens",
+    verse:
+      "On this rock I will build my ekklesia, and the gates of Hades will not overcome it.",
+    verseRef: "Matthew 16:18",
+    context:
+      "Ekklesia was a political term, not a religious one. In Greek city-states, the ekklesia was the assembly of citizens who gathered to make decisions. It had no connection to buildings, clergy, or institutions. When Jesus said he would build his ekklesia, his listeners heard: 'I'm building an alternative assembly -- a new political community.' Translating this as 'church' imports 2,000 years of institutional baggage into a word that originally meant 'people gathered for a purpose.' The gates of Hades (death) 'not prevailing' against it isn't about a building surviving -- it's about a community that death itself cannot disband.",
+    category: "word",
+  },
+  {
+    id: "sc-32",
+    greek: "doulos",
+    transliteration: "doulos",
+    commonTranslation: "Servant",
+    actualMeaning: "Slave",
+    verse:
+      "Paul, a doulos of Christ Jesus, called to be an apostle.",
+    verseRef: "Romans 1:1",
+    context:
+      "English Bibles almost universally soften doulos to 'servant' or 'bondservant.' The word means slave. Paul calls himself a slave of Christ -- total ownership, no autonomy, no exit. This was not metaphorical prettiness. In the Roman Empire, roughly 1 in 3 people were enslaved. Paul's readers knew exactly what the word meant. By calling himself Christ's slave, Paul was making a radical identity claim: his primary allegiance belonged to Jesus, not to Rome, not to the synagogue, not to himself. The softening of 'slave' to 'servant' obscures both the radical nature of the claim and the uncomfortable reality that the New Testament world was built on slavery.",
+    category: "word",
+  },
+  {
+    id: "sc-33",
+    greek: "skandalon",
+    transliteration: "skandalon",
+    commonTranslation: "Stumbling block / Offense",
+    actualMeaning: "Trigger of a trap / Bait-stick",
+    verse:
+      "We preach Christ crucified, a skandalon to Jews and foolishness to Gentiles.",
+    verseRef: "1 Corinthians 1:23",
+    context:
+      "A skandalon was the bait-stick of a trap -- the trigger that, when touched, springs the mechanism. Paul says the cross is a skandalon: it triggers people. For Jews expecting a conquering messiah, a crucified one was not just disappointing but offensive -- cursed by God (Deuteronomy 21:23). For Greeks who valued wisdom and power, execution by the state was the ultimate failure. The cross is designed to offend every human system of value. It is not a stumbling block you accidentally trip over. It is a trap-trigger that forces you to decide: either this changes everything about how you understand power, or you reject it entirely. There is no neutral response.",
+    category: "word",
+  },
+  {
+    id: "sc-34",
+    greek: "paraclete",
+    transliteration: "parakletos",
+    commonTranslation: "Comforter / Helper",
+    actualMeaning: "Advocate / One called alongside (legal counsel)",
+    verse:
+      "I will ask the Father, and he will give you another parakletos to be with you forever.",
+    verseRef: "John 14:16",
+    context:
+      "Parakletos is a legal term: someone called to stand beside you in court. A defense attorney. An advocate. 'Comforter' (from the King James Version) makes the Holy Spirit sound like a warm blanket. The original word makes the Spirit sound like a lawyer. The Spirit's role, in John's theology, is to defend, guide, remind, convict, and testify -- active legal work, not passive emotional support. The Spirit 'will guide you into all truth' (16:13) and 'will testify about me' (15:26). This is advocacy language. The Spirit is your counsel in the cosmic trial between truth and deception.",
+    category: "word",
+  },
+  {
+    id: "sc-35",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "The eye is the lamp of the body. If your eye is single, your whole body will be full of light.",
+    verseRef: "Matthew 6:22",
+    context:
+      "Most translations say 'if your eye is healthy' or 'good.' The Greek word is haplous -- meaning single, simple, undivided. The opposite is diplous (double). Jesus is not giving an ophthalmology lesson. He's talking about focus -- single-mindedness versus divided attention. This saying sits between the teaching on treasure ('where your treasure is, your heart will be') and the teaching on serving two masters ('you cannot serve God and Money'). The 'single eye' is unified intention. A person whose eye is 'single' sees everything from one perspective: reality as it is. A 'double' eye tries to see two ways at once -- and ends up in darkness. The context is money, but the principle is about all divided loyalties.",
+    category: "teaching",
+  },
+  {
+    id: "sc-36",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Truly I tell you, unless you change and become like little children, you will never enter the kingdom of heaven.",
+    verseRef: "Matthew 18:3",
+    context:
+      "This is not about innocence or naivety. In the ancient world, children had no social status, no legal rights, no power. They were the lowest members of the household. When the disciples asked 'who is greatest in the kingdom?' -- a status question -- Jesus put a child in front of them and said: become like this. The answer to 'who is greatest?' is: the one with no status at all. The kingdom reversal is total. It isn't about childlike wonder (a modern romantic notion). It's about surrendering the entire status game. You enter the kingdom by giving up your claim to greatness, not by achieving it.",
+    category: "teaching",
+  },
+  {
+    id: "sc-37",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Jesus said: If your leaders say to you, 'Look, the kingdom is in the sky,' then the birds of the sky will precede you. Rather, the kingdom is inside of you, and it is outside of you.",
+    verseRef: "Gospel of Thomas, Saying 3",
+    context:
+      "This saying directly challenges externalized religion. If someone points you to the sky (heaven after death) or to any external location, they are misdirecting you. The kingdom is simultaneously within and without -- not located in a place but present as a mode of perception. 'When you come to know yourselves, then you will become known.' Self-knowledge and kingdom-knowledge are the same thing. The Gnostic framework sees ignorance (of one's divine nature) as the fundamental problem -- not sin, not disobedience, but forgetting who you are. Waking up IS salvation.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-38",
+    greek: "dunamis",
+    transliteration: "dynamis",
+    commonTranslation: "Power / Miracle",
+    actualMeaning: "Inherent capacity / Explosive potential",
+    verse:
+      "You will receive dynamis when the Holy Spirit comes upon you.",
+    verseRef: "Acts 1:8",
+    context:
+      "Dynamis is the root of 'dynamite.' But it doesn't mean destructive force -- it means inherent capacity, the power that something has by its nature. A seed has dynamis to become a tree. The word is used for Jesus' healings ('dynameis' -- acts of power) not because they are supernatural spectacles but because they reveal the inherent capacity of reality when aligned with God. The promise in Acts 1:8 is not that the disciples will get supernatural abilities bolted on. It is that they will discover the capacity that was already latent within them, activated by the Spirit. This is closer to 'you will discover what you are capable of' than 'you will receive magic powers.'",
+    category: "word",
+  },
+  {
+    id: "sc-39",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "For where two or three gather in my name, there am I with them.",
+    verseRef: "Matthew 18:20",
+    context:
+      "This verse is usually quoted to validate small gatherings ('even if only a few people show up, God is here'). The original context is different. Matthew 18 is about conflict resolution within the community. The preceding verses describe a process: if someone wrongs you, go to them directly, then bring witnesses, then bring it to the assembly. The 'two or three gathered' are not a worship service -- they are a reconciliation process. Christ is present specifically in the work of honest confrontation and resolution. The promise is not 'I'm present in small churches.' It's 'I'm present when you do the hard work of making things right with each other.'",
+    category: "teaching",
+  },
+  {
+    id: "sc-40",
+    greek: "logos",
+    transliteration: "logos",
+    commonTranslation: "Word",
+    actualMeaning: "Reason / Pattern / Organizing principle of reality",
+    verse:
+      "In the beginning was the Logos, and the Logos was with God, and the Logos was God.",
+    verseRef: "John 1:1",
+    context:
+      "Logos is one of the most loaded words in the ancient world. In Greek philosophy (Heraclitus, the Stoics), Logos was the rational principle underlying all reality -- the pattern that holds the universe together. In Judaism, it connected to the Wisdom tradition (Proverbs 8) where Wisdom was present at creation, and to the idea that God creates through speech ('God said, let there be light'). John's opening deliberately echoes Genesis 1:1 ('In the beginning...') while importing the entire Greek philosophical tradition. The claim is staggering: the rational structure of the universe, the principle by which everything coheres, became a human person. Translating Logos as simply 'Word' loses the cosmic scope. This is not about a vocabulary item. It's about the organizing intelligence of reality taking on flesh.",
+    category: "word",
+  },
 ];
