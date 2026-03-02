@@ -95,7 +95,7 @@ export const domains: Domain[] = [
     description:
       "Liturgical calendar, Eucharistic traditions, baptismal theology, sacred music. How Christians have worshiped across 2,000 years.",
     icon: "Church",
-    conceptCount: 5,
+    conceptCount: 3,
     color: "#9333EA",
   },
   {
@@ -106,7 +106,7 @@ export const domains: Domain[] = [
     description:
       "Second Temple Judaism, Rabbinic tradition, Islam, Kabbalah. Understanding the neighbors illuminates the tradition.",
     icon: "Globe",
-    conceptCount: 5,
+    conceptCount: 3,
     color: "#059669",
   },
   {
@@ -117,7 +117,7 @@ export const domains: Domain[] = [
     description:
       "Ancient Near Eastern parallels, Dead Sea Scrolls sites, crucifixion evidence, Josephus. What the ground tells us.",
     icon: "MapPin",
-    conceptCount: 5,
+    conceptCount: 3,
     color: "#92400E",
   },
   {
@@ -128,7 +128,7 @@ export const domains: Domain[] = [
     description:
       "Allegorical, historical-critical, narrative, feminist, liberation. How you read changes what you find.",
     icon: "Eye",
-    conceptCount: 5,
+    conceptCount: 3,
     color: "#1D4ED8",
   },
   {
@@ -139,7 +139,7 @@ export const domains: Domain[] = [
     description:
       "Catholic, Orthodox, Lutheran, Reformed, Baptist, Methodist, Pentecostal, Anabaptist. What makes each one tick.",
     icon: "Users",
-    conceptCount: 5,
+    conceptCount: 3,
     color: "#7C2D12",
   },
   {
@@ -150,7 +150,7 @@ export const domains: Domain[] = [
     description:
       "Grief, decision-making, suffering, mental health, justice, money. Where the texts meet actual human life.",
     icon: "Heart",
-    conceptCount: 5,
+    conceptCount: 3,
     color: "#BE185D",
   },
 ];
