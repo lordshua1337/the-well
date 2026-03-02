@@ -235,6 +235,106 @@ export const wordCorrections: WordCorrection[] = [
     whyItMatters:
       "Faith becomes more than a feeling. Loving God 'with all your heart' is not an emotional experience you try to manufacture on Sunday morning. It is the full engagement of everything you are -- your intellect, your will, your choices, your understanding, and yes, your emotions too. The whole person, not just the sentimental part. Christianity reduced to feelings is Christianity stripped of its teeth.",
   },
+  {
+    id: "doulos",
+    greek: "doulos",
+    transliteration: "doulos",
+    commonTranslation: "Servant",
+    actualMeaning: "Slave -- a person owned by another, with no legal rights or autonomy",
+    explanation:
+      "English translations consistently soften 'doulos' to 'servant,' but the word means slave. A servant chooses to work and can leave. A doulos cannot. Paul calls himself 'doulos Christou' (slave of Christ) -- not a polite assistant but someone who has surrendered all autonomy. The early church was full of actual slaves (some estimates suggest 30-40% of the Roman Empire's population). When Paul wrote to the Philippians that Jesus 'took the form of a doulos' (Philippians 2:7), they understood: the divine took the lowest possible social position. The sanitizing of 'slave' to 'servant' in English removes the shock and the social radicalism. Paul was not saying 'I work for Jesus.' He was saying 'I belong to Jesus completely, the way a Roman slave belongs to a master.' That is a fundamentally different statement about devotion and surrender.",
+    keyVerses: [
+      {
+        ref: "Philippians 2:7",
+        text: "He emptied himself, taking the form of a slave, being born in human likeness.",
+      },
+      {
+        ref: "Romans 1:1",
+        text: "Paul, a slave of Christ Jesus, called to be an apostle.",
+      },
+      {
+        ref: "Galatians 3:28",
+        text: "There is neither Jew nor Gentile, neither slave nor free... for you are all one in Christ Jesus.",
+      },
+    ],
+    whyItMatters:
+      "If Paul was a 'servant,' he had a nice job. If Paul was a 'slave,' he had given up everything. The word choice reveals the intensity of early Christian commitment -- and the radicalism of a movement that said slave and free were equal in Christ, in a society built on slavery. Softening the word softens the revolution.",
+  },
+  {
+    id: "agape",
+    greek: "agape",
+    transliteration: "agape",
+    commonTranslation: "Love (generic)",
+    actualMeaning: "Unconditional, deliberate, self-giving love -- a choice, not a feeling",
+    explanation:
+      "Greek had four distinct words for love: eros (romantic desire), philia (deep friendship), storge (family affection), and agape (unconditional, self-giving commitment). English collapses all four into one word: 'love.' When Jesus says 'love your enemies' (Matthew 5:44), he uses agape -- not asking you to feel warm about people who harm you, but to choose to act in their genuine interest regardless of how you feel. Agape is a verb before it is a noun. It is something you do, not something you fall into. In 1 Corinthians 13 -- the famous 'love chapter' read at weddings -- Paul defines agape entirely through actions: it is patient, kind, does not envy, does not boast. Not one definition involves feelings. The entire chapter is a behavioral description. The reduction of agape to a warm emotion is one of the most consequential misunderstandings in Christian history.",
+    keyVerses: [
+      {
+        ref: "1 Corinthians 13:4-7",
+        text: "Agape is patient and kind. Agape does not envy or boast. It is not arrogant or rude. It does not insist on its own way.",
+      },
+      {
+        ref: "Matthew 5:44",
+        text: "But I say to you, agape your enemies and pray for those who persecute you.",
+      },
+      {
+        ref: "John 15:13",
+        text: "Greater agape has no one than this: to lay down one's life for one's friends.",
+      },
+    ],
+    whyItMatters:
+      "Love-as-feeling is passive -- it happens to you. Agape-as-choice is active -- you do it on purpose, especially when you do not feel like it. The command to 'love your enemies' is impossible if love is a feeling. It is entirely possible if love is a choice to act in someone's interest. Agape makes the impossible commandment practical.",
+  },
+  {
+    id: "pistis",
+    greek: "pistis",
+    transliteration: "pistis",
+    commonTranslation: "Faith (belief without evidence)",
+    actualMeaning: "Trust, loyalty, fidelity, faithfulness -- relational confidence based on character",
+    explanation:
+      "In modern English, 'faith' has become almost synonymous with 'believing things without evidence.' This would have been incomprehensible to a Greek speaker. Pistis was a relational word -- it meant the trust between people, the reliability of a business partner, the faithfulness of a friend, the loyalty of a soldier. It was the word used in contracts and oaths. When Paul says 'we are justified by pistis' (Romans 3:28), he does not mean 'we are justified by believing certain doctrines.' He means 'we are made right through trust' -- through a relationship of loyalty and reliance. Pistis has an active, relational quality. You have pistis in someone because you know their character, because they have proven trustworthy. The Greek-speaking world would not have separated pistis from evidence -- pistis was precisely the confidence that comes from evidence of character. The blind faith concept is a modern invention that contradicts the original word.",
+    keyVerses: [
+      {
+        ref: "Romans 3:28",
+        text: "For we hold that a person is justified by trust apart from works of the law.",
+      },
+      {
+        ref: "Hebrews 11:1",
+        text: "Now trust is the substance of things hoped for, the evidence of things not seen.",
+      },
+      {
+        ref: "Galatians 5:22",
+        text: "The fruit of the Spirit is agape, joy, peace, patience, kindness, goodness, faithfulness.",
+      },
+    ],
+    whyItMatters:
+      "Faith-as-blind-belief creates a religion of intellectual submission. Pistis-as-trust creates a religion of relationship. The question shifts from 'Do you believe the right doctrines?' to 'Do you trust the character of the divine?' One requires turning off your brain. The other requires engaging it fully to assess trustworthiness.",
+  },
+  {
+    id: "sarx",
+    greek: "sarx",
+    transliteration: "sarx",
+    commonTranslation: "Flesh (the body, physical desires)",
+    actualMeaning: "The whole self oriented toward self-preservation -- ego-driven existence, not the physical body",
+    explanation:
+      "When Paul contrasts 'sarx' (flesh) with 'pneuma' (spirit), translators and theologians have historically read this as body versus soul -- physical versus spiritual. This created centuries of body-hatred in Christianity: the body is sinful, desires are evil, the physical world is fallen. But Paul was not a Greek dualist who despised the body. He was a Jewish thinker, and in Hebrew thought, the physical world is good ('And God saw that it was good,' Genesis 1). Sarx in Paul's usage means the entire self -- body, mind, and emotions -- oriented around ego, self-preservation, and fear. 'Walking according to the sarx' is not about having a body. It is about living as if your survival instinct is all there is. The opposite, 'walking according to the pneuma,' is living from a deeper center -- connected, generous, trusting. It is about orientation, not substance. You do not escape the flesh by denying the body. You transform the flesh by reorienting the self.",
+    keyVerses: [
+      {
+        ref: "Galatians 5:19-21",
+        text: "The works of the sarx are evident: hatred, discord, jealousy, fits of rage, selfish ambition, dissensions, factions, envy. -- Note: most of these are mental and social, not physical.",
+      },
+      {
+        ref: "Romans 8:6",
+        text: "The mind set on sarx is death, but the mind set on the Spirit is life and peace.",
+      },
+      {
+        ref: "Galatians 5:16",
+        text: "Walk by the Spirit, and you will not gratify the desires of the sarx.",
+      },
+    ],
+    whyItMatters:
+      "Christianity's war on the body -- its suspicion of pleasure, sexuality, and the physical world -- is built on reading 'sarx' as 'body.' But Paul's list of the 'works of the flesh' is mostly social and psychological: jealousy, rage, faction, envy. The problem is not having a body. The problem is living from ego. Fix the translation, and centuries of body-shame start to unravel.",
+  },
 ];
 
 export const scriptureCards: ScriptureCard[] = [
@@ -429,6 +529,71 @@ export const scriptureCards: ScriptureCard[] = [
     verseRef: "John 4:14",
     context:
       "Jesus said this to a Samaritan woman -- someone his culture told him to avoid (Jews did not associate with Samaritans, and rabbis did not speak publicly with women). He broke two social codes to offer living water to an outsider. The water is not something you come back for weekly. It becomes a spring inside you -- self-sustaining, continuous, yours.",
+    category: "teaching",
+  },
+  {
+    id: "sc-16",
+    greek: "agape",
+    transliteration: "agape",
+    commonTranslation: "Love",
+    actualMeaning: "Unconditional, deliberate, self-giving love",
+    verse:
+      "Agape is patient and kind. Agape does not envy or boast. It is not arrogant or rude. It does not insist on its own way.",
+    verseRef: "1 Corinthians 13:4-5",
+    context:
+      "Paul defines agape entirely through actions -- not one definition involves a feeling. Greek had four words for love: eros (desire), philia (friendship), storge (family), agape (unconditional commitment). English collapses all four into one word. Agape is a verb before it is a noun. Something you do, not something you fall into.",
+    category: "word",
+  },
+  {
+    id: "sc-17",
+    greek: "pistis",
+    transliteration: "pistis",
+    commonTranslation: "Faith",
+    actualMeaning: "Trust / Loyalty / Relational confidence",
+    verse:
+      "Now trust is the substance of things hoped for, the evidence of things not seen.",
+    verseRef: "Hebrews 11:1",
+    context:
+      "Pistis was a relational word -- the trust between business partners, the loyalty of a soldier, the reliability of a friend. Not blind belief without evidence, but confidence based on proven character. The entire concept of 'faith versus reason' would not have made sense to a Greek speaker. Pistis was reasonable trust.",
+    category: "word",
+  },
+  {
+    id: "sc-18",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "His disciples said to him, 'When will the kingdom come?' Jesus said, 'It will not come by waiting for it. It will not be a matter of saying Here it is or There it is. Rather, the kingdom of the Father is spread out upon the earth, and people do not see it.'",
+    verseRef: "Gospel of Thomas, Saying 113",
+    context:
+      "The kingdom is not coming. It is already here. The problem is perception, not timing. You do not need to wait for a future event or travel to a special place. You need new eyes. This matches Luke 17:21 but pushes further -- it is literally spread out on the earth, right under your feet, and you are missing it.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-19",
+    greek: "doulos",
+    transliteration: "doulos",
+    commonTranslation: "Servant",
+    actualMeaning: "Slave -- a person with no legal autonomy",
+    verse:
+      "He emptied himself, taking the form of a slave, being born in human likeness.",
+    verseRef: "Philippians 2:7",
+    context:
+      "Doulos means slave, not servant. A servant can quit; a slave cannot. Paul says God took the lowest social position in the Roman world. English translations soften this to 'servant' and lose the scandal: the divine becoming the owned, the powerless, the legally nonexistent. In an empire where 30-40% of the population were slaves, this was a radical claim about where God shows up.",
+    category: "word",
+  },
+  {
+    id: "sc-20",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Truly I tell you, whatever you did for one of the least of these brothers and sisters of mine, you did for me.",
+    verseRef: "Matthew 25:40",
+    context:
+      "The sheep and goats parable. The criteria for judgment? Not doctrine. Not worship attendance. Not which creed you affirmed. Did you feed the hungry? Visit the prisoner? Clothe the naked? The 'goats' are shocked because they never recognized the divine in the desperate. Jesus locates himself in the marginalized, not in the temple.",
     category: "teaching",
   },
 ];
