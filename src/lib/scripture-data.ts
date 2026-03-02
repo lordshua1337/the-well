@@ -956,4 +956,69 @@ export const scriptureCards: ScriptureCard[] = [
       "Logos is one of the most loaded words in the ancient world. In Greek philosophy (Heraclitus, the Stoics), Logos was the rational principle underlying all reality -- the pattern that holds the universe together. In Judaism, it connected to the Wisdom tradition (Proverbs 8) where Wisdom was present at creation, and to the idea that God creates through speech ('God said, let there be light'). John's opening deliberately echoes Genesis 1:1 ('In the beginning...') while importing the entire Greek philosophical tradition. The claim is staggering: the rational structure of the universe, the principle by which everything coheres, became a human person. Translating Logos as simply 'Word' loses the cosmic scope. This is not about a vocabulary item. It's about the organizing intelligence of reality taking on flesh.",
     category: "word",
   },
+  {
+    id: "sc-41",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Jesus said: If those who lead you say to you, 'See, the Kingdom is in the sky,' then the birds of the sky will precede you. If they say to you, 'It is in the sea,' then the fish will precede you. Rather, the Kingdom is inside of you, and it is outside of you.",
+    verseRef: "Gospel of Thomas, Saying 3",
+    context:
+      "The Gospel of Thomas, discovered at Nag Hammadi in 1945, preserves 114 sayings attributed to Jesus with no narrative framework. This saying directly challenges any religion that locates the divine exclusively in an afterlife or external location. The Kingdom is not a place you go to after you die. It is a mode of awareness available now, both within human consciousness and in the world around you. This parallels Luke 17:21 ('the kingdom of God is within/among you') but goes further: 'When you come to know yourselves, then you will become known.' Self-knowledge is the path to divine encounter. Whether or not Thomas preserves Jesus's actual words, this saying represents an early strand of Christian thought where inner transformation, not institutional belonging, was the point.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-42",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Jesus said: I am the light that is over all things. I am all. From me all came forth, and to me all attained. Split a piece of wood; I am there. Lift up the stone, and you will find me there.",
+    verseRef: "Gospel of Thomas, Saying 77",
+    context:
+      "This is one of the most striking sayings in Thomas and one of the most theologically radical. The divine is not confined to temples, churches, or sacred spaces. It pervades all matter -- wood, stone, everything. This is not pantheism ('everything is God') but panentheism ('God is in everything'). The claim echoes Colossians 1:17 ('in him all things hold together') and Acts 17:28 ('in him we live and move and have our being') but makes it viscerally physical. You do not need to go somewhere special to encounter the sacred. The ordinary material world is already saturated with it. Every piece of wood you split, every stone you lift. The implication is that the sacred/secular divide -- the idea that some spaces are holy and others are not -- is a human invention, not a divine one.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-43",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "His disciples said to him: When will the rest for the dead take place, and when will the new world come? He said to them: What you look for has already come, but you do not recognize it.",
+    verseRef: "Gospel of Thomas, Saying 51",
+    context:
+      "The disciples ask the standard apocalyptic question: when does the future Kingdom arrive? When do the dead rise? Jesus redirects entirely: it is already here. You are already in it. You just cannot see it. This parallels the canonical 'the kingdom of God has come near' (Mark 1:15) but is more direct. There is no future event to wait for. The transformation the disciples are looking for is already available -- the problem is perception, not timing. This saying undermines any Christianity built primarily around waiting for a future event (Second Coming, Rapture, afterlife). If what you are looking for has already come, then the spiritual task is not patience or belief in future events -- it is learning to see what is already present.",
+    category: "gnostic",
+  },
+  {
+    id: "sc-44",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "You have heard that it was said, 'Eye for eye, and tooth for tooth.' But I tell you, do not resist an evil person. If anyone slaps you on the right cheek, turn to them the other cheek also.",
+    verseRef: "Matthew 5:38-39",
+    context:
+      "This is almost universally read as a command to be passive: let people hurt you, do not fight back, be a doormat. The historical context reveals something entirely different. In the ancient Near East, a slap to the right cheek (delivered with the back of the right hand) was not an act of violence -- it was a gesture of dominance used by a superior toward an inferior (master to slave, Roman to Jew). Turning the other cheek forces the aggressor to use the open palm or fist, which are strikes between equals. The act is not passive submission -- it is a refusal to accept the inferior position. It says: 'You will not treat me as less than human. Hit me as an equal or do not hit me at all.' This is nonviolent resistance, not nonresistance. Jesus is teaching people without power how to reclaim their dignity within an oppressive system -- not telling them to accept abuse.",
+    category: "teaching",
+  },
+  {
+    id: "sc-45",
+    greek: "",
+    transliteration: "",
+    commonTranslation: "",
+    actualMeaning: "",
+    verse:
+      "Again I tell you, it is easier for a camel to go through the eye of a needle than for someone who is rich to enter the kingdom of God.",
+    verseRef: "Matthew 19:24",
+    context:
+      "For centuries, preachers have tried to soften this saying. The most famous attempt: 'The Eye of the Needle was a small gate in Jerusalem's wall that a camel could squeeze through if it knelt down and removed its baggage.' This gate never existed. There is zero archaeological or historical evidence for it. The explanation was invented in the 9th century to make wealthy Christians feel better. Jesus's original audience would have heard exactly what it sounds like: an impossibility. Camels do not fit through needle eyes. That is the point. The saying is hyperbolic, yes -- but the hyperbole points in a clear direction. Wealth creates attachment. Attachment prevents the radical letting-go that entering the Kingdom requires. The reaction of the disciples confirms this reading -- they are 'greatly astonished' and ask 'Who then can be saved?' They understood the claim as extreme. Later theology domesticated it. Jesus did not.",
+    category: "teaching",
+  },
 ];
