@@ -180,7 +180,7 @@ export default function ExplorePage() {
           </p>
           <h1 className="text-3xl sm:text-4xl mb-3">Explore</h1>
           <p className="text-text-secondary text-sm max-w-lg mx-auto">
-            13 domains spanning scripture, theology, history, languages,
+            {domains.length} domains spanning scripture, theology, history, languages,
             practice, and pastoral application. Enter from any point.
           </p>
         </div>

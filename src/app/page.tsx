@@ -242,7 +242,7 @@ export default function HomePage() {
             <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
               The Knowledge Universe
             </p>
-            <h2>13 Domains. {concepts.length} Entries. Three Depths.</h2>
+            <h2>{domains.length} Domains. {concepts.length} Entries. Three Depths.</h2>
             <p className="text-text-secondary text-sm mt-3 max-w-lg mx-auto">
               Scripture, theology, history, languages, practice, and pastoral
               application. Each entry written at three levels -- from accessible
@@ -278,7 +278,7 @@ export default function HomePage() {
               href="/explore"
               className="text-accent font-medium text-sm hover:text-accent-light transition-colors inline-flex items-center gap-1"
             >
-              See all 13 domains
+              See all {domains.length} domains
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
