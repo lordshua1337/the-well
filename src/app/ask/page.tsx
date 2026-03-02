@@ -24,6 +24,10 @@ const STARTER_QUESTIONS = [
   "What does 'repent' really mean?",
   "Did Jesus actually say to be perfect?",
   "What is the 'living water' Jesus talked about?",
+  "What does 'pneuma' mean -- spirit or breath?",
+  "Why was the Gospel of Thomas excluded?",
+  "What does 'forgive' actually mean in Greek?",
+  "What did Jesus mean by the 'Kingdom of God'?",
 ];
 
 function MessageBubble({ message }: { message: Message }) {
