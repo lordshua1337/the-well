@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, FormEvent } from "react";
+import { useState, useRef, useEffect, FormEvent, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
   Send,
@@ -84,12 +85,21 @@ function TypingIndicator() {
   );
 }
 
-export default function AskPage() {
+function AskPageContent() {
+  const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const topic = searchParams.get("topic");
+    if (topic) {
+      setInput(`Tell me about ${topic}`);
+      inputRef.current?.focus();
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -268,5 +278,13 @@ export default function AskPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function AskPage() {
+  return (
+    <Suspense>
+      <AskPageContent />
+    </Suspense>
   );
 }
