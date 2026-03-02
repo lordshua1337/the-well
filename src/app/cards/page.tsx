@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect, TouchEvent } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect, TouchEvent } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -8,6 +8,7 @@ import {
   Languages,
   ScrollText,
   Filter,
+  Shuffle,
 } from "lucide-react";
 import { scriptureCards, type ScriptureCard } from "@/lib/scripture-data";
 
@@ -111,6 +112,13 @@ export default function CardsPage() {
 
   const currentCard = filteredCards[currentIndex];
 
+  const categoryCounts = useMemo(() => ({
+    all: scriptureCards.length,
+    word: scriptureCards.filter((c) => c.category === "word").length,
+    teaching: scriptureCards.filter((c) => c.category === "teaching").length,
+    gnostic: scriptureCards.filter((c) => c.category === "gnostic").length,
+  }), []);
+
   const goNext = useCallback(() => {
     if (currentIndex < filteredCards.length - 1) {
       setDirection("right");
@@ -193,9 +201,20 @@ export default function CardsPage() {
               }`}
             >
               {categoryIcons[cat]}
-              {categoryLabels[cat]}
+              {categoryLabels[cat]} ({categoryCounts[cat]})
             </button>
           ))}
+          <button
+            onClick={() => {
+              const randomIdx = Math.floor(Math.random() * filteredCards.length);
+              setDirection("right");
+              setCurrentIndex(randomIdx);
+            }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-surface border border-border text-text-secondary hover:border-accent/30 transition-colors"
+          >
+            <Shuffle className="w-4 h-4" />
+            Random
+          </button>
         </div>
 
         {/* Card display */}
