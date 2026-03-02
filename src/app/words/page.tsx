@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useMemo } from "react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search } from "lucide-react";
 import Link from "next/link";
 import { wordCorrections, type WordCorrection } from "@/lib/scripture-data";
 
@@ -97,10 +97,22 @@ function WordCard({
 
 export default function WordsPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleWord = (id: string) => {
     setExpanded((prev) => (prev === id ? null : id));
   };
+
+  const filteredWords = useMemo(() => {
+    if (!searchQuery.trim()) return wordCorrections;
+    const q = searchQuery.toLowerCase();
+    return wordCorrections.filter(
+      (w) =>
+        w.transliteration.toLowerCase().includes(q) ||
+        w.commonTranslation.toLowerCase().includes(q) ||
+        w.actualMeaning.toLowerCase().includes(q)
+    );
+  }, [searchQuery]);
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
@@ -117,7 +129,7 @@ export default function WordsPage() {
         {/* Header */}
         <div className="mb-10">
           <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
-            Word Corrections
+            {wordCorrections.length} Word Corrections
           </p>
           <h1 className="text-3xl sm:text-4xl mb-4">
             The Words That Got Lost in Translation
@@ -129,9 +141,21 @@ export default function WordsPage() {
           </p>
         </div>
 
+        {/* Search */}
+        <div className="relative mb-6">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search words, translations, meanings..."
+            className="w-full bg-surface border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent/40 transition-colors"
+          />
+        </div>
+
         {/* Word list */}
         <div className="space-y-3">
-          {wordCorrections.map((word) => (
+          {filteredWords.map((word) => (
             <WordCard
               key={word.id}
               word={word}
@@ -139,6 +163,11 @@ export default function WordsPage() {
               onToggle={() => toggleWord(word.id)}
             />
           ))}
+          {filteredWords.length === 0 && (
+            <div className="text-center py-12 text-text-muted text-sm">
+              No words match your search.
+            </div>
+          )}
         </div>
 
         {/* Bottom CTA */}
