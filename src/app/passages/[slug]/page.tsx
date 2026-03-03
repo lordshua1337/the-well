@@ -1,0 +1,212 @@
+"use client";
+
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft, AlertTriangle, BookOpen, Languages } from "lucide-react";
+import { getDossierBySlug, allDossiers } from "@/lib/passages";
+import { misuseTypes } from "@/lib/misuse-types";
+
+function getMisuseType(id: string) {
+  return misuseTypes.find((m) => m.id === id);
+}
+
+export default function PassageDetailPage() {
+  const params = useParams();
+  const slug = params.slug as string;
+  const dossier = getDossierBySlug(slug);
+
+  if (!dossier) {
+    return (
+      <div className="min-h-screen pt-24 pb-16 px-4 text-center">
+        <h1 className="text-2xl mb-4">Passage not found</h1>
+        <Link href="/passages" className="text-accent hover:underline">
+          Back to all passages
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen pt-24 pb-16 px-4">
+      <div className="max-w-2xl mx-auto">
+        {/* Back link */}
+        <Link
+          href="/passages"
+          className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-accent transition-colors mb-8"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          All Passages
+        </Link>
+
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-2">
+            {dossier.priority === "P1" && (
+              <span className="text-[10px] uppercase tracking-widest font-bold text-red-400 bg-red-400/10 px-2 py-0.5 rounded-full">
+                High Risk
+              </span>
+            )}
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-serif mb-2">
+            {dossier.passage}
+          </h1>
+          <p className="text-lg text-text-muted italic">
+            &ldquo;{dossier.commonQuoteForm}&rdquo;
+          </p>
+        </div>
+
+        {/* Misuse types */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {dossier.misuses.types.map((typeId) => {
+            const mt = getMisuseType(typeId);
+            if (!mt) return null;
+            return (
+              <span
+                key={typeId}
+                className="inline-flex items-center gap-1.5 text-xs font-medium bg-red-400/10 text-red-300 px-3 py-1 rounded-full"
+              >
+                <AlertTriangle className="w-3 h-3" />
+                {mt.name}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* Historical / Linguistic Context */}
+        <section className="bg-surface rounded-xl border border-border p-6 mb-4">
+          <div className="flex items-center gap-2 mb-4">
+            <BookOpen className="w-5 h-5 text-accent" />
+            <h2 className="text-lg font-serif">What the Text Actually Says</h2>
+          </div>
+          <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">
+            {dossier.context.historicalLinguistic}
+          </p>
+        </section>
+
+        {/* Key Terms */}
+        {dossier.context.keyTerms.length > 0 && (
+          <section className="bg-surface rounded-xl border border-border p-6 mb-4">
+            <div className="flex items-center gap-2 mb-4">
+              <Languages className="w-5 h-5 text-accent" />
+              <h2 className="text-lg font-serif">Key Terms</h2>
+            </div>
+            <div className="space-y-4">
+              {dossier.context.keyTerms.map((term) => (
+                <div
+                  key={term.transliteration}
+                  className="bg-background rounded-lg p-4"
+                >
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="font-serif text-accent text-lg">
+                      {term.original}
+                    </span>
+                    <span className="text-sm text-text-muted italic">
+                      {term.transliteration}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-widest text-text-muted">
+                      {term.language}
+                    </span>
+                  </div>
+                  <p className="text-sm text-text-secondary mb-1">
+                    <span className="font-medium text-text-primary">Range:</span>{" "}
+                    {term.glossRange}
+                  </p>
+                  <p className="text-sm text-text-secondary">
+                    {term.significance}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Translation Issues */}
+        {dossier.context.translationIssues && (
+          <section className="bg-surface rounded-xl border border-border p-6 mb-4">
+            <h2 className="text-lg font-serif mb-3">Translation Issues</h2>
+            <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">
+              {dossier.context.translationIssues}
+            </p>
+          </section>
+        )}
+
+        {/* How It Gets Misused */}
+        <section className="bg-red-400/5 rounded-xl border border-red-400/20 p-6 mb-4">
+          <div className="flex items-center gap-2 mb-4">
+            <AlertTriangle className="w-5 h-5 text-red-400" />
+            <h2 className="text-lg font-serif">How It Gets Misused</h2>
+          </div>
+          <p className="text-sm text-text-secondary leading-relaxed mb-4">
+            {dossier.misuses.description}
+          </p>
+          <div className="bg-background/50 rounded-lg p-4">
+            <p className="text-xs uppercase tracking-widest text-text-muted mb-2">
+              Real-World Examples
+            </p>
+            <p className="text-sm text-text-secondary leading-relaxed">
+              {dossier.misuses.concreteExamples}
+            </p>
+          </div>
+        </section>
+
+        {/* Love Impact */}
+        <section className="bg-surface rounded-xl border border-border p-6 mb-4">
+          <h2 className="text-lg font-serif mb-3">
+            How This Distorts Access to God&apos;s Love
+          </h2>
+          <p className="text-sm text-text-secondary leading-relaxed">
+            {dossier.loveImpact}
+          </p>
+        </section>
+
+        {/* Clarified Reading */}
+        <section className="bg-accent/5 rounded-xl border border-accent/20 p-6 mb-8">
+          <h2 className="text-lg font-serif text-accent mb-4">
+            A Faithful Reading
+          </h2>
+          <p className="text-sm text-text-secondary leading-relaxed mb-4">
+            {dossier.clarifiedReading.reframe}
+          </p>
+          <blockquote className="border-l-2 border-accent pl-4">
+            <p className="font-serif text-text-primary leading-relaxed">
+              {dossier.clarifiedReading.appResponse}
+            </p>
+          </blockquote>
+        </section>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center pt-4 border-t border-border-light">
+          {(() => {
+            const idx = allDossiers.findIndex((d) => d.id === dossier.id);
+            const prev = idx > 0 ? allDossiers[idx - 1] : null;
+            const next = idx < allDossiers.length - 1 ? allDossiers[idx + 1] : null;
+            return (
+              <>
+                {prev ? (
+                  <Link
+                    href={`/passages/${prev.id}`}
+                    className="text-sm text-text-muted hover:text-accent transition-colors"
+                  >
+                    &larr; {prev.passage}
+                  </Link>
+                ) : (
+                  <span />
+                )}
+                {next ? (
+                  <Link
+                    href={`/passages/${next.id}`}
+                    className="text-sm text-text-muted hover:text-accent transition-colors"
+                  >
+                    {next.passage} &rarr;
+                  </Link>
+                ) : (
+                  <span />
+                )}
+              </>
+            );
+          })()}
+        </div>
+      </div>
+    </div>
+  );
+}

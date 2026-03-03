@@ -11,6 +11,7 @@ export function Nav() {
     { href: "/explore", label: "Explore" },
     { href: "/words", label: "Words" },
     { href: "/cards", label: "Cards" },
+    { href: "/passages", label: "Passages" },
     { href: "/ask", label: "Ask" },
   ];
 
