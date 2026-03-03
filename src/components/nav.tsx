@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Droplets } from "lucide-react";
+import { Menu, X, Droplets, Search } from "lucide-react";
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +12,7 @@ export function Nav() {
     { href: "/words", label: "Words" },
     { href: "/cards", label: "Cards" },
     { href: "/passages", label: "Passages" },
+    { href: "/search", label: "Search" },
     { href: "/ask", label: "Ask" },
   ];
 
