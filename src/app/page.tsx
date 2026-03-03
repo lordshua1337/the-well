@@ -166,8 +166,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Warm divider */}
+      <div className="divider-warm" />
+
       {/* Word previews */}
-      <section id="word-previews" className="py-16 px-4">
+      <section id="word-previews" className="py-16 px-4 section-parchment">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
@@ -236,8 +239,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Warm divider */}
+      <div className="divider-warm" />
+
       {/* Stats bar */}
-      <section className="py-12 px-4">
+      <section className="py-12 px-4 section-parchment">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
@@ -255,6 +261,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Warm divider */}
+      <div className="divider-warm" />
 
       {/* Recently added concepts */}
       <section className="py-12 px-4 bg-surface-warm">
@@ -312,8 +321,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Warm divider */}
+      <div className="divider-warm" />
+
       {/* Knowledge Universe */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 section-parchment">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
@@ -362,6 +374,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Warm divider */}
+      <div className="divider-warm" />
+
       {/* Features */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
@@ -400,6 +415,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Warm divider */}
+      <div className="divider-warm" />
 
       {/* About / Philosophy */}
       <section className="py-16 px-4 bg-surface-warm">
@@ -454,7 +472,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8 px-4">
+      <footer className="footer-elevated py-8 px-4">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-text-muted text-sm">
             <Droplets className="w-4 h-4" />

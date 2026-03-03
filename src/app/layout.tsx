@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} font-sans antialiased paper-texture`}
       >
         <Nav />
         <main>{children}</main>

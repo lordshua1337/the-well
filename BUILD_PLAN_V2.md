@@ -205,6 +205,44 @@ Start with: Gospel of Thomas (all 114 sayings), key NT passages with Greek word 
 
 ---
 
+## Phase 7: Scripture Misuse Expansion Pack
+
+**Spec:** `the_well_scripture_misuse_expansion_pack_spec.md` (in project root)
+
+Three new modules that add depth to the AI guide and content layer. This is an EXPANSION -- no existing code is replaced.
+
+### 7a: Misuse Taxonomy + Detection
+- New data: `MisuseType` classification system (3 categories: text-level, context-level, ethics-pastoral)
+- 10 misuse types: misquotation, translation trap, semantic narrowing, verse isolation, genre confusion, covenant transfer, audience shift, proof-texting, weaponization, spiritual bypassing
+- AI layer uses taxonomy to detect error patterns in user messages and route to corrective pathways
+
+### 7b: 50 Passage Dossiers
+- 50 high-frequency, high-impact biblical passages commonly misquoted, weaponized, or decontextualized
+- Each dossier: original language key terms (Hebrew/Greek), 5-10 verse context window, common misuse patterns (tagged to taxonomy), scholarly correction, pastoral framing, tradition-specific notes
+- Organized into 6 content bands: Clobber Passages (8), Prosperity/Blessing (8), Obedience/Authority (7), Suffering/Theodicy (7), End Times/Judgment (6), Identity/Calling (6), plus 8 supplemental
+- Feeds into existing card, chat, search, and AI response systems as a new content layer
+
+### 7c: Chatbot Protocol
+- Generation rules and guardrails for producing responses that are scripturally faithful, pastorally safe, and non-formulaic
+- Tone calibration: scholarly but warm, never preachy, never dismissive
+- Safety router for crisis/pastoral situations
+- Citation requirements: every claim cites a text, dossier, or scholarly source
+- "I don't know" protocol for genuine unknowns
+
+### New Files
+| File | Action |
+|------|--------|
+| `src/lib/misuse-taxonomy.ts` | NEW - 10 misuse type definitions |
+| `src/lib/passage-dossiers.ts` | NEW - 50 passage dossier entries |
+| `src/lib/chatbot-protocol.ts` | NEW - AI response generation rules |
+| `src/lib/scholarly-sources.ts` | NEW - 10 scholarly source constants (BHS, NA28, BDAG, etc.) |
+| `src/lib/system-prompt.ts` | UPDATE - Integrate misuse detection + dossier context |
+| `src/app/passages/page.tsx` | NEW - Passage dossier browse/search page |
+| `src/app/passages/[id]/page.tsx` | NEW - Individual dossier detail view |
+| `src/components/misuse-tag.tsx` | NEW - Misuse type badge component |
+
+---
+
 ## Files to Create/Modify
 
 | File | Action |

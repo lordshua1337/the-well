@@ -125,12 +125,93 @@
   color: var(--color-accent);
 }
 
+/* ── CARD HOVER -- upgraded spring physics ── */
 .card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-color: var(--color-accent-light);
+}
+
+/* ── PAPER TEXTURE OVERLAY ── */
+.paper-texture::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+}
+
+/* ── GRADIENT DIVIDER -- warm scholarly ── */
+.divider-warm {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45,106,79,0.2), rgba(182,141,64,0.2), transparent);
+}
+
+/* ── SECTION ALTERNATE ── */
+.section-parchment {
+  background: linear-gradient(180deg, #F8F5F0 0%, #F2EDE5 50%, #F8F5F0 100%);
+}
+
+/* ── FOOTER ELEVATED ── */
+.footer-elevated {
+  position: relative;
+  background: linear-gradient(180deg, #F8F5F0 0%, #F0EBE3 40%, #EBE5DB 100%);
+}
+.footer-elevated::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45,106,79,0.25) 30%, rgba(182,141,64,0.25) 70%, transparent);
+}
+
+/* ── SCROLL REVEAL ── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── LINK ANIMATED UNDERLINE ── */
+.link-animated {
+  position: relative;
+  text-decoration: none;
+}
+.link-animated::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+.link-animated:hover::after {
+  width: 100%;
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .card-hover { transition: none; }
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
+  .link-animated::after { transition: none; }
+  .animate-fade-in { animation: none; opacity: 1; }
+  .animate-pulse-glow { animation: none; }
 }
 
 .swipe-container {

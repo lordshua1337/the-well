@@ -31,7 +31,7 @@ export function Nav() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+              className="text-sm text-text-secondary hover:text-text-primary transition-colors link-animated"
             >
               {link.label}
             </Link>
