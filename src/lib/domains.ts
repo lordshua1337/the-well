@@ -18,7 +18,7 @@ export const domains: Domain[] = [
     description:
       "Torah, Prophets, Writings -- the foundational texts in their original context. Documentary Hypothesis, Dead Sea Scrolls variants, Ancient Near Eastern parallels.",
     icon: "ScrollText",
-    conceptCount: 8,
+    conceptCount: 9,
     color: "#8B6914",
   },
   {
@@ -84,7 +84,7 @@ export const domains: Domain[] = [
     description:
       "Desert Fathers, Lectio Divina, Centering Prayer, Ignatian Spirituality, mystical theology. The practices, not just the ideas.",
     icon: "Flame",
-    conceptCount: 6,
+    conceptCount: 11,
     color: "#DC2626",
   },
   {

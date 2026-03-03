@@ -10,6 +10,9 @@ import {
   ScrollText,
   FileText,
   X,
+  Sparkles,
+  User,
+  Sun,
 } from "lucide-react";
 import {
   searchAll,
@@ -30,6 +33,9 @@ const TYPE_CONFIG: Record<
   word: { label: "Word", color: "#B68D40", icon: Languages },
   card: { label: "Card", color: "#40916C", icon: ScrollText },
   passage: { label: "Passage", color: "#C1292E", icon: FileText },
+  practice: { label: "Practice", color: "#8B5E3C", icon: Sparkles },
+  chapter: { label: "Chapter", color: "#1B4332", icon: User },
+  livingword: { label: "Living Word", color: "#4A4E69", icon: Sun },
 };
 
 // ---------------------------------------------------------------------------
@@ -103,6 +109,9 @@ function FilterPills({
     { key: "word", label: "Words" },
     { key: "card", label: "Cards" },
     { key: "passage", label: "Passages" },
+    { key: "practice", label: "Practices" },
+    { key: "chapter", label: "Chapters" },
+    { key: "livingword", label: "Living Words" },
   ];
 
   return (
@@ -169,6 +178,9 @@ export default function SearchPage() {
       word: 0,
       card: 0,
       passage: 0,
+      practice: 0,
+      chapter: 0,
+      livingword: 0,
     };
     for (const r of results) {
       c[r.type]++;

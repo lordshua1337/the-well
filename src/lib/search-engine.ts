@@ -5,12 +5,22 @@
 import { concepts } from "./concepts";
 import { wordCorrections, scriptureCards } from "./scripture-data";
 import { allDossiers } from "./passages";
+import { practices } from "./practices-data";
+import { humanJesusChapters } from "./human-jesus-data";
+import { livingWords } from "./living-words-data";
 
 // ---------------------------------------------------------------------------
 // Search result types
 // ---------------------------------------------------------------------------
 
-export type SearchResultType = "concept" | "word" | "card" | "passage";
+export type SearchResultType =
+  | "concept"
+  | "word"
+  | "card"
+  | "passage"
+  | "practice"
+  | "chapter"
+  | "livingword";
 
 export interface SearchResult {
   readonly type: SearchResultType;
@@ -193,6 +203,80 @@ function searchPassagesUnified(query: string): readonly SearchResult[] {
   return results;
 }
 
+function searchPracticesUnified(query: string): readonly SearchResult[] {
+  const results: SearchResult[] = [];
+
+  for (const p of practices) {
+    const fields = [p.title, p.tradition, p.subtitle, p.purpose, p.origin];
+    const score = bestScore(fields, query);
+    if (score === 0) {
+      const tagMatch = p.tags.some((t) =>
+        t.toLowerCase().includes(query.toLowerCase())
+      );
+      if (!tagMatch) continue;
+    }
+
+    results.push({
+      type: "practice",
+      id: p.id,
+      title: p.title,
+      subtitle: `${p.tradition} tradition -- ${p.difficulty}`,
+      snippet: p.subtitle,
+      href: `/practices/${p.slug}`,
+      relevance: score || 20,
+      meta: p.category,
+    });
+  }
+
+  return results;
+}
+
+function searchChaptersUnified(query: string): readonly SearchResult[] {
+  const results: SearchResult[] = [];
+
+  for (const ch of humanJesusChapters) {
+    const sectionTexts = ch.sections.map((s) => s.title);
+    const fields = [ch.title, ch.subtitle, ...sectionTexts];
+    const score = bestScore(fields, query);
+    if (score === 0) continue;
+
+    results.push({
+      type: "chapter",
+      id: ch.id,
+      title: ch.title,
+      subtitle: "The Human Jesus",
+      snippet: ch.subtitle,
+      href: `/jesus/${ch.slug}`,
+      relevance: score,
+    });
+  }
+
+  return results;
+}
+
+function searchLivingWordsUnified(query: string): readonly SearchResult[] {
+  const results: SearchResult[] = [];
+
+  for (const lw of livingWords) {
+    const fields = [lw.title, lw.prompt, lw.grounding, lw.microPractice];
+    const score = bestScore(fields, query);
+    if (score === 0) continue;
+
+    results.push({
+      type: "livingword",
+      id: lw.id,
+      title: lw.title,
+      subtitle: `Living Word -- Day ${lw.day}`,
+      snippet: lw.prompt.slice(0, 150) + (lw.prompt.length > 150 ? "..." : ""),
+      href: "/living-words",
+      relevance: score,
+      meta: lw.category,
+    });
+  }
+
+  return results;
+}
+
 // ---------------------------------------------------------------------------
 // Unified search
 // ---------------------------------------------------------------------------
@@ -207,6 +291,9 @@ export function searchAll(query: string): readonly SearchResult[] {
     ...searchWordsUnified(q),
     ...searchCardsUnified(q),
     ...searchPassagesUnified(q),
+    ...searchPracticesUnified(q),
+    ...searchChaptersUnified(q),
+    ...searchLivingWordsUnified(q),
   ];
 
   // Sort by relevance (highest first), then alphabetically within same score
@@ -226,6 +313,16 @@ export function getContentStats() {
     words: wordCorrections.length,
     cards: scriptureCards.length,
     passages: allDossiers.length,
-    total: concepts.length + wordCorrections.length + scriptureCards.length + allDossiers.length,
+    practices: practices.length,
+    chapters: humanJesusChapters.length,
+    livingWords: livingWords.length,
+    total:
+      concepts.length +
+      wordCorrections.length +
+      scriptureCards.length +
+      allDossiers.length +
+      practices.length +
+      humanJesusChapters.length +
+      livingWords.length,
   };
 }

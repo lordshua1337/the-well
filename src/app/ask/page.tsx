@@ -8,8 +8,12 @@ import {
   Loader2,
   Droplets,
   RotateCcw,
+  BookOpen,
+  Heart,
 } from "lucide-react";
 import Link from "next/link";
+
+type AskMode = "scholar" | "director";
 
 interface Message {
   id: string;
@@ -70,7 +74,7 @@ function MessageBubble({ message }: { message: Message }) {
   );
 }
 
-function TypingIndicator() {
+function TypingIndicator({ mode }: { readonly mode: AskMode }) {
   return (
     <div className="flex justify-start animate-fade-in">
       <div className="bg-surface border border-border rounded-2xl rounded-bl-md px-4 py-3">
@@ -81,10 +85,47 @@ function TypingIndicator() {
         <div className="flex items-center gap-1">
           <Loader2 className="w-4 h-4 text-text-muted animate-spin" />
           <span className="text-xs text-text-muted">
-            Going back to the source...
+            {mode === "scholar"
+              ? "Going back to the source..."
+              : "Sitting with your question..."}
           </span>
         </div>
       </div>
+    </div>
+  );
+}
+
+function ModeToggle({
+  mode,
+  onModeChange,
+}: {
+  readonly mode: AskMode;
+  readonly onModeChange: (mode: AskMode) => void;
+}) {
+  return (
+    <div className="flex items-center bg-surface-warm rounded-lg p-0.5 border border-border-light">
+      <button
+        onClick={() => onModeChange("scholar")}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+          mode === "scholar"
+            ? "bg-surface text-accent shadow-sm border border-border-light"
+            : "text-text-muted hover:text-text-secondary"
+        }`}
+      >
+        <BookOpen className="w-3.5 h-3.5" />
+        Scholar
+      </button>
+      <button
+        onClick={() => onModeChange("director")}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+          mode === "director"
+            ? "bg-surface text-accent shadow-sm border border-border-light"
+            : "text-text-muted hover:text-text-secondary"
+        }`}
+      >
+        <Heart className="w-3.5 h-3.5" />
+        Director
+      </button>
     </div>
   );
 }
@@ -94,6 +135,7 @@ function AskPageContent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState<AskMode>("scholar");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -132,6 +174,7 @@ function AskPageContent() {
             role: m.role,
             content: m.content,
           })),
+          mode,
         }),
       });
 
@@ -197,19 +240,24 @@ function AskPageContent() {
                 Ask The Well
               </h1>
               <p className="text-xs text-text-muted">
-                Questions answered from the original texts
+                {mode === "scholar"
+                  ? "Scholarly analysis from the original texts"
+                  : "Contemplative guidance for your journey"}
               </p>
             </div>
           </div>
-          {messages.length > 0 && (
-            <button
-              onClick={resetChat}
-              className="text-text-muted hover:text-text-secondary p-1.5 rounded-lg hover:bg-surface transition-colors"
-              title="Start over"
-            >
-              <RotateCcw className="w-4 h-4" />
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            <ModeToggle mode={mode} onModeChange={setMode} />
+            {messages.length > 0 && (
+              <button
+                onClick={resetChat}
+                className="text-text-muted hover:text-text-secondary p-1.5 rounded-lg hover:bg-surface transition-colors"
+                title="Start over"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -221,12 +269,14 @@ function AskPageContent() {
             <div className="flex flex-col items-center justify-center min-h-[50vh]">
               <Droplets className="w-10 h-10 text-accent mb-4 animate-pulse-glow rounded-full" />
               <h2 className="text-xl font-serif mb-2">
-                What do you want to know?
+                {mode === "scholar"
+                  ? "What do you want to know?"
+                  : "What are you sitting with?"}
               </h2>
               <p className="text-text-muted text-sm text-center max-w-sm mb-8">
-                Ask about any verse, word, or teaching. Get answers based on
-                the original Greek and Aramaic -- not filtered through
-                centuries of institutional interpretation.
+                {mode === "scholar"
+                  ? "Ask about any verse, word, or teaching. Get answers based on the original Greek and Aramaic -- not filtered through centuries of institutional interpretation."
+                  : "Share what's on your heart. The Director mode asks more than it answers, points toward practices, and holds space for wherever you are."}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md">
@@ -247,7 +297,7 @@ function AskPageContent() {
               {messages.map((message) => (
                 <MessageBubble key={message.id} message={message} />
               ))}
-              {isLoading && <TypingIndicator />}
+              {isLoading && <TypingIndicator mode={mode} />}
               <div ref={messagesEndRef} />
             </div>
           )}

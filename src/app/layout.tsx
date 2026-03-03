@@ -57,7 +57,7 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} font-sans antialiased paper-texture`}
       >
         <Nav />
-        <main>{children}</main>
+        <main className="pb-14 md:pb-0">{children}</main>
         <Footer />
       </body>
     </html>

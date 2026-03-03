@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { config } from "@/lib/config";
-import { getSystemPrompt } from "@/lib/system-prompt";
+import { buildEnhancedSystemPrompt, type AskMode } from "@/lib/ai/context-builder";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const messages: ChatMessage[] = body.messages;
+    const mode: AskMode = body.mode === "director" ? "director" : "scholar";
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
@@ -34,6 +35,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ content: demoResponse });
     }
 
+    // Build a focused system prompt using RAG -- only inject knowledge
+    // relevant to this specific question, not the entire content library
+    const systemPrompt = buildEnhancedSystemPrompt(lastMessage.content, mode);
+
     // Call Claude API
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -45,7 +50,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
         max_tokens: 1500,
-        system: getSystemPrompt(),
+        system: systemPrompt,
         messages: messages.map((m) => ({
           role: m.role,
           content: m.content,

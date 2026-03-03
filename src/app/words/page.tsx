@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search, CheckCircle2, Bookmark } from "lucide-react";
 import Link from "next/link";
-import { wordCorrections, type WordCorrection } from "@/lib/scripture-data";
+import { wordCorrections, type WordCorrection, type WordCategory } from "@/lib/words";
 import { getRelatedPassages } from "@/lib/cross-links";
 import { loadProgress, markWordRead, saveProgress, type ReadingProgress } from "@/lib/reading-progress";
 import {
@@ -13,6 +13,16 @@ import {
   isWordBookmarked,
   type Bookmarks,
 } from "@/lib/bookmarks";
+
+const CATEGORIES: { id: WordCategory | "all"; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "theological", label: "Theological" },
+  { id: "salvation", label: "Salvation" },
+  { id: "power", label: "Power" },
+  { id: "relational", label: "Relational" },
+  { id: "prayer", label: "Prayer" },
+  { id: "kingdom", label: "Kingdom" },
+];
 
 function WordCard({
   word,
@@ -166,6 +176,7 @@ function WordCard({
 export default function WordsPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<WordCategory | "all">("all");
   const [progress, setProgress] = useState<ReadingProgress | null>(null);
   const [bookmarks, setBookmarks] = useState<Bookmarks | null>(null);
 
@@ -198,15 +209,35 @@ export default function WordsPage() {
   }, []);
 
   const filteredWords = useMemo(() => {
-    if (!searchQuery.trim()) return wordCorrections;
-    const q = searchQuery.toLowerCase();
-    return wordCorrections.filter(
-      (w) =>
-        w.transliteration.toLowerCase().includes(q) ||
-        w.commonTranslation.toLowerCase().includes(q) ||
-        w.actualMeaning.toLowerCase().includes(q)
-    );
-  }, [searchQuery]);
+    let words = wordCorrections;
+
+    // Filter by category
+    if (activeCategory !== "all") {
+      words = words.filter((w) => w.category === activeCategory);
+    }
+
+    // Filter by search
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      words = words.filter(
+        (w) =>
+          w.transliteration.toLowerCase().includes(q) ||
+          w.commonTranslation.toLowerCase().includes(q) ||
+          w.actualMeaning.toLowerCase().includes(q) ||
+          w.greek.toLowerCase().includes(q)
+      );
+    }
+
+    return words;
+  }, [searchQuery, activeCategory]);
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: wordCorrections.length };
+    for (const w of wordCorrections) {
+      counts[w.category] = (counts[w.category] || 0) + 1;
+    }
+    return counts;
+  }, []);
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
@@ -235,22 +266,24 @@ export default function WordsPage() {
           </p>
         </div>
 
-        {/* Quick jump */}
-        <div className="bg-surface border border-border rounded-xl p-5 mb-8">
-          <p className="text-xs text-accent uppercase tracking-widest font-medium mb-3">
-            Jump to Word
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {wordCorrections.map((word) => (
-              <a
-                key={word.id}
-                href={`#${word.id}`}
-                className="text-sm bg-surface-warm px-3 py-1.5 rounded-lg text-text-secondary hover:text-accent hover:bg-accent/10 transition-colors"
-              >
-                <span className="font-serif italic">{word.transliteration}</span>
-              </a>
-            ))}
-          </div>
+        {/* Category tabs */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`text-sm px-3 py-1.5 rounded-lg transition-colors ${
+                activeCategory === cat.id
+                  ? "bg-accent text-white"
+                  : "bg-surface border border-border text-text-secondary hover:text-accent hover:border-accent/30"
+              }`}
+            >
+              {cat.label}
+              <span className="ml-1.5 text-xs opacity-70">
+                {categoryCounts[cat.id] || 0}
+              </span>
+            </button>
+          ))}
         </div>
 
         {/* Search */}

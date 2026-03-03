@@ -7,6 +7,7 @@ export interface Bookmarks {
   readonly concepts: readonly string[];
   readonly words: readonly string[];
   readonly cards: readonly string[];
+  readonly practices: readonly string[];
   readonly updatedAt: string;
 }
 
@@ -26,6 +27,7 @@ function createBookmarks(): Bookmarks {
     concepts: [],
     words: [],
     cards: [],
+    practices: [],
     updatedAt: new Date().toISOString(),
   };
 }
@@ -39,7 +41,16 @@ export function loadBookmarks(): Bookmarks {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return createBookmarks();
   try {
-    return JSON.parse(raw) as Bookmarks;
+    const parsed = JSON.parse(raw);
+    // Backward compat: add missing fields from older stored data
+    return {
+      passages: parsed.passages ?? [],
+      concepts: parsed.concepts ?? [],
+      words: parsed.words ?? [],
+      cards: parsed.cards ?? [],
+      practices: parsed.practices ?? [],
+      updatedAt: parsed.updatedAt ?? new Date().toISOString(),
+    };
   } catch {
     return createBookmarks();
   }
@@ -110,6 +121,20 @@ export function toggleCardBookmark(
   };
 }
 
+export function togglePracticeBookmark(
+  bookmarks: Bookmarks,
+  practiceId: string,
+): Bookmarks {
+  const exists = bookmarks.practices.includes(practiceId);
+  return {
+    ...bookmarks,
+    practices: exists
+      ? bookmarks.practices.filter((id) => id !== practiceId)
+      : [...bookmarks.practices, practiceId],
+    updatedAt: new Date().toISOString(),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Query helpers
 // ---------------------------------------------------------------------------
@@ -142,11 +167,19 @@ export function isCardBookmarked(
   return bookmarks.cards.includes(cardId);
 }
 
+export function isPracticeBookmarked(
+  bookmarks: Bookmarks,
+  practiceId: string,
+): boolean {
+  return bookmarks.practices.includes(practiceId);
+}
+
 export function getTotalBookmarks(bookmarks: Bookmarks): number {
   return (
     bookmarks.passages.length +
     bookmarks.concepts.length +
     bookmarks.words.length +
-    bookmarks.cards.length
+    bookmarks.cards.length +
+    bookmarks.practices.length
   );
 }
