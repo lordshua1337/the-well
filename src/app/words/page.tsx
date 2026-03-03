@@ -1,18 +1,21 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search } from "lucide-react";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { wordCorrections, type WordCorrection } from "@/lib/scripture-data";
 import { getRelatedPassages } from "@/lib/cross-links";
+import { loadProgress, markWordRead, saveProgress, type ReadingProgress } from "@/lib/reading-progress";
 
 function WordCard({
   word,
   isExpanded,
+  isRead,
   onToggle,
 }: {
   word: WordCorrection;
   isExpanded: boolean;
+  isRead: boolean;
   onToggle: () => void;
 }) {
   return (
@@ -27,6 +30,7 @@ function WordCard({
             <span className="font-serif italic text-accent text-lg">
               {word.transliteration}
             </span>
+            {isRead && <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />}
             <span className="text-text-muted">&mdash;</span>
             <span className="text-sm text-text-muted">
               ({word.greek})
@@ -133,10 +137,27 @@ function WordCard({
 export default function WordsPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [progress, setProgress] = useState<ReadingProgress | null>(null);
 
-  const toggleWord = (id: string) => {
-    setExpanded((prev) => (prev === id ? null : id));
-  };
+  useEffect(() => {
+    setProgress(loadProgress());
+  }, []);
+
+  const toggleWord = useCallback((id: string) => {
+    setExpanded((prev) => {
+      const next = prev === id ? null : id;
+      // Mark as read when expanding
+      if (next !== null) {
+        const current = loadProgress();
+        const updated = markWordRead(current, id);
+        if (updated !== current) {
+          saveProgress(updated);
+          setProgress(updated);
+        }
+      }
+      return next;
+    });
+  }, []);
 
   const filteredWords = useMemo(() => {
     if (!searchQuery.trim()) return wordCorrections;
@@ -215,6 +236,7 @@ export default function WordsPage() {
               key={word.id}
               word={word}
               isExpanded={expanded === word.id}
+              isRead={progress?.words.includes(word.id) ?? false}
               onToggle={() => toggleWord(word.id)}
             />
           ))}

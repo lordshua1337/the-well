@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { AlertTriangle, BookOpen, Shield, Search } from "lucide-react";
+import { AlertTriangle, BookOpen, Shield, Search, CheckCircle2 } from "lucide-react";
 import { allDossiers } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
+import { loadProgress, type ReadingProgress } from "@/lib/reading-progress";
 
 type FilterMode = "all" | "P1" | "P2" | string;
 
@@ -33,6 +34,11 @@ function getMisuseTypeCategory(id: string): string {
 export default function PassagesPage() {
   const [filter, setFilter] = useState<FilterMode>("all");
   const [search, setSearch] = useState("");
+  const [progress, setProgress] = useState<ReadingProgress | null>(null);
+
+  useEffect(() => {
+    setProgress(loadProgress());
+  }, []);
 
   const filtered = useMemo(() => {
     let results = [...allDossiers];
@@ -75,6 +81,28 @@ export default function PassagesPage() {
             reading looks like.
           </p>
         </div>
+
+        {/* Progress bar */}
+        {progress && progress.passages.length > 0 && (
+          <div className="bg-surface rounded-xl border border-border p-4 mb-6">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-medium text-text-secondary">
+                Reading Progress
+              </span>
+              <span className="text-xs text-accent font-medium">
+                {progress.passages.length} / {allDossiers.length} read
+              </span>
+            </div>
+            <div className="w-full h-1.5 bg-background rounded-full overflow-hidden">
+              <div
+                className="h-full bg-accent rounded-full transition-all duration-500"
+                style={{
+                  width: `${Math.round((progress.passages.length / allDossiers.length) * 100)}%`,
+                }}
+              />
+            </div>
+          </div>
+        )}
 
         {/* Search */}
         <div className="relative mb-6">
@@ -151,6 +179,9 @@ export default function PassagesPage() {
                       <span className="text-[10px] uppercase tracking-widest font-bold text-red-400 bg-red-400/10 px-2 py-0.5 rounded-full">
                         High Risk
                       </span>
+                    )}
+                    {progress?.passages.includes(dossier.id) && (
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
                     )}
                   </div>
                   <p className="text-sm text-text-muted mb-2">

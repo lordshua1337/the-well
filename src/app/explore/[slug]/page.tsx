@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -9,6 +9,7 @@ import {
   ChevronDown,
   ChevronUp,
   Search,
+  CheckCircle2,
   ScrollText,
   BookOpen,
   Archive,
@@ -25,6 +26,7 @@ import {
 } from "lucide-react";
 import { getDomainBySlug, type Domain } from "@/lib/domains";
 import { getConceptsByDomain, searchConcepts, type Concept } from "@/lib/concepts";
+import { loadProgress, type ReadingProgress } from "@/lib/reading-progress";
 
 const iconMap: Record<string, React.ReactNode> = {
   ScrollText: <ScrollText className="w-6 h-6" />,
@@ -42,7 +44,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Heart: <Heart className="w-6 h-6" />,
 };
 
-function ConceptCard({ concept, domain }: { concept: Concept; domain: Domain }) {
+function ConceptCard({ concept, domain, isRead }: { concept: Concept; domain: Domain; isRead: boolean }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -52,7 +54,10 @@ function ConceptCard({ concept, domain }: { concept: Concept; domain: Domain }) 
         className="w-full text-left p-5 flex items-start justify-between gap-4"
       >
         <div className="min-w-0">
-          <h3 className="text-base font-semibold mb-1">{concept.name}</h3>
+          <div className="flex items-center gap-2 mb-1">
+            <h3 className="text-base font-semibold">{concept.name}</h3>
+            {isRead && <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />}
+          </div>
           <p className="text-sm text-text-secondary leading-relaxed line-clamp-2">
             {concept.summary}
           </p>
@@ -106,6 +111,11 @@ export default function DomainDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const [searchQuery, setSearchQuery] = useState("");
+  const [progress, setProgress] = useState<ReadingProgress | null>(null);
+
+  useEffect(() => {
+    setProgress(loadProgress());
+  }, []);
 
   const domain = useMemo(() => getDomainBySlug(slug), [slug]);
   const concepts = useMemo(
@@ -172,6 +182,12 @@ export default function DomainDetailPage() {
           </p>
           <p className="text-xs text-text-muted mt-2">
             {concepts.length} {concepts.length === 1 ? "entry" : "entries"}
+            {progress && (() => {
+              const readCount = concepts.filter((c) =>
+                progress.concepts.includes(c.id)
+              ).length;
+              return readCount > 0 ? ` -- ${readCount} read` : "";
+            })()}
           </p>
         </div>
 
@@ -193,7 +209,12 @@ export default function DomainDetailPage() {
         {filteredConcepts.length > 0 ? (
           <div className="space-y-3">
             {filteredConcepts.map((concept) => (
-              <ConceptCard key={concept.id} concept={concept} domain={domain} />
+              <ConceptCard
+                key={concept.id}
+                concept={concept}
+                domain={domain}
+                isRead={progress?.concepts.includes(concept.id) ?? false}
+              />
             ))}
           </div>
         ) : (

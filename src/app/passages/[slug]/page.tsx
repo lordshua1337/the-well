@@ -1,11 +1,13 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, AlertTriangle, BookOpen, Languages, ArrowRight } from "lucide-react";
+import { ArrowLeft, AlertTriangle, BookOpen, Languages, ArrowRight, CheckCircle2 } from "lucide-react";
 import { getDossierBySlug, allDossiers } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
 import { getRelatedWords, getRelatedCardsForPassage } from "@/lib/cross-links";
+import { loadProgress, markPassageRead, saveProgress } from "@/lib/reading-progress";
 
 function getMisuseType(id: string) {
   return misuseTypes.find((m) => m.id === id);
@@ -15,6 +17,16 @@ export default function PassageDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const dossier = getDossierBySlug(slug);
+
+  // Mark passage as read on visit
+  useEffect(() => {
+    if (!dossier) return;
+    const progress = loadProgress();
+    const updated = markPassageRead(progress, dossier.id);
+    if (updated !== progress) {
+      saveProgress(updated);
+    }
+  }, [dossier]);
 
   if (!dossier) {
     return (
@@ -47,6 +59,10 @@ export default function PassageDetailPage() {
                 High Risk
               </span>
             )}
+            <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest font-bold text-accent bg-accent/10 px-2 py-0.5 rounded-full">
+              <CheckCircle2 className="w-3 h-3" />
+              Read
+            </span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-serif mb-2">
             {dossier.passage}

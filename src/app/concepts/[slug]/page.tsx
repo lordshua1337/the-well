@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { concepts, getConceptBySlug, getConceptsByDomain, type Concept } from "@/lib/concepts";
 import { getDomainById } from "@/lib/domains";
+import { loadProgress, markConceptRead, saveProgress } from "@/lib/reading-progress";
 
 type DepthTab = "accessible" | "intermediate" | "advanced";
 
@@ -117,6 +118,16 @@ export default function ConceptDetailPage() {
       prevConcept: idx > 0 ? domainConcepts[idx - 1] : null,
       nextConcept: idx < domainConcepts.length - 1 ? domainConcepts[idx + 1] : null,
     };
+  }, [concept]);
+
+  // Mark concept as read on visit
+  useEffect(() => {
+    if (!concept) return;
+    const progress = loadProgress();
+    const updated = markConceptRead(progress, concept.id);
+    if (updated !== progress) {
+      saveProgress(updated);
+    }
   }, [concept]);
 
   if (!concept || !domain) {
