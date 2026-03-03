@@ -22,6 +22,7 @@ import {
 import { domains } from "@/lib/domains";
 import { concepts } from "@/lib/concepts";
 import { scriptureCards } from "@/lib/scripture-data";
+import DailyWord from "@/components/daily-word";
 
 const domainIconMap: Record<string, React.ReactNode> = {
   ScrollText: <ScrollText className="w-4 h-4" />,
@@ -163,6 +164,16 @@ export default function HomePage() {
           >
             <ChevronDown className="w-6 h-6 mx-auto" />
           </a>
+        </div>
+      </section>
+
+      {/* Warm divider */}
+      <div className="divider-warm" />
+
+      {/* Daily Word */}
+      <section className="py-12 px-4 section-parchment">
+        <div className="max-w-xl mx-auto">
+          <DailyWord />
         </div>
       </section>
 
