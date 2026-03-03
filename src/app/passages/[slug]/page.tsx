@@ -175,7 +175,8 @@ export default function PassageDetailPage() {
         </section>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center pt-4 border-t border-border-light">
+        <div className="divider-warm mb-4" />
+        <div className="flex justify-between items-center pt-4">
           {(() => {
             const idx = allDossiers.findIndex((d) => d.id === dossier.id);
             const prev = idx > 0 ? allDossiers[idx - 1] : null;

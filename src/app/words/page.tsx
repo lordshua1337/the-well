@@ -171,6 +171,8 @@ export default function WordsPage() {
           />
         </div>
 
+        <div className="divider-warm mb-6" />
+
         {/* Word list */}
         <div className="space-y-3">
           {filteredWords.map((word) => (
@@ -188,8 +190,10 @@ export default function WordsPage() {
           )}
         </div>
 
+        <div className="divider-warm mt-12 mb-8" />
+
         {/* Bottom CTA */}
-        <div className="mt-12 text-center bg-surface-warm rounded-xl p-8">
+        <div className="text-center bg-surface-warm rounded-xl p-8">
           <h3 className="text-xl mb-3">Have a Question About a Word?</h3>
           <p className="text-text-secondary text-sm mb-6">
             Ask about any Greek word, verse, or teaching and get an answer

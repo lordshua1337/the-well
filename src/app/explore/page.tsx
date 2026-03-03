@@ -241,8 +241,9 @@ export default function ExplorePage() {
         )}
 
         {/* Total stats */}
+        {!isSearching && <div className="divider-warm mt-10 mb-6" />}
         {!isSearching && (
-          <div className="mt-10 bg-surface rounded-xl border border-border p-6">
+          <div className="bg-surface rounded-xl border border-border p-6">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               <div>
                 <p className="text-2xl font-semibold text-accent">

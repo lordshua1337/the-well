@@ -131,13 +131,15 @@ export default function PassagesPage() {
           })}
         </div>
 
+        <div className="divider-warm mb-6" />
+
         {/* Results */}
         <div className="space-y-3">
           {filtered.map((dossier) => (
             <Link
               key={dossier.id}
               href={`/passages/${dossier.id}`}
-              className="block bg-surface rounded-xl border border-border p-5 hover:border-accent/30 transition-colors group"
+              className="block bg-surface rounded-xl border border-border p-5 card-hover group"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
