@@ -12,6 +12,7 @@ export function Nav() {
     { href: "/words", label: "Words" },
     { href: "/cards", label: "Cards" },
     { href: "/passages", label: "Passages" },
+    { href: "/saved", label: "Saved" },
     { href: "/search", label: "Search" },
     { href: "/ask", label: "Ask" },
   ];

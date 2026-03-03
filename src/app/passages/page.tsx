@@ -1,13 +1,20 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { AlertTriangle, BookOpen, Shield, Search, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, BookOpen, Shield, Search, CheckCircle2, Bookmark } from "lucide-react";
 import { allDossiers } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
 import { loadProgress, type ReadingProgress } from "@/lib/reading-progress";
+import {
+  loadBookmarks,
+  saveBookmarks,
+  togglePassageBookmark,
+  isPassageBookmarked,
+  type Bookmarks,
+} from "@/lib/bookmarks";
 
-type FilterMode = "all" | "P1" | "P2" | string;
+type FilterMode = "all" | "P1" | "P2" | "saved" | string;
 
 const CATEGORY_LABELS: Record<string, string> = {
   "text-level": "Text-Level Errors",
@@ -35,15 +42,35 @@ export default function PassagesPage() {
   const [filter, setFilter] = useState<FilterMode>("all");
   const [search, setSearch] = useState("");
   const [progress, setProgress] = useState<ReadingProgress | null>(null);
+  const [bookmarks, setBookmarks] = useState<Bookmarks | null>(null);
 
   useEffect(() => {
     setProgress(loadProgress());
+    setBookmarks(loadBookmarks());
   }, []);
+
+  const handleToggleBookmark = useCallback(
+    (e: React.MouseEvent, passageId: string) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!bookmarks) return;
+      const updated = togglePassageBookmark(bookmarks, passageId);
+      saveBookmarks(updated);
+      setBookmarks(updated);
+    },
+    [bookmarks],
+  );
+
+  const savedCount = bookmarks?.passages.length ?? 0;
 
   const filtered = useMemo(() => {
     let results = [...allDossiers];
 
-    if (filter === "P1") {
+    if (filter === "saved") {
+      results = results.filter(
+        (d) => bookmarks !== null && bookmarks.passages.includes(d.id),
+      );
+    } else if (filter === "P1") {
       results = results.filter((d) => d.priority === "P1");
     } else if (filter === "P2") {
       results = results.filter((d) => d.priority === "P2");
@@ -62,7 +89,7 @@ export default function PassagesPage() {
     }
 
     return results;
-  }, [filter, search]);
+  }, [filter, search, bookmarks]);
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
@@ -128,6 +155,19 @@ export default function PassagesPage() {
           >
             All ({allDossiers.length})
           </button>
+          {savedCount > 0 && (
+            <button
+              onClick={() => setFilter("saved")}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors inline-flex items-center gap-1 ${
+                filter === "saved"
+                  ? "bg-accent text-white"
+                  : "bg-surface border border-border text-text-secondary hover:border-accent/30"
+              }`}
+            >
+              <Bookmark className="w-3 h-3" />
+              Saved ({savedCount})
+            </button>
+          )}
           <button
             onClick={() => setFilter("P1")}
             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
@@ -191,15 +231,38 @@ export default function PassagesPage() {
                     {dossier.clarifiedReading.appResponse}
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-1 shrink-0 max-w-[140px]">
-                  {dossier.misuses.types.map((typeId) => (
-                    <span
-                      key={typeId}
-                      className="text-[10px] text-text-muted bg-background px-1.5 py-0.5 rounded"
-                    >
-                      {getMisuseTypeName(typeId)}
-                    </span>
-                  ))}
+                <div className="flex flex-col items-end gap-2 shrink-0">
+                  <button
+                    onClick={(e) => handleToggleBookmark(e, dossier.id)}
+                    className={`p-1.5 rounded-lg transition-colors ${
+                      bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                        ? "text-accent"
+                        : "text-text-muted opacity-0 group-hover:opacity-100"
+                    } hover:bg-accent/10`}
+                    aria-label={
+                      bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                        ? "Remove bookmark"
+                        : "Save for later"
+                    }
+                  >
+                    <Bookmark
+                      className={`w-4 h-4 ${
+                        bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                          ? "fill-current"
+                          : ""
+                      }`}
+                    />
+                  </button>
+                  <div className="flex flex-wrap gap-1 max-w-[140px]">
+                    {dossier.misuses.types.map((typeId) => (
+                      <span
+                        key={typeId}
+                        className="text-[10px] text-text-muted bg-background px-1.5 py-0.5 rounded"
+                      >
+                        {getMisuseTypeName(typeId)}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </Link>

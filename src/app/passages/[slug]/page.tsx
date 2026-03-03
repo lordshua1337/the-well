@@ -1,13 +1,20 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { ArrowLeft, AlertTriangle, BookOpen, Languages, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, AlertTriangle, BookOpen, Languages, ArrowRight, CheckCircle2, Bookmark } from "lucide-react";
 import { getDossierBySlug, allDossiers } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
 import { getRelatedWords, getRelatedCardsForPassage } from "@/lib/cross-links";
 import { loadProgress, markPassageRead, saveProgress } from "@/lib/reading-progress";
+import {
+  loadBookmarks,
+  saveBookmarks,
+  togglePassageBookmark,
+  isPassageBookmarked,
+  type Bookmarks,
+} from "@/lib/bookmarks";
 
 function getMisuseType(id: string) {
   return misuseTypes.find((m) => m.id === id);
@@ -18,7 +25,9 @@ export default function PassageDetailPage() {
   const slug = params.slug as string;
   const dossier = getDossierBySlug(slug);
 
-  // Mark passage as read on visit
+  const [bookmarks, setBookmarks] = useState<Bookmarks | null>(null);
+
+  // Mark passage as read on visit + load bookmarks
   useEffect(() => {
     if (!dossier) return;
     const progress = loadProgress();
@@ -26,7 +35,15 @@ export default function PassageDetailPage() {
     if (updated !== progress) {
       saveProgress(updated);
     }
+    setBookmarks(loadBookmarks());
   }, [dossier]);
+
+  const handleToggleBookmark = useCallback(() => {
+    if (!bookmarks || !dossier) return;
+    const updated = togglePassageBookmark(bookmarks, dossier.id);
+    saveBookmarks(updated);
+    setBookmarks(updated);
+  }, [bookmarks, dossier]);
 
   if (!dossier) {
     return (
@@ -64,12 +81,42 @@ export default function PassageDetailPage() {
               Read
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-serif mb-2">
-            {dossier.passage}
-          </h1>
-          <p className="text-lg text-text-muted italic">
-            &ldquo;{dossier.commonQuoteForm}&rdquo;
-          </p>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-serif mb-2">
+                {dossier.passage}
+              </h1>
+              <p className="text-lg text-text-muted italic">
+                &ldquo;{dossier.commonQuoteForm}&rdquo;
+              </p>
+            </div>
+            <button
+              onClick={handleToggleBookmark}
+              className={`p-2.5 rounded-xl border transition-colors shrink-0 mt-1 ${
+                bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                  ? "bg-accent/10 border-accent/20 text-accent"
+                  : "bg-surface border-border text-text-muted hover:text-accent hover:border-accent/30"
+              }`}
+              aria-label={
+                bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                  ? "Remove bookmark"
+                  : "Save for later"
+              }
+              title={
+                bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                  ? "Saved"
+                  : "Save for later"
+              }
+            >
+              <Bookmark
+                className={`w-5 h-5 ${
+                  bookmarks && isPassageBookmarked(bookmarks, dossier.id)
+                    ? "fill-current"
+                    : ""
+                }`}
+              />
+            </button>
+          </div>
         </div>
 
         {/* Misuse types */}

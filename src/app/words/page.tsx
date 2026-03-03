@@ -1,22 +1,33 @@
 "use client";
 
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search, CheckCircle2, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { wordCorrections, type WordCorrection } from "@/lib/scripture-data";
 import { getRelatedPassages } from "@/lib/cross-links";
 import { loadProgress, markWordRead, saveProgress, type ReadingProgress } from "@/lib/reading-progress";
+import {
+  loadBookmarks,
+  saveBookmarks,
+  toggleWordBookmark,
+  isWordBookmarked,
+  type Bookmarks,
+} from "@/lib/bookmarks";
 
 function WordCard({
   word,
   isExpanded,
   isRead,
+  isBookmarked,
   onToggle,
+  onToggleBookmark,
 }: {
   word: WordCorrection;
   isExpanded: boolean;
   isRead: boolean;
+  isBookmarked: boolean;
   onToggle: () => void;
+  onToggleBookmark: () => void;
 }) {
   return (
     <div id={word.id} className="bg-surface rounded-xl border border-border overflow-hidden card-hover scroll-mt-24">
@@ -48,12 +59,30 @@ function WordCard({
           </div>
         </div>
 
-        <div className="text-text-muted mt-1">
-          {isExpanded ? (
-            <ChevronUp className="w-5 h-5" />
-          ) : (
-            <ChevronDown className="w-5 h-5" />
-          )}
+        <div className="flex items-center gap-1 mt-1">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleBookmark();
+            }}
+            className={`p-1 rounded-lg transition-colors ${
+              isBookmarked
+                ? "text-accent"
+                : "text-text-muted hover:text-accent"
+            } hover:bg-accent/10`}
+            aria-label={isBookmarked ? "Remove bookmark" : "Save for later"}
+          >
+            <Bookmark
+              className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`}
+            />
+          </button>
+          <span className="text-text-muted">
+            {isExpanded ? (
+              <ChevronUp className="w-5 h-5" />
+            ) : (
+              <ChevronDown className="w-5 h-5" />
+            )}
+          </span>
         </div>
       </button>
 
@@ -138,9 +167,18 @@ export default function WordsPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [progress, setProgress] = useState<ReadingProgress | null>(null);
+  const [bookmarks, setBookmarks] = useState<Bookmarks | null>(null);
 
   useEffect(() => {
     setProgress(loadProgress());
+    setBookmarks(loadBookmarks());
+  }, []);
+
+  const handleToggleBookmark = useCallback((wordId: string) => {
+    const current = loadBookmarks();
+    const updated = toggleWordBookmark(current, wordId);
+    saveBookmarks(updated);
+    setBookmarks(updated);
   }, []);
 
   const toggleWord = useCallback((id: string) => {
@@ -237,7 +275,9 @@ export default function WordsPage() {
               word={word}
               isExpanded={expanded === word.id}
               isRead={progress?.words.includes(word.id) ?? false}
+              isBookmarked={bookmarks ? isWordBookmarked(bookmarks, word.id) : false}
               onToggle={() => toggleWord(word.id)}
+              onToggleBookmark={() => handleToggleBookmark(word.id)}
             />
           ))}
           {filteredWords.length === 0 && (
