@@ -2,9 +2,10 @@
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, AlertTriangle, BookOpen, Languages } from "lucide-react";
+import { ArrowLeft, AlertTriangle, BookOpen, Languages, ArrowRight } from "lucide-react";
 import { getDossierBySlug, allDossiers } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
+import { getRelatedWords, getRelatedCardsForPassage } from "@/lib/cross-links";
 
 function getMisuseType(id: string) {
   return misuseTypes.find((m) => m.id === id);
@@ -173,6 +174,66 @@ export default function PassageDetailPage() {
             </p>
           </blockquote>
         </section>
+
+        {/* Cross-links */}
+        {(() => {
+          const relatedWords = getRelatedWords(dossier);
+          const relatedCards = getRelatedCardsForPassage(dossier);
+          if (relatedWords.length === 0 && relatedCards.length === 0) return null;
+          return (
+            <section className="bg-surface rounded-xl border border-border p-6 mb-8">
+              <h2 className="text-lg font-serif mb-4">Related in The Well</h2>
+              {relatedWords.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-xs text-accent uppercase tracking-widest font-medium mb-3">
+                    Word Corrections
+                  </p>
+                  <div className="space-y-2">
+                    {relatedWords.map((word) => (
+                      <Link
+                        key={word.id}
+                        href={`/words#${word.id}`}
+                        className="flex items-center justify-between bg-background rounded-lg p-3 card-hover group"
+                      >
+                        <div className="flex items-baseline gap-2">
+                          <span className="font-serif italic text-accent">
+                            {word.transliteration}
+                          </span>
+                          <span className="text-xs text-text-muted">
+                            {word.commonTranslation}
+                          </span>
+                          <ArrowRight className="w-3 h-3 text-text-muted" />
+                          <span className="text-xs text-accent font-medium">
+                            {word.actualMeaning}
+                          </span>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {relatedCards.length > 0 && (
+                <div>
+                  <p className="text-xs text-accent uppercase tracking-widest font-medium mb-3">
+                    Scripture Cards
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {relatedCards.map((card) => (
+                      <Link
+                        key={card.id}
+                        href="/cards"
+                        className="text-xs bg-accent/10 text-accent px-3 py-1.5 rounded-full hover:bg-accent/20 transition-colors"
+                      >
+                        {card.transliteration || card.verseRef}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
+          );
+        })()}
 
         {/* Navigation */}
         <div className="divider-warm mb-4" />

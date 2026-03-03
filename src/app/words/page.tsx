@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Search } from "lucide-react";
 import Link from "next/link";
 import { wordCorrections, type WordCorrection } from "@/lib/scripture-data";
+import { getRelatedPassages } from "@/lib/cross-links";
 
 function WordCard({
   word,
@@ -89,6 +90,40 @@ function WordCard({
               {word.whyItMatters}
             </p>
           </div>
+
+          {/* Related passages (cross-link) */}
+          {(() => {
+            const passages = getRelatedPassages(word);
+            if (passages.length === 0) return null;
+            return (
+              <div className="mt-6 pt-4 border-t border-border-light">
+                <p className="text-xs text-accent uppercase tracking-widest font-medium mb-3">
+                  Related Passages
+                </p>
+                <div className="space-y-2">
+                  {passages.map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/passages/${p.id}`}
+                      className="flex items-center justify-between bg-surface-warm rounded-lg p-3 hover:bg-accent/5 transition-colors group"
+                    >
+                      <div>
+                        <span className="text-sm font-serif text-text-primary group-hover:text-accent transition-colors">
+                          {p.passage}
+                        </span>
+                        {p.priority === "P1" && (
+                          <span className="ml-2 text-[9px] uppercase tracking-widest font-bold text-red-400 bg-red-400/10 px-1.5 py-0.5 rounded-full">
+                            High Risk
+                          </span>
+                        )}
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       )}
     </div>
