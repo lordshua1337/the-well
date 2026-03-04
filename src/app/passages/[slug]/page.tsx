@@ -3,7 +3,18 @@
 import { useParams } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { ArrowLeft, AlertTriangle, BookOpen, Languages, ArrowRight, CheckCircle2, Bookmark } from "lucide-react";
+import {
+  ArrowLeft,
+  AlertTriangle,
+  BookOpen,
+  Languages,
+  ArrowRight,
+  CheckCircle2,
+  Bookmark,
+  ChevronDown,
+  Heart,
+  Sparkles,
+} from "lucide-react";
 import { getDossierBySlug, allDossiers } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
 import { getRelatedWords, getRelatedCardsForPassage } from "@/lib/cross-links";
@@ -19,6 +30,84 @@ import {
 function getMisuseType(id: string) {
   return misuseTypes.find((m) => m.id === id);
 }
+
+// ---------------------------------------------------------------------------
+// Collapsible section component
+// ---------------------------------------------------------------------------
+
+function DisclosureSection({
+  icon,
+  title,
+  preview,
+  children,
+  defaultOpen = false,
+  variant = "default",
+}: {
+  icon: React.ReactNode;
+  title: string;
+  preview: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+  variant?: "default" | "warning" | "accent";
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  const borderClass =
+    variant === "warning"
+      ? "border-red-400/20"
+      : variant === "accent"
+        ? "border-accent/20"
+        : "border-border";
+  const bgClass =
+    variant === "warning"
+      ? "bg-red-400/5"
+      : variant === "accent"
+        ? "bg-accent/5"
+        : "bg-surface";
+
+  return (
+    <section className={`rounded-xl border ${borderClass} ${bgClass} mb-4 overflow-hidden`}>
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className="w-full flex items-start gap-3 p-6 text-left group"
+        aria-expanded={open}
+      >
+        <span className="shrink-0 mt-0.5">{icon}</span>
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg font-serif mb-1">{title}</h2>
+          {!open && (
+            <p className="text-sm text-text-muted line-clamp-1">
+              {preview}
+            </p>
+          )}
+        </div>
+        <ChevronDown
+          className={`w-5 h-5 text-text-muted shrink-0 mt-1 transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      {open && (
+        <div className="px-6 pb-6 -mt-2">
+          {children}
+        </div>
+      )}
+    </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Utility: truncate text for preview snippets
+// ---------------------------------------------------------------------------
+
+function truncate(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text;
+  return text.slice(0, maxLen).trimEnd() + "...";
+}
+
+// ---------------------------------------------------------------------------
+// Main page
+// ---------------------------------------------------------------------------
 
 export default function PassageDetailPage() {
   const params = useParams();
@@ -136,24 +225,27 @@ export default function PassageDetailPage() {
           })}
         </div>
 
-        {/* Historical / Linguistic Context */}
-        <section className="bg-surface rounded-xl border border-border p-6 mb-4">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="w-5 h-5 text-accent" />
-            <h2 className="text-lg font-serif">What the Text Actually Says</h2>
-          </div>
+        {/* Historical / Linguistic Context -- starts open (core content) */}
+        <DisclosureSection
+          icon={<BookOpen className="w-5 h-5 text-accent" />}
+          title="What the Text Actually Says"
+          preview={truncate(dossier.context.historicalLinguistic, 120)}
+          defaultOpen={true}
+        >
           <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">
             {dossier.context.historicalLinguistic}
           </p>
-        </section>
+        </DisclosureSection>
 
         {/* Key Terms */}
         {dossier.context.keyTerms.length > 0 && (
-          <section className="bg-surface rounded-xl border border-border p-6 mb-4">
-            <div className="flex items-center gap-2 mb-4">
-              <Languages className="w-5 h-5 text-accent" />
-              <h2 className="text-lg font-serif">Key Terms</h2>
-            </div>
+          <DisclosureSection
+            icon={<Languages className="w-5 h-5 text-accent" />}
+            title="Key Terms"
+            preview={dossier.context.keyTerms
+              .map((t) => `${t.transliteration} (${t.glossRange})`)
+              .join(", ")}
+          >
             <div className="space-y-4">
               {dossier.context.keyTerms.map((term) => (
                 <div
@@ -181,25 +273,29 @@ export default function PassageDetailPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </DisclosureSection>
         )}
 
         {/* Translation Issues */}
         {dossier.context.translationIssues && (
-          <section className="bg-surface rounded-xl border border-border p-6 mb-4">
-            <h2 className="text-lg font-serif mb-3">Translation Issues</h2>
+          <DisclosureSection
+            icon={<BookOpen className="w-5 h-5 text-text-muted" />}
+            title="Translation Issues"
+            preview={truncate(dossier.context.translationIssues, 120)}
+          >
             <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-line">
               {dossier.context.translationIssues}
             </p>
-          </section>
+          </DisclosureSection>
         )}
 
         {/* How It Gets Misused */}
-        <section className="bg-red-400/5 rounded-xl border border-red-400/20 p-6 mb-4">
-          <div className="flex items-center gap-2 mb-4">
-            <AlertTriangle className="w-5 h-5 text-red-400" />
-            <h2 className="text-lg font-serif">How It Gets Misused</h2>
-          </div>
+        <DisclosureSection
+          icon={<AlertTriangle className="w-5 h-5 text-red-400" />}
+          title="How It Gets Misused"
+          preview={truncate(dossier.misuses.description, 120)}
+          variant="warning"
+        >
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
             {dossier.misuses.description}
           </p>
@@ -211,23 +307,26 @@ export default function PassageDetailPage() {
               {dossier.misuses.concreteExamples}
             </p>
           </div>
-        </section>
+        </DisclosureSection>
 
         {/* Love Impact */}
-        <section className="bg-surface rounded-xl border border-border p-6 mb-4">
-          <h2 className="text-lg font-serif mb-3">
-            How This Distorts Access to God&apos;s Love
-          </h2>
+        <DisclosureSection
+          icon={<Heart className="w-5 h-5 text-red-400" />}
+          title="How This Distorts Access to God's Love"
+          preview={truncate(dossier.loveImpact, 120)}
+        >
           <p className="text-sm text-text-secondary leading-relaxed">
             {dossier.loveImpact}
           </p>
-        </section>
+        </DisclosureSection>
 
         {/* Clarified Reading */}
-        <section className="bg-accent/5 rounded-xl border border-accent/20 p-6 mb-8">
-          <h2 className="text-lg font-serif text-accent mb-4">
-            A Faithful Reading
-          </h2>
+        <DisclosureSection
+          icon={<Sparkles className="w-5 h-5 text-accent" />}
+          title="A Faithful Reading"
+          preview={truncate(dossier.clarifiedReading.reframe, 120)}
+          variant="accent"
+        >
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
             {dossier.clarifiedReading.reframe}
           </p>
@@ -236,7 +335,7 @@ export default function PassageDetailPage() {
               {dossier.clarifiedReading.appResponse}
             </p>
           </blockquote>
-        </section>
+        </DisclosureSection>
 
         {/* Cross-links */}
         {(() => {
