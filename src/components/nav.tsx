@@ -115,13 +115,7 @@ export function Nav() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/ask"
-                onClick={() => setIsOpen(false)}
-                className="text-sm bg-accent text-white px-4 py-2.5 rounded-lg text-center hover:bg-accent-light transition-colors mt-2"
-              >
-                Ask a Question
-              </Link>
+              {/* Ask is accessible via desktop button + mobile tab bar */}
             </div>
           </div>
         )}

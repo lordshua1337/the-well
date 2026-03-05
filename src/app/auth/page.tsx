@@ -1,15 +1,21 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { createSupabaseBrowser } from '@/lib/auth/client'
-import Link from 'next/link'
 
 export default function AuthPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
   const supabase = createSupabaseBrowser()
+
+  function handleDemoLogin() {
+    document.cookie = 'demo-auth=true; path=/; max-age=86400'
+    router.push('/dashboard')
+  }
 
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault()
@@ -85,10 +91,10 @@ export default function AuthPage() {
           )}
         </div>
 
-        <p className="text-center text-xs text-[#8B7D6B] mt-4">
-          <Link href="/" className="hover:text-[#2D6A4F] transition-colors">Continue without account</Link>
-          {' '} -- progress stays in this browser
-        </p>
+        <button onClick={handleDemoLogin}
+          className="w-full mt-4 px-4 py-2.5 border border-[#D4C5A9] text-[#8B7D6B] rounded-lg hover:bg-white hover:text-[#2D6A4F] transition-colors text-sm font-medium">
+          Demo Login (test@test.com)
+        </button>
       </div>
     </div>
   )
