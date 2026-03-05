@@ -4,10 +4,11 @@
 
 import { getBaseSystemPrompt } from "./system-prompt-base";
 import { getDirectorSystemPrompt } from "./system-prompt-director";
+import { getTutorSystemPromptAddition } from "./tutor-context";
 import { retrieveRelevantChunks } from "./retrieval";
 import type { KnowledgeChunk } from "./knowledge-index";
 
-export type AskMode = "scholar" | "director";
+export type AskMode = "scholar" | "director" | "tutor";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -92,7 +93,11 @@ export function buildEnhancedSystemPrompt(
   const contextBlock = buildContextBlock(chunks);
 
   const base =
-    mode === "director" ? getDirectorSystemPrompt() : getBaseSystemPrompt();
+    mode === "director"
+      ? getDirectorSystemPrompt()
+      : mode === "tutor"
+        ? getBaseSystemPrompt() + getTutorSystemPromptAddition()
+        : getBaseSystemPrompt();
 
   if (!contextBlock) return base;
 

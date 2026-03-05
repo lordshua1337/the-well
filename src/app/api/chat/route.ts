@@ -11,7 +11,8 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const messages: ChatMessage[] = body.messages;
-    const mode: AskMode = body.mode === "director" ? "director" : "scholar";
+    const mode: AskMode = body.mode === "director" ? "director" : body.mode === "tutor" ? "tutor" : "scholar";
+    const tutorContext: string = body.tutorContext ?? "";
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
@@ -37,7 +38,10 @@ export async function POST(request: NextRequest) {
 
     // Build a focused system prompt using RAG -- only inject knowledge
     // relevant to this specific question, not the entire content library
-    const systemPrompt = buildEnhancedSystemPrompt(lastMessage.content, mode);
+    let systemPrompt = buildEnhancedSystemPrompt(lastMessage.content, mode);
+    if (mode === "tutor" && tutorContext) {
+      systemPrompt = `${systemPrompt}\n\n${tutorContext}`;
+    }
 
     // Call Claude API
     const response = await fetch("https://api.anthropic.com/v1/messages", {

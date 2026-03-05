@@ -10,10 +10,13 @@ import {
   RotateCcw,
   BookOpen,
   Heart,
+  GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
 
-type AskMode = "scholar" | "director";
+import { buildTutorContext, getTutorSuggestions } from "@/lib/ai/tutor-context";
+
+type AskMode = "scholar" | "director" | "tutor";
 
 interface Message {
   id: string;
@@ -87,7 +90,9 @@ function TypingIndicator({ mode }: { readonly mode: AskMode }) {
           <span className="text-xs text-text-muted">
             {mode === "scholar"
               ? "Going back to the source..."
-              : "Sitting with your question..."}
+              : mode === "tutor"
+                ? "Thinking back to what he said..."
+                : "Sitting with your question..."}
           </span>
         </div>
       </div>
@@ -125,6 +130,17 @@ function ModeToggle({
       >
         <Heart className="w-3.5 h-3.5" />
         Director
+      </button>
+      <button
+        onClick={() => onModeChange("tutor")}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+          mode === "tutor"
+            ? "bg-surface text-accent shadow-sm border border-border-light"
+            : "text-text-muted hover:text-text-secondary"
+        }`}
+      >
+        <GraduationCap className="w-3.5 h-3.5" />
+        Tutor
       </button>
     </div>
   );
@@ -166,16 +182,23 @@ function AskPageContent() {
     setIsLoading(true);
 
     try {
+      const payload: Record<string, unknown> = {
+        messages: updatedMessages.map((m) => ({
+          role: m.role,
+          content: m.content,
+        })),
+        mode,
+      };
+
+      // In tutor mode, include the user's learning state from localStorage
+      if (mode === "tutor") {
+        payload.tutorContext = buildTutorContext();
+      }
+
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: updatedMessages.map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
-          mode,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -242,7 +265,9 @@ function AskPageContent() {
               <p className="text-xs text-text-muted">
                 {mode === "scholar"
                   ? "Scholarly analysis from the original texts"
-                  : "Contemplative guidance for your journey"}
+                  : mode === "tutor"
+                    ? "Personalized guidance based on your journey"
+                    : "Contemplative guidance for your journey"}
               </p>
             </div>
           </div>
@@ -271,16 +296,20 @@ function AskPageContent() {
               <h2 className="text-xl font-serif mb-2">
                 {mode === "scholar"
                   ? "What do you want to know?"
-                  : "What are you sitting with?"}
+                  : mode === "tutor"
+                    ? "What would you like to talk about?"
+                    : "What are you sitting with?"}
               </h2>
               <p className="text-text-muted text-sm text-center max-w-sm mb-8">
                 {mode === "scholar"
                   ? "Ask about any verse, word, or teaching. Get answers based on the original Greek and Aramaic -- not filtered through centuries of institutional interpretation."
-                  : "Share what's on your heart. The Director mode asks more than it answers, points toward practices, and holds space for wherever you are."}
+                  : mode === "tutor"
+                    ? "Talk with someone who knew Jesus personally. Ask about his teachings, his life, what he actually meant -- and get guidance for your journey."
+                    : "Share what's on your heart. The Director mode asks more than it answers, points toward practices, and holds space for wherever you are."}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md">
-                {STARTER_QUESTIONS.map((q) => (
+                {(mode === "tutor" ? getTutorSuggestions() : STARTER_QUESTIONS).map((q) => (
                   <button
                     key={q}
                     onClick={() => sendMessage(q)}
