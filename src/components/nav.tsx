@@ -26,6 +26,7 @@ const primaryLinks = [
 const secondaryLinks = [
   { href: "/plans", label: "Study Plans" },
   { href: "/journal", label: "Journal" },
+  { href: "/graph", label: "Knowledge Graph" },
   { href: "/words", label: "Words" },
   { href: "/cards", label: "Cards" },
   { href: "/passages", label: "Passages" },
