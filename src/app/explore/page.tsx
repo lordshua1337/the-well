@@ -24,6 +24,10 @@ import {
 import { domains, type Domain } from "@/lib/domains";
 import { concepts, searchConcepts, getConceptsByDomain } from "@/lib/concepts";
 
+// Show only these domains on the main explore page.
+// Others still accessible via search or direct URL.
+const FEATURED_DOMAIN_IDS = new Set(["d2", "d3", "d6", "d7", "d9", "d13"]);
+
 const iconMap: Record<string, React.ReactNode> = {
   ScrollText: <ScrollText className="w-5 h-5" />,
   BookOpen: <BookOpen className="w-5 h-5" />,
@@ -155,6 +159,11 @@ function ConceptResult({
 export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
 
+  const featuredDomains = useMemo(
+    () => domains.filter((d) => FEATURED_DOMAIN_IDS.has(d.id)),
+    []
+  );
+
   const domainConceptCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const domain of domains) {
@@ -176,12 +185,12 @@ export default function ExplorePage() {
         {/* Header */}
         <div className="text-center mb-8">
           <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
-            The Knowledge Universe
+            Go deeper
           </p>
           <h1 className="text-3xl sm:text-4xl mb-3">Explore</h1>
           <p className="text-text-secondary text-sm max-w-lg mx-auto">
-            {domains.length} domains spanning scripture, theology, history, languages,
-            practice, and pastoral application. Enter from any point.
+            Dive into the texts, traditions, and practices that shaped
+            the original message. Self-directed -- go wherever you&apos;re drawn.
           </p>
         </div>
 
@@ -230,7 +239,7 @@ export default function ExplorePage() {
         ) : (
           /* Domain grid */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {domains.map((domain) => (
+            {featuredDomains.map((domain) => (
               <DomainCard
                 key={domain.id}
                 domain={domain}
@@ -247,7 +256,7 @@ export default function ExplorePage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               <div>
                 <p className="text-2xl font-semibold text-accent">
-                  {domains.length}
+                  {featuredDomains.length}
                 </p>
                 <p className="text-xs text-text-muted mt-1">Domains</p>
               </div>
