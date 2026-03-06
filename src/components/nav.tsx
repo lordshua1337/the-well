@@ -10,37 +10,42 @@ import {
   Route,
   Sparkles,
   Sun,
-  Compass,
   MessageCircle,
+  MoreHorizontal,
+  BookOpen,
+  ScrollText,
+  Search,
+  Bookmark,
+  PenTool,
+  GraduationCap,
+  Layers,
 } from "lucide-react";
 
-// Desktop nav: primary links visible, secondary in hamburger
+// Desktop primary nav
 const primaryLinks = [
   { href: "/path", label: "The Path" },
-  { href: "/practices", label: "Practices" },
-  { href: "/jesus", label: "The Human Jesus" },
   { href: "/living-words", label: "Living Words" },
-  { href: "/explore", label: "Explore" },
-];
-
-const secondaryLinks = [
-  { href: "/plans", label: "Study Plans" },
-  { href: "/journal", label: "Journal" },
-  { href: "/graph", label: "Knowledge Graph" },
-  { href: "/words", label: "Words" },
-  { href: "/cards", label: "Cards" },
-  { href: "/passages", label: "Passages" },
+  { href: "/practices", label: "Practices" },
   { href: "/reclaimed", label: "Reclaimed" },
-  { href: "/saved", label: "Saved" },
-  { href: "/search", label: "Search" },
 ];
 
-// Mobile bottom tabs: the 5 most important routes
+// Secondary nav (hamburger menu)
+const secondaryLinks = [
+  { href: "/cards", label: "Word Cards", icon: Layers },
+  { href: "/words", label: "All 43 Words", icon: ScrollText },
+  { href: "/passages", label: "Passages", icon: BookOpen },
+  { href: "/plans", label: "Study Plans", icon: GraduationCap },
+  { href: "/journal", label: "Journal", icon: PenTool },
+  { href: "/explore", label: "Explore", icon: Search },
+  { href: "/saved", label: "Saved", icon: Bookmark },
+  { href: "/search", label: "Search", icon: Search },
+];
+
+// Mobile bottom tabs
 const mobileTabLinks = [
   { href: "/path", label: "Path", icon: Route },
-  { href: "/practices", label: "Practices", icon: Sparkles },
   { href: "/living-words", label: "Words", icon: Sun },
-  { href: "/explore", label: "Explore", icon: Compass },
+  { href: "/practices", label: "Practices", icon: Sparkles },
   { href: "/ask", label: "Ask", icon: MessageCircle },
 ];
 
@@ -81,6 +86,17 @@ export function Nav() {
             >
               Ask
             </Link>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-text-secondary hover:text-text-primary transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -97,25 +113,46 @@ export function Nav() {
           </button>
         </div>
 
-        {/* Mobile slide-down menu (full link list) */}
+        {/* Slide-down menu (secondary links) */}
         {isOpen && (
-          <div className="md:hidden border-t border-border-light bg-background/95 backdrop-blur-md">
-            <div className="px-4 py-4 flex flex-col gap-3">
-              {[...primaryLinks, ...secondaryLinks].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`text-base py-2 ${
-                    pathname.startsWith(link.href)
-                      ? "text-accent font-medium"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              {/* Ask is accessible via desktop button + mobile tab bar */}
+          <div className="border-t border-border-light bg-background/95 backdrop-blur-md">
+            <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
+              {/* On mobile, show primary links too */}
+              <div className="md:hidden mb-2">
+                {primaryLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`block py-2.5 text-base ${
+                      pathname.startsWith(link.href)
+                        ? "text-accent font-medium"
+                        : "text-text-secondary hover:text-text-primary"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="h-px bg-border-light my-2" />
+              </div>
+              {secondaryLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-3 py-2.5 text-sm ${
+                      pathname.startsWith(link.href)
+                        ? "text-accent font-medium"
+                        : "text-text-secondary hover:text-text-primary"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}
@@ -142,6 +179,17 @@ export function Nav() {
               </Link>
             );
           })}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`flex flex-col items-center justify-center gap-0.5 flex-1 py-1 transition-colors ${
+              isOpen
+                ? "text-accent"
+                : "text-text-muted hover:text-text-secondary"
+            }`}
+          >
+            <MoreHorizontal className="w-5 h-5" />
+            <span className="text-[10px] font-medium">More</span>
+          </button>
         </div>
       </div>
     </>
