@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 
 import { buildTutorContext } from "@/lib/ai/tutor-context";
+import { getSuggestions, type Suggestion } from "@/lib/ai/autocomplete";
 
 interface Message {
   id: string;
@@ -94,6 +95,8 @@ function AskPageContent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [suggestions, setSuggestions] = useState<readonly Suggestion[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -121,6 +124,7 @@ function AskPageContent() {
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     setInput("");
+    setShowSuggestions(false);
     setIsLoading(true);
 
     try {
@@ -257,6 +261,33 @@ function AskPageContent() {
         </div>
       </div>
 
+      {/* Autocomplete suggestions */}
+      {showSuggestions && suggestions.length > 0 && (
+        <div className="border-t border-border-light bg-surface px-4 py-2">
+          <div className="max-w-2xl mx-auto space-y-1">
+            {suggestions.map((s) => (
+              <button
+                key={s.query}
+                onClick={() => {
+                  setShowSuggestions(false);
+                  sendMessage(s.query);
+                }}
+                className="w-full text-left text-sm px-3 py-2 rounded-lg hover:bg-background transition-colors flex items-center gap-2"
+              >
+                <span className={`text-[10px] uppercase tracking-widest font-medium px-1.5 py-0.5 rounded ${
+                  s.type === "word"
+                    ? "bg-accent/10 text-accent"
+                    : "bg-gold/10 text-gold"
+                }`}>
+                  {s.type}
+                </span>
+                <span className="text-text-secondary truncate">{s.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Input area */}
       <div className="border-t border-border-light bg-background/80 backdrop-blur-sm px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] md:pb-3">
         <form
@@ -266,7 +297,17 @@ function AskPageContent() {
           <textarea
             ref={inputRef}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setInput(val);
+              if (messages.length === 0 && val.trim().length >= 2) {
+                const s = getSuggestions(val);
+                setSuggestions(s);
+                setShowSuggestions(s.length > 0);
+              } else {
+                setShowSuggestions(false);
+              }
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Type a verse, a word, or a question..."
             rows={1}

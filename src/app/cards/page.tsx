@@ -11,6 +11,7 @@ import {
   Shuffle,
   ArrowRight,
   MessageCircle,
+  Share2,
 } from "lucide-react";
 import Link from "next/link";
 import { scriptureCards, type ScriptureCard } from "@/lib/scripture-data";
@@ -101,6 +102,22 @@ function FullScreenCard({
             {card.context}
           </p>
         </div>
+
+        {/* Share */}
+        <button
+          onClick={() => {
+            const text = `"${card.commonTranslation?.split("(")[0].trim()}" doesn't mean what you think.\n\nThe Greek word is ${card.transliteration} — it actually means: ${card.actualMeaning}\n\n${card.verseRef}: "${card.verse}"\n\nFrom The Well`;
+            if (navigator.share) {
+              navigator.share({ text }).catch(() => {});
+            } else {
+              navigator.clipboard.writeText(text).catch(() => {});
+            }
+          }}
+          className="mt-4 inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
+        >
+          <Share2 className="w-3.5 h-3.5" />
+          Share this
+        </button>
       </div>
     </div>
   );
