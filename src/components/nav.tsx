@@ -19,6 +19,7 @@ import {
   PenTool,
   GraduationCap,
   Layers,
+  Clock,
 } from "lucide-react";
 
 // Desktop primary nav
@@ -32,6 +33,7 @@ const primaryLinks = [
 // Secondary nav (hamburger menu)
 const secondaryLinks = [
   { href: "/cards", label: "Word Cards", icon: Layers },
+  { href: "/timeline", label: "Timeline", icon: Clock },
   { href: "/words", label: "All 43 Words", icon: ScrollText },
   { href: "/passages", label: "Passages", icon: BookOpen },
   { href: "/plans", label: "Study Plans", icon: GraduationCap },
