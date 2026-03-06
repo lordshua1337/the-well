@@ -83,46 +83,47 @@ export default function SectionHook({
             <motion.div variants={itemVariants} className="mb-8">
               <span className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium">
                 <Droplets className="w-4 h-4" />
-                Original Greek. No filters.
+                The original words
               </span>
             </motion.div>
 
             <motion.h1 variants={itemVariants} className="mb-6">
-              What if the most important book in Western history was{" "}
-              <span className="text-accent italic">mistranslated</span>?
+              You&apos;re not broken.{" "}
+              <span className="text-accent italic">You never were.</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="text-text-secondary text-lg max-w-xl mx-auto mb-4 leading-relaxed"
             >
-              2,000 years of translation, interpretation, and institutional
-              agenda sit between you and the original words. We strip it all
-              away.
+              The original words of Jesus were about release, trust, growth, and
+              wholeness -- not guilt, fear, and punishment. Somewhere along the
+              way, the message changed.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
               className="text-text-muted max-w-lg mx-auto mb-10"
             >
-              &ldquo;Sin&rdquo; doesn&apos;t mean what you think.
-              Neither does &ldquo;repent,&rdquo; &ldquo;hell,&rdquo; or
-              &ldquo;eternal.&rdquo;
+              &ldquo;Sin&rdquo; meant missing the mark.
+              &ldquo;Repent&rdquo; meant change how you see.
+              &ldquo;Hell&rdquo; was a garbage dump.
+              Here&apos;s what was really said.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
-                href="/path"
+                href="/cards"
                 className="bg-accent text-white px-6 py-3 rounded-lg font-medium hover:bg-accent-light transition-colors inline-flex items-center justify-center gap-2"
               >
-                Start The Path
+                See What They Changed
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/explore"
+                href="/ask"
                 className="bg-surface border border-border text-text-primary px-6 py-3 rounded-lg font-medium hover:border-accent/30 transition-colors inline-flex items-center justify-center gap-2"
               >
-                Explore
+                Ask About Any Verse
               </Link>
             </motion.div>
           </>
