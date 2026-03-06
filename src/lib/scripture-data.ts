@@ -599,4 +599,43 @@ export const scriptureCards: ScriptureCard[] = [
       "For centuries, preachers have tried to soften this saying. The most famous attempt: 'The Eye of the Needle was a small gate in Jerusalem's wall that a camel could squeeze through if it knelt down and removed its baggage.' This gate never existed. There is zero archaeological or historical evidence for it. The explanation was invented in the 9th century to make wealthy Christians feel better. Jesus's original audience would have heard exactly what it sounds like: an impossibility. Camels do not fit through needle eyes. That is the point. The saying is hyperbolic, yes -- but the hyperbole points in a clear direction. Wealth creates attachment. Attachment prevents the radical letting-go that entering the Kingdom requires. The reaction of the disciples confirms this reading -- they are 'greatly astonished' and ask 'Who then can be saved?' They understood the claim as extreme. Later theology domesticated it. Jesus did not.",
     category: "teaching",
   },
+  {
+    id: "sc-46",
+    greek: "χάρις",
+    transliteration: "charis",
+    commonTranslation: "Grace (unmerited favor)",
+    actualMeaning: "Gift-giving generosity -- the natural overflow of abundance",
+    verse:
+      "For by charis you have been made whole through trust -- and this not from yourselves, it is the gift of God.",
+    verseRef: "Ephesians 2:8-9",
+    context:
+      "The emphasis in 'unmerited favor' falls on your unworthiness: you do not deserve this. The emphasis in the original charis falls on the giver's abundance: this is what generosity looks like. One makes you feel small. The other makes the source look magnificent. Charis operated in a gift economy -- a patron gives generously, the recipient responds with gratitude. Not debt and payment. Overflow.",
+    category: "word",
+  },
+  {
+    id: "sc-47",
+    greek: "κόλασις",
+    transliteration: "kolasis",
+    commonTranslation: "Punishment",
+    actualMeaning: "Corrective pruning -- a gardening term for cutting back what is dead so the plant can flourish",
+    verse:
+      "And these will go away into age-long correction, but the righteous into age-long life.",
+    verseRef: "Matthew 25:46",
+    context:
+      "Aristotle drew a clear distinction: timoria is retribution (punishment for the punisher's satisfaction). Kolasis is correction (applied for the sake of the one receiving it, aimed at restoration). The New Testament chose the corrective word. A God who punishes is settling scores. A God who prunes is tending a garden. The goal is flourishing, not suffering.",
+    category: "word",
+  },
+  {
+    id: "sc-48",
+    greek: "ἀπόλλυμι",
+    transliteration: "apollymi",
+    commonTranslation: "Perish (be destroyed)",
+    actualMeaning: "To be lost, to wander away -- not annihilated, but separated from where you belong",
+    verse:
+      "For the Son of Man came to seek and to save the lost.",
+    verseRef: "Luke 19:10",
+    context:
+      "Jesus uses this same word for the lost sheep, the lost coin, the lost son. In every parable, what is apollymi is found and restored. The word does not mean obliteration. It means being in the wrong place, unable to find your way back. The shepherd goes after what is lost precisely because lost is not the same as gone forever.",
+    category: "word",
+  },
 ];
