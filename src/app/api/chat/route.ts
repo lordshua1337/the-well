@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { config } from "@/lib/config";
-import { buildEnhancedSystemPrompt, type AskMode } from "@/lib/ai/context-builder";
+import { buildEnhancedSystemPrompt } from "@/lib/ai/context-builder";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const messages: ChatMessage[] = body.messages;
-    const mode: AskMode = body.mode === "director" ? "director" : body.mode === "tutor" ? "tutor" : "scholar";
     const tutorContext: string = body.tutorContext ?? "";
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
@@ -36,12 +35,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ content: demoResponse });
     }
 
-    // Build a focused system prompt using RAG -- only inject knowledge
-    // relevant to this specific question, not the entire content library
-    let systemPrompt = buildEnhancedSystemPrompt(lastMessage.content, mode);
-    if (mode === "tutor" && tutorContext) {
-      systemPrompt = `${systemPrompt}\n\n${tutorContext}`;
-    }
+    // Build unified system prompt with RAG context + learner state
+    const systemPrompt = buildEnhancedSystemPrompt(
+      lastMessage.content,
+      tutorContext || undefined,
+    );
 
     // Call Claude API
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -91,51 +89,48 @@ function getDemoResponse(question: string): string {
   const q = question.toLowerCase();
 
   if (q.includes("sin") || q.includes("hamartia")) {
-    return `Great question. The word commonly translated as "sin" in English comes from the Greek **hamartia** (hamartia).
+    return `The word they translated as "sin" is **hamartia** in Greek. It's an archery term -- it literally means **"missing the mark."** You aimed at a target and your arrow went wide. No moral depravity, no permanent stain. Just: you aimed, you missed, adjust and try again.
 
-It's an archery term. It literally means **"missing the mark"** -- you aimed at a target and your arrow went wide. No moral depravity, no permanent stain on your soul. Just: you aimed, you missed, adjust and try again.
+So when Paul writes "all have sinned" (Romans 3:23), the original is closer to: "everyone has missed the mark." That's coaching, not condemnation.
 
-This matters because when Paul writes "all have sinned" (Romans 3:23), the original meaning is closer to: "everyone has missed the mark." That's a fundamentally different tone -- coaching rather than condemnation.
-
-The shift from "you are a sinner" to "you missed the mark" changes the entire posture of the text. One shames you. The other invites you to try again.`;
+What changes for you when you hear it that way -- as an invitation to adjust your aim rather than a verdict on your soul?`;
   }
 
   if (q.includes("repent") || q.includes("metanoia")) {
-    return `The word translated "repent" is **metanoia** (metanoia) in Greek.
+    return `The word translated "repent" is **metanoia** in Greek. **Meta** = beyond. **Nous** = mind, perception. So it literally means **"to go beyond your current way of thinking"** -- a fundamental shift in how you see.
 
-**Meta** = beyond, after
-**Nous** = mind, perception
+When Jesus begins his ministry saying "Repent, for the kingdom of heaven is at hand" -- what the original actually says is closer to: **"Transform your perception, because the kingdom of heaven is right here."**
 
-So metanoia literally means **"to go beyond your current way of thinking"** -- a fundamental shift in perception and understanding.
+He wasn't telling people to feel guilty. He was telling them to see differently. That's expansion, not contraction.
 
-When Jesus begins his ministry saying "Repent, for the kingdom of heaven is at hand" (Matthew 4:17), the original says something closer to: **"Transform your perception, because the kingdom of heaven is right here."**
-
-He wasn't telling people to feel guilty. He was telling them to see differently. That's a fundamentally different invitation -- one of expansion, not contraction.`;
+What would it look like to hear that as an invitation rather than a command?`;
   }
 
   if (q.includes("hell") || q.includes("gehenna")) {
-    return `There are actually three different Greek words that all got translated as "hell" in English -- and they mean very different things:
+    return `There are three different Greek words that all got translated as "hell" -- and they mean very different things:
 
-**Gehenna** -- This is a real place. The Valley of Hinnom (Ge-Hinnom), a garbage dump south of Jerusalem where trash burned constantly. When Jesus says someone will be "thrown into Gehenna," his audience could literally see this place from the city walls. It's a metaphor for the consequences of destructive living, not a description of eternal supernatural torture.
+**Gehenna** -- A real place. The Valley of Hinnom, a garbage dump south of Jerusalem where trash burned constantly. Jesus' audience could literally see it from the city walls. It's a metaphor for the consequences of destructive living, not a description of eternal torture.
 
-**Hades** -- The Greek underworld. The realm of the dead. Not a punishment -- just where dead people go. Borrowed from Greek mythology and used loosely in the New Testament.
+**Hades** -- The Greek underworld. The realm of the dead. Not punishment -- just where dead people go.
 
-**Tartarus** -- Used exactly once (2 Peter 2:4), referring to where fallen angels are held. Not about human souls at all.
+**Tartarus** -- Used exactly once (2 Peter 2:4), about fallen angels. Not about human souls at all.
 
-The modern concept of "hell" as eternal conscious torment comes primarily from medieval theology (Dante, etc.), not from the original texts.`;
+The modern concept of "hell" as eternal conscious torment comes primarily from medieval theology -- Dante, not Jesus.
+
+What does it change for you knowing that Jesus was pointing at a garbage dump, not an eternal torture chamber?`;
   }
 
-  return `That's a great question. To give you the full picture with original Greek references and scholarly context, this would normally connect to the AI companion.
+  return `That's a meaningful question. To give you the full answer with original Greek context, this connects to the AI companion which needs an API key to run.
 
-**Demo Mode**: The full AI-powered answer engine is available when the Anthropic API key is configured. In the meantime, here's what I can tell you from the built-in knowledge base:
+**What I can share from the knowledge base:**
 
-The Well is built around going back to the original Greek and Aramaic texts to see what was actually written, before centuries of translation and institutional interpretation changed the meaning.
+The Well is built around one idea: going back to the original Greek and Aramaic to see what was actually written, before centuries of translation and institutional interpretation changed the meaning.
 
-Some key starting points:
+Some places to start:
 - **hamartia** ("sin") actually means "missing the mark" -- an archery term
 - **metanoia** ("repent") actually means "transform your perception"
 - **Gehenna** ("hell") was literally the garbage dump outside Jerusalem
-- **aionios** ("eternal") actually means "of the age" -- age-long, not necessarily infinite
+- **aionios** ("eternal") actually means "of the age" -- not necessarily infinite
 
-Try asking about any of these specifically, or explore the Word Corrections page for deep dives into each one.`;
+Try asking about any of these, or explore the Word Cards for a guided story through the most important changes.`;
 }

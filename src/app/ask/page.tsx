@@ -8,15 +8,10 @@ import {
   Loader2,
   Droplets,
   RotateCcw,
-  BookOpen,
-  Heart,
-  GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
 
-import { buildTutorContext, getTutorSuggestions } from "@/lib/ai/tutor-context";
-
-type AskMode = "scholar" | "director" | "tutor";
+import { buildTutorContext } from "@/lib/ai/tutor-context";
 
 interface Message {
   id: string;
@@ -24,20 +19,18 @@ interface Message {
   content: string;
 }
 
-const STARTER_QUESTIONS = [
-  "What does 'sin' actually mean in Greek?",
-  "What did Jesus actually say about hell?",
-  "What is the Gospel of Thomas?",
-  "What does 'repent' really mean?",
-  "Did Jesus actually say to be perfect?",
-  "What is the 'living water' Jesus talked about?",
-  "What does 'pneuma' mean -- spirit or breath?",
-  "Why was the Gospel of Thomas excluded?",
+const STARTER_PROMPTS = [
+  "\"For all have sinned and fall short of the glory of God.\"",
+  "\"Repent, for the kingdom of heaven is at hand.\"",
   "What does 'forgive' actually mean in Greek?",
-  "What did Jesus mean by the 'Kingdom of God'?",
+  "\"The wages of sin is death.\"",
+  "What did Jesus actually say about hell?",
+  "\"Be perfect, as your heavenly Father is perfect.\"",
+  "What is the Gospel of Thomas?",
+  "\"Unless you are born again, you cannot see the kingdom of God.\"",
 ];
 
-function MessageBubble({ message }: { message: Message }) {
+function MessageBubble({ message }: { readonly message: Message }) {
   const isUser = message.role === "user";
 
   return (
@@ -77,7 +70,7 @@ function MessageBubble({ message }: { message: Message }) {
   );
 }
 
-function TypingIndicator({ mode }: { readonly mode: AskMode }) {
+function TypingIndicator() {
   return (
     <div className="flex justify-start animate-fade-in">
       <div className="bg-surface border border-border rounded-2xl rounded-bl-md px-4 py-3">
@@ -88,60 +81,10 @@ function TypingIndicator({ mode }: { readonly mode: AskMode }) {
         <div className="flex items-center gap-1">
           <Loader2 className="w-4 h-4 text-text-muted animate-spin" />
           <span className="text-xs text-text-muted">
-            {mode === "scholar"
-              ? "Going back to the source..."
-              : mode === "tutor"
-                ? "Thinking back to what he said..."
-                : "Sitting with your question..."}
+            Going back to the source...
           </span>
         </div>
       </div>
-    </div>
-  );
-}
-
-function ModeToggle({
-  mode,
-  onModeChange,
-}: {
-  readonly mode: AskMode;
-  readonly onModeChange: (mode: AskMode) => void;
-}) {
-  return (
-    <div className="flex items-center bg-surface-warm rounded-lg p-0.5 border border-border-light">
-      <button
-        onClick={() => onModeChange("scholar")}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-          mode === "scholar"
-            ? "bg-surface text-accent shadow-sm border border-border-light"
-            : "text-text-muted hover:text-text-secondary"
-        }`}
-      >
-        <BookOpen className="w-3.5 h-3.5" />
-        Scholar
-      </button>
-      <button
-        onClick={() => onModeChange("director")}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-          mode === "director"
-            ? "bg-surface text-accent shadow-sm border border-border-light"
-            : "text-text-muted hover:text-text-secondary"
-        }`}
-      >
-        <Heart className="w-3.5 h-3.5" />
-        Director
-      </button>
-      <button
-        onClick={() => onModeChange("tutor")}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-          mode === "tutor"
-            ? "bg-surface text-accent shadow-sm border border-border-light"
-            : "text-text-muted hover:text-text-secondary"
-        }`}
-      >
-        <GraduationCap className="w-3.5 h-3.5" />
-        Tutor
-      </button>
     </div>
   );
 }
@@ -151,7 +94,6 @@ function AskPageContent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<AskMode>("scholar");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -182,23 +124,18 @@ function AskPageContent() {
     setIsLoading(true);
 
     try {
-      const payload: Record<string, unknown> = {
-        messages: updatedMessages.map((m) => ({
-          role: m.role,
-          content: m.content,
-        })),
-        mode,
-      };
-
-      // In tutor mode, include the user's learning state from localStorage
-      if (mode === "tutor") {
-        payload.tutorContext = buildTutorContext();
-      }
+      const tutorContext = buildTutorContext();
 
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          messages: updatedMessages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+          tutorContext,
+        }),
       });
 
       if (!response.ok) {
@@ -263,26 +200,19 @@ function AskPageContent() {
                 Ask The Well
               </h1>
               <p className="text-xs text-text-muted">
-                {mode === "scholar"
-                  ? "Scholarly analysis from the original texts"
-                  : mode === "tutor"
-                    ? "Personalized guidance based on your journey"
-                    : "Contemplative guidance for your journey"}
+                Type a passage or ask anything about the original words
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <ModeToggle mode={mode} onModeChange={setMode} />
-            {messages.length > 0 && (
-              <button
-                onClick={resetChat}
-                className="text-text-muted hover:text-text-secondary p-1.5 rounded-lg hover:bg-surface transition-colors"
-                title="Start over"
-              >
-                <RotateCcw className="w-4 h-4" />
-              </button>
-            )}
-          </div>
+          {messages.length > 0 && (
+            <button
+              onClick={resetChat}
+              className="text-text-muted hover:text-text-secondary p-1.5 rounded-lg hover:bg-surface transition-colors"
+              title="Start over"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
 
@@ -294,22 +224,16 @@ function AskPageContent() {
             <div className="flex flex-col items-center justify-center min-h-[50vh]">
               <Droplets className="w-10 h-10 text-accent mb-4 animate-pulse-glow rounded-full" />
               <h2 className="text-xl font-serif mb-2">
-                {mode === "scholar"
-                  ? "What do you want to know?"
-                  : mode === "tutor"
-                    ? "What would you like to talk about?"
-                    : "What are you sitting with?"}
+                What passage is on your heart?
               </h2>
               <p className="text-text-muted text-sm text-center max-w-sm mb-8">
-                {mode === "scholar"
-                  ? "Ask about any verse, word, or teaching. Get answers based on the original Greek and Aramaic -- not filtered through centuries of institutional interpretation."
-                  : mode === "tutor"
-                    ? "Talk with someone who knew Jesus personally. Ask about his teachings, his life, what he actually meant -- and get guidance for your journey."
-                    : "Share what's on your heart. The Director mode asks more than it answers, points toward practices, and holds space for wherever you are."}
+                Type in your favorite verse and discover what it really means in
+                the original Greek. Or ask about any word, teaching, or question
+                you&apos;ve been carrying.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md">
-                {(mode === "tutor" ? getTutorSuggestions() : STARTER_QUESTIONS).map((q) => (
+                {STARTER_PROMPTS.map((q) => (
                   <button
                     key={q}
                     onClick={() => sendMessage(q)}
@@ -326,7 +250,7 @@ function AskPageContent() {
               {messages.map((message) => (
                 <MessageBubble key={message.id} message={message} />
               ))}
-              {isLoading && <TypingIndicator mode={mode} />}
+              {isLoading && <TypingIndicator />}
               <div ref={messagesEndRef} />
             </div>
           )}
@@ -334,7 +258,7 @@ function AskPageContent() {
       </div>
 
       {/* Input area */}
-      <div className="border-t border-border-light bg-background/80 backdrop-blur-sm px-4 py-3">
+      <div className="border-t border-border-light bg-background/80 backdrop-blur-sm px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] md:pb-3">
         <form
           onSubmit={handleSubmit}
           className="max-w-2xl mx-auto flex items-end gap-2"
@@ -344,7 +268,7 @@ function AskPageContent() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about any verse, word, or teaching..."
+            placeholder="Type a verse, a word, or a question..."
             rows={1}
             className="flex-1 resize-none bg-surface border border-border rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent/40 transition-colors"
             style={{ maxHeight: "120px" }}

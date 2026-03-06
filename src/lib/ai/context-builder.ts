@@ -1,14 +1,10 @@
 // Context builder for The Well's RAG system.
 // Takes retrieved chunks and formats them into a context block,
-// then combines that block with the base system prompt.
+// then combines that block with the unified system prompt.
 
 import { getBaseSystemPrompt } from "./system-prompt-base";
-import { getDirectorSystemPrompt } from "./system-prompt-director";
-import { getTutorSystemPromptAddition } from "./tutor-context";
 import { retrieveRelevantChunks } from "./retrieval";
 import type { KnowledgeChunk } from "./knowledge-index";
-
-export type AskMode = "scholar" | "director" | "tutor";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -62,11 +58,10 @@ export function buildContextBlock(chunks: readonly KnowledgeChunk[]): string {
 
   if (sections.length === 0) return "";
 
-  return `RETRIEVED KNOWLEDGE (use this context to answer the question accurately):\n\n${sections.join("\n\n")}`;
+  return `RETRIEVED KNOWLEDGE (use this context to answer accurately):\n\n${sections.join("\n\n")}`;
 }
 
 // Maximum characters per chunk entry in the context block.
-// Keeps individual items readable without letting verbose concepts balloon the prompt.
 const MAX_CONTENT_CHARS = 600;
 
 function truncateContent(text: string): string {
@@ -87,19 +82,20 @@ function formatSection(heading: string, chunks: KnowledgeChunk[]): string {
 
 export function buildEnhancedSystemPrompt(
   question: string,
-  mode: AskMode = "scholar"
+  tutorContext?: string,
 ): string {
   const chunks = retrieveRelevantChunks(question);
   const contextBlock = buildContextBlock(chunks);
 
-  const base =
-    mode === "director"
-      ? getDirectorSystemPrompt()
-      : mode === "tutor"
-        ? getBaseSystemPrompt() + getTutorSystemPromptAddition()
-        : getBaseSystemPrompt();
+  let prompt = getBaseSystemPrompt();
 
-  if (!contextBlock) return base;
+  if (contextBlock) {
+    prompt = `${prompt}\n\n${contextBlock}`;
+  }
 
-  return `${base}\n\n${contextBlock}`;
+  if (tutorContext) {
+    prompt = `${prompt}\n\n${tutorContext}`;
+  }
+
+  return prompt;
 }
