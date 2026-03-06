@@ -137,10 +137,17 @@ export function KnowledgeGraph({
 }) {
   const router = useRouter();
   const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const animRef = useRef<number>(0);
   const [, forceUpdate] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const panStartRef = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchMatch, setSearchMatch] = useState<string | null>(null);
 
   // Filter data
   const filteredData = useMemo(() => {
@@ -220,6 +227,62 @@ export function KnowledgeGraph({
     [router]
   );
 
+  // Zoom via mouse wheel
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    setZoom((z) => Math.max(0.3, Math.min(3, z + delta)));
+  }, []);
+
+  // Pan via mouse drag on background
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if ((e.target as Element).tagName === "circle") return;
+    setIsPanning(true);
+    panStartRef.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y };
+  }, [pan]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isPanning) return;
+    setPan({
+      x: panStartRef.current.panX + (e.clientX - panStartRef.current.x),
+      y: panStartRef.current.panY + (e.clientY - panStartRef.current.y),
+    });
+  }, [isPanning]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsPanning(false);
+  }, []);
+
+  // Search
+  const handleSearch = useCallback((term: string) => {
+    setSearchTerm(term);
+    if (!term.trim() || !simRef.current) {
+      setSearchMatch(null);
+      return;
+    }
+    const lower = term.toLowerCase();
+    const match = simRef.current.simNodes.find((n) =>
+      n.node.label.toLowerCase().includes(lower)
+    );
+    if (match) {
+      setSearchMatch(match.id);
+      // Center on the matched node
+      setPan({
+        x: dimensions.width / 2 - match.x * zoom,
+        y: dimensions.height / 2 - match.y * zoom,
+      });
+    } else {
+      setSearchMatch(null);
+    }
+  }, [dimensions, zoom]);
+
+  const handleResetView = useCallback(() => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+    setSearchTerm("");
+    setSearchMatch(null);
+  }, []);
+
   if (!simRef.current) return null;
 
   const { simNodes, simEdges } = simRef.current;
@@ -243,13 +306,62 @@ export function KnowledgeGraph({
     : null;
 
   return (
-    <div className="relative w-full" style={{ height: dimensions.height }}>
+    <div
+      ref={containerRef}
+      className="relative w-full overflow-hidden"
+      style={{ height: dimensions.height }}
+    >
+      {/* Search + Controls */}
+      <div className="absolute top-3 left-3 z-20 flex items-center gap-2">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="Search nodes..."
+          className="px-3 py-1.5 rounded-lg text-xs bg-surface border border-border text-text-primary placeholder-text-muted focus:outline-none focus:border-accent"
+          style={{ width: 180 }}
+        />
+      </div>
+      <div className="absolute top-3 right-3 z-20 flex items-center gap-1">
+        <button
+          onClick={() => setZoom((z) => Math.min(3, z + 0.2))}
+          className="w-7 h-7 rounded-lg bg-surface border border-border text-text-secondary text-xs flex items-center justify-center hover:text-text-primary transition-colors"
+          title="Zoom in"
+        >
+          +
+        </button>
+        <span className="text-[10px] text-text-muted w-10 text-center font-mono">
+          {Math.round(zoom * 100)}%
+        </span>
+        <button
+          onClick={() => setZoom((z) => Math.max(0.3, z - 0.2))}
+          className="w-7 h-7 rounded-lg bg-surface border border-border text-text-secondary text-xs flex items-center justify-center hover:text-text-primary transition-colors"
+          title="Zoom out"
+        >
+          -
+        </button>
+        <button
+          onClick={handleResetView}
+          className="ml-1 px-2 h-7 rounded-lg bg-surface border border-border text-text-secondary text-[10px] flex items-center justify-center hover:text-text-primary transition-colors"
+          title="Reset view"
+        >
+          Reset
+        </button>
+      </div>
+
       <svg
         ref={svgRef}
         width={dimensions.width}
         height={dimensions.height}
         className="bg-surface rounded-xl border border-border"
+        style={{ cursor: isPanning ? "grabbing" : "grab" }}
+        onWheel={handleWheel}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
+        <g transform={`translate(${pan.x},${pan.y}) scale(${zoom})`}>
         {/* Edges */}
         {simEdges.map((e, i) => {
           const isHighlighted = highlightedEdges.has(i);
@@ -280,36 +392,59 @@ export function KnowledgeGraph({
         {simNodes.map((sn) => {
           const isHighlighted = highlightedNodes.has(sn.id);
           const isHoverActive = hoveredNode !== null;
+          const isSearched = searchMatch === sn.id;
           return (
             <g key={sn.id}>
+              {/* Search highlight ring */}
+              {isSearched && (
+                <circle
+                  cx={sn.x}
+                  cy={sn.y}
+                  r={sn.radius + 6}
+                  fill="none"
+                  stroke="#F4A261"
+                  strokeWidth={3}
+                  strokeDasharray="4 2"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="0;12"
+                    dur="1s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              )}
               <circle
                 cx={sn.x}
                 cy={sn.y}
                 r={sn.radius}
                 fill={sn.node.domainColor}
                 fillOpacity={
-                  isHoverActive ? (isHighlighted ? 1 : 0.15) : 0.7
+                  isSearched ? 1 : isHoverActive ? (isHighlighted ? 1 : 0.15) : 0.7
                 }
-                stroke={isHighlighted ? "#fff" : "none"}
-                strokeWidth={isHighlighted ? 2 : 0}
+                stroke={isHighlighted || isSearched ? "#fff" : "none"}
+                strokeWidth={isHighlighted || isSearched ? 2 : 0}
                 className="cursor-pointer transition-opacity"
                 onMouseEnter={() => setHoveredNode(sn.id)}
                 onMouseLeave={() => setHoveredNode(null)}
                 onClick={() => handleNodeClick(sn.node)}
               />
-              {/* Label for larger nodes */}
-              {sn.radius >= 8 && (
+              {/* Label for larger nodes or searched node */}
+              {(sn.radius >= 8 || isSearched) && (
                 <text
                   x={sn.x}
                   y={sn.y + sn.radius + 12}
                   textAnchor="middle"
                   className="text-[9px] fill-text-muted pointer-events-none select-none"
                   style={{
-                    opacity: isHoverActive
-                      ? isHighlighted
-                        ? 1
-                        : 0.1
-                      : 0.6,
+                    opacity: isSearched
+                      ? 1
+                      : isHoverActive
+                        ? isHighlighted
+                          ? 1
+                          : 0.1
+                        : 0.6,
+                    fontWeight: isSearched ? 600 : 400,
                   }}
                 >
                   {sn.node.label.length > 20
@@ -320,6 +455,7 @@ export function KnowledgeGraph({
             </g>
           );
         })}
+        </g>
       </svg>
 
       {/* Hover tooltip */}
@@ -327,8 +463,8 @@ export function KnowledgeGraph({
         <div
           className="absolute bg-surface border border-border rounded-lg px-3 py-2 shadow-lg pointer-events-none z-10"
           style={{
-            left: Math.min(hoveredData.x + 20, dimensions.width - 200),
-            top: Math.max(hoveredData.y - 50, 10),
+            left: Math.min(hoveredData.x * zoom + pan.x + 20, dimensions.width - 200),
+            top: Math.max(hoveredData.y * zoom + pan.y - 50, 10),
           }}
         >
           <p className="text-xs font-semibold text-text-primary">
