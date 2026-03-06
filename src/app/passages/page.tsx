@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { AlertTriangle, BookOpen, Shield, Search, CheckCircle2, Bookmark } from "lucide-react";
-import { allDossiers } from "@/lib/passages";
+import { allDossiers, getDossiersByTestament } from "@/lib/passages";
 import { misuseTypes } from "@/lib/misuse-types";
 import { loadProgress, type ReadingProgress } from "@/lib/reading-progress";
 import {
@@ -14,6 +14,7 @@ import {
   type Bookmarks,
 } from "@/lib/bookmarks";
 
+type TestamentFilter = "nt" | "ot" | "all";
 type FilterMode = "all" | "P1" | "P2" | "saved" | string;
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -39,6 +40,7 @@ function getMisuseTypeCategory(id: string): string {
 }
 
 export default function PassagesPage() {
+  const [testament, setTestament] = useState<TestamentFilter>("nt");
   const [filter, setFilter] = useState<FilterMode>("all");
   const [search, setSearch] = useState("");
   const [progress, setProgress] = useState<ReadingProgress | null>(null);
@@ -63,8 +65,14 @@ export default function PassagesPage() {
 
   const savedCount = bookmarks?.passages.length ?? 0;
 
+  const ntCount = getDossiersByTestament("nt").length;
+  const otCount = getDossiersByTestament("ot").length;
+
   const filtered = useMemo(() => {
-    let results = [...allDossiers];
+    let results =
+      testament === "all"
+        ? [...allDossiers]
+        : [...getDossiersByTestament(testament)];
 
     if (filter === "saved") {
       results = results.filter(
@@ -89,7 +97,7 @@ export default function PassagesPage() {
     }
 
     return results;
-  }, [filter, search, bookmarks]);
+  }, [testament, filter, search, bookmarks]);
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">
@@ -97,16 +105,37 @@ export default function PassagesPage() {
         {/* Header */}
         <div className="text-center mb-10">
           <p className="text-xs text-accent uppercase tracking-widest font-medium mb-2">
-            Scripture Misuse Dossiers
+            What the passages really say
           </p>
           <h1 className="text-3xl sm:text-4xl mb-3">
-            Passages That Get Misused
+            Passages
           </h1>
           <p className="text-text-secondary text-sm max-w-lg mx-auto">
-            Commonly quoted, frequently misapplied. Each dossier shows the
-            original context, how the passage gets misused, and what a faithful
-            reading looks like.
+            The most quoted verses with what they actually mean in
+            context. Pick any passage and see the original alongside the
+            common reading.
           </p>
+
+          {/* Testament toggle */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {(["nt", "ot", "all"] as const).map((t) => (
+              <button
+                key={t}
+                onClick={() => { setTestament(t); setFilter("all"); }}
+                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                  testament === t
+                    ? "bg-accent text-white"
+                    : "bg-surface border border-border text-text-secondary hover:border-accent/30"
+                }`}
+              >
+                {t === "nt"
+                  ? `New Testament (${ntCount})`
+                  : t === "ot"
+                    ? `Old Testament (${otCount})`
+                    : `All (${allDossiers.length})`}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Progress bar */}

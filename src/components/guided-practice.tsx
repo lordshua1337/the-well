@@ -1,9 +1,28 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { X, ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
 import { type Practice } from "@/lib/practices-data";
 import { PracticeTimer } from "@/components/practice-timer";
+
+// Generate a soft bell tone using Web Audio API
+function playBell() {
+  try {
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(528, ctx.currentTime);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.5);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 2.5);
+  } catch {
+    // Audio not available -- silent fallback
+  }
+}
 
 interface GuidedPracticeProps {
   readonly practice: Practice;
@@ -15,6 +34,9 @@ export function GuidedPractice({ practice, onClose, onComplete }: GuidedPractice
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isDone, setIsDone] = useState(false);
   const [timerComplete, setTimerComplete] = useState(false);
+  const [reflection, setReflection] = useState("");
+  const [reflectionSaved, setReflectionSaved] = useState(false);
+  const bellPlayed = useRef(false);
 
   const steps = practice.steps;
   const currentStep = steps[currentStepIndex];
@@ -28,6 +50,7 @@ export function GuidedPractice({ practice, onClose, onComplete }: GuidedPractice
     } else {
       setCurrentStepIndex((prev) => prev + 1);
       setTimerComplete(false);
+      bellPlayed.current = false;
     }
   }, [isLast, onComplete]);
 
@@ -40,6 +63,10 @@ export function GuidedPractice({ practice, onClose, onComplete }: GuidedPractice
 
   const handleTimerComplete = useCallback(() => {
     setTimerComplete(true);
+    if (!bellPlayed.current) {
+      bellPlayed.current = true;
+      playBell();
+    }
   }, []);
 
   // Extract minutes from the step duration string.
@@ -81,14 +108,45 @@ export function GuidedPractice({ practice, onClose, onComplete }: GuidedPractice
             Tradition holds that what happens after a practice matters as much as the practice itself. Sit for a moment before you move.
           </p>
 
-          {/* Reflection prompt */}
+          {/* Reflection */}
           <div className="bg-surface rounded-xl border border-border p-5 mb-8 text-left">
             <p className="text-xs text-accent uppercase tracking-widest font-medium mb-3">
               Reflection
             </p>
-            <p className="text-sm text-text-secondary leading-relaxed">
-              What was one moment during this practice that surprised you, moved you, or stayed with you? Name it -- even briefly. The naming is part of the practice.
+            <p className="text-sm text-text-secondary leading-relaxed mb-4">
+              What was one moment during this practice that surprised you, moved you, or stayed with you?
             </p>
+            <textarea
+              value={reflection}
+              onChange={(e) => setReflection(e.target.value)}
+              placeholder="Name it -- even briefly..."
+              rows={3}
+              className="w-full bg-background border border-border-light rounded-lg px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent/40 transition-colors resize-none mb-3"
+            />
+            {!reflectionSaved && reflection.trim() && (
+              <button
+                onClick={() => {
+                  try {
+                    const saved = JSON.parse(localStorage.getItem("the-well-reflections") ?? "[]");
+                    saved.push({
+                      practice: practice.slug,
+                      text: reflection.trim(),
+                      date: new Date().toISOString(),
+                    });
+                    localStorage.setItem("the-well-reflections", JSON.stringify(saved));
+                    setReflectionSaved(true);
+                  } catch {
+                    setReflectionSaved(true);
+                  }
+                }}
+                className="text-accent text-sm font-medium hover:text-accent-light transition-colors"
+              >
+                Save reflection
+              </button>
+            )}
+            {reflectionSaved && (
+              <p className="text-xs text-accent animate-fade-in">Saved.</p>
+            )}
           </div>
 
           <button
