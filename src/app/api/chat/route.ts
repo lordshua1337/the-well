@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error("Anthropic API error:", response.status, error);
+      console.warn("[api/chat] Anthropic API error:", { status: response.status, body: error.slice(0, 200) });
       return NextResponse.json(
         { error: "Failed to get response" },
         { status: 500 }
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ content });
   } catch (error) {
-    console.error("Chat API error:", error);
+    console.warn("[api/chat] unhandled error:", { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

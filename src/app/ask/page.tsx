@@ -156,7 +156,7 @@ function AskPageContent() {
 
       setMessages([...updatedMessages, assistantMessage]);
     } catch (error) {
-      console.error("Chat error:", error);
+      console.warn("[ask] chat error:", { error: error instanceof Error ? error.message : String(error) });
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: "assistant",
