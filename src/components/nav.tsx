@@ -19,21 +19,22 @@ import {
   PenTool,
   GraduationCap,
   Layers,
-  Clock,
+  Anchor,
+  Waves,
 } from "lucide-react";
 
 // Desktop primary nav
 const primaryLinks = [
   { href: "/path", label: "The Path" },
+  { href: "/walls", label: "The Walls" },
   { href: "/living-words", label: "Living Words" },
   { href: "/practices", label: "Practices" },
-  { href: "/reclaimed", label: "Reclaimed" },
+  { href: "/the-deep", label: "The Deep", accent: true },
 ];
 
 // Secondary nav (hamburger menu)
 const secondaryLinks = [
   { href: "/cards", label: "Word Cards", icon: Layers },
-  { href: "/timeline", label: "Timeline", icon: Clock },
   { href: "/words", label: "All 43 Words", icon: ScrollText },
   { href: "/passages", label: "Passages", icon: BookOpen },
   { href: "/plans", label: "Study Plans", icon: GraduationCap },
@@ -76,7 +77,9 @@ export function Nav() {
                 className={`text-sm transition-colors link-animated ${
                   pathname.startsWith(link.href)
                     ? "text-accent font-medium"
-                    : "text-text-secondary hover:text-text-primary"
+                    : "accent" in link && link.accent
+                      ? "text-text-muted hover:text-accent/80"
+                      : "text-text-secondary hover:text-text-primary"
                 }`}
               >
                 {link.label}

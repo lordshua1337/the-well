@@ -602,7 +602,7 @@ export const pathStages: readonly PathStage[] = [
         estimatedMinutes: 2,
         content: {
           title: "You Have Practiced",
-          body: "You have done something most churchgoers never do: you sat in silence and let go. You did not recite. You did not petition. You practiced presence. This is the contemplative tradition in its simplest form -- and it has been transforming people for two thousand years. The Practices section of The Well has twelve full guided practices if you want to go deeper. But the seed has been planted: you know that this tradition exists, and you have experienced it, even briefly.",
+          body: "You have done something most churchgoers never do: you sat in silence and let go. You did not recite. You did not petition. You practiced presence. This is the contemplative tradition in its simplest form -- and it has been transforming people for two thousand years. The Practices section of The Well has twelve full guided practices if you want to go deeper. But the seed has been planted: you know that this tradition exists, and you have experienced it, even briefly.\n\nWhen you are ready to see the larger picture -- how these teachings were suppressed and what systems replaced them -- The Deep (/the-deep) is waiting. It is not gentle. But it is true.",
         },
       },
     ],
@@ -660,7 +660,7 @@ export const pathStages: readonly PathStage[] = [
         estimatedMinutes: 3,
         content: {
           title: "You Have Walked the Path",
-          body: "Seven stages. From the lens to the words to the text to the teacher to the lost voices to the practices to daily commitment. You have done something significant: you have looked past 2,000 years of institutional interpretation and encountered the source material on its own terms.\n\nThis is not the end. It is the beginning of a different kind of relationship with these texts -- one based on honesty, original languages, and direct experience rather than institutional authority. The Well is always here. The scholarship continues to grow. New practices and Living Words are added regularly.\n\nThe water has been here for two thousand years. Most people drink from the pipes downstream. You came to the source.\n\nKeep drinking.",
+          body: "Seven stages. From the lens to the words to the text to the teacher to the lost voices to the practices to daily commitment. You have done something significant: you have looked past 2,000 years of institutional interpretation and encountered the source material on its own terms.\n\nThis is not the end. It is the beginning of a different kind of relationship with these texts -- one based on honesty, original languages, and direct experience rather than institutional authority. The Well is always here. The scholarship continues to grow. New practices and Living Words are added regularly.\n\nTwo paths open from here:\n\n- The Seven Walls (/walls) -- the inner demolition work. Seven denials of self, each with a Jericho Walk practice and declarations of freedom. This is the personal transformation layer.\n\n- The Deep (/the-deep) -- the system of control. How religion, war, economics, and death were weaponized. This is the structural awareness layer.\n\nThe water has been here for two thousand years. Most people drink from the pipes downstream. You came to the source.\n\nKeep drinking.",
           pullQuote: "This is not the end. It is the beginning.",
           keyInsight: "The Path is complete. The practice continues. Come back tomorrow.",
         },

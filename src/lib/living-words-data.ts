@@ -12,7 +12,8 @@ export type LivingWordCategory =
   | "body"
   | "shadow"
   | "community"
-  | "silence";
+  | "silence"
+  | "awakening";
 
 export interface LivingWord {
   readonly id: string;
@@ -39,6 +40,7 @@ export const CATEGORY_LABELS: Record<LivingWordCategory, string> = {
   shadow: "Shadow",
   community: "Community",
   silence: "Silence",
+  awakening: "Awakening",
 };
 
 export const CATEGORY_DESCRIPTIONS: Record<LivingWordCategory, string> = {
@@ -52,6 +54,7 @@ export const CATEGORY_DESCRIPTIONS: Record<LivingWordCategory, string> = {
   shadow: "Honest self-examination. What part of yourself do you condemn in others?",
   community: "Koinonia, ekklesia. Who in your life tells you truth you do not want to hear?",
   silence: "Contemplative practice invitations. Can you sit for five minutes without reaching for your phone?",
+  awakening: "The cost of seeing clearly. Ego death, inner fire, the price of freedom.",
 };
 
 // ---------------------------------------------------------------------------
@@ -651,6 +654,62 @@ export const livingWords: readonly LivingWord[] = [
     grounding: "The last word of the biblical tradition is not doctrine or instruction but vision -- the book of Revelation ends with an image. The Psalter ends with praise so extravagant it runs out of words. The mystics across every tradition eventually arrive at the same silence -- not emptiness but fullness too large for language. Meister Eckhart: 'The most beautiful thing a person can say about God is to remain silent out of the wisdom of inner richness.' You have sixty days of questions. Now: rest.",
     microPractice: "Sit in silence for twenty minutes today. No instruction. No technique. No particular thing to do or notice. Let it be enough to be here.",
     relatedPracticeSlug: "centering-prayer",
+  },
+
+  // AWAKENING (days 61-66) -- Morningstar themes
+  {
+    id: "awakening-1",
+    day: 61,
+    category: "awakening",
+    title: "The Identity You Would Have to Lose",
+    prompt: "What identity would you have to lose to become who you actually are? Not your worst self -- the identity you constructed to survive. The competent one. The strong one. The one who has it together. The one everyone relies on. What if that version of you is not your true self but a cage you built so well you forgot you were inside it?",
+    grounding: "Jesus said 'whoever loses their life will find it' (Matthew 16:25). The Greek word for 'life' here is psyche -- not biological life but the constructed self, the persona, the identity you present to the world. The invitation is not to self-destruction but to the discovery that your real life exists underneath the one you perform.",
+    microPractice: "Write down three words that describe who you are to the world (responsible, strong, smart, etc.). Now ask: what is underneath each one? What would remain if that identity were stripped away? Sit with whatever surfaces.",
+  },
+  {
+    id: "awakening-2",
+    day: 62,
+    category: "awakening",
+    title: "The Cage You Call Responsibility",
+    prompt: "What are you calling 'responsibility' that is actually a cage? The obligations you never chose. The expectations you inherited. The life you built because someone told you this is what adults do. Not all responsibility is a cage -- but some of what you call duty is actually fear dressed in respectable clothes.",
+    grounding: "When Jesus called his disciples, the texts say they left their nets 'immediately' (euthys in Mark 1:18). They did not file paperwork. They did not give two weeks' notice. This is not a model for irresponsibility -- it is a portrait of what happens when someone sees clearly enough to distinguish between genuine obligation and the prison of 'should.' The nets were their livelihood. They left them.",
+    microPractice: "List your top five obligations. For each one, ask: did I choose this, or did it choose me? Circle the ones that feel like cages. You do not have to leave them today. Just see them clearly.",
+  },
+  {
+    id: "awakening-3",
+    day: 63,
+    category: "awakening",
+    title: "The Performance of Strength",
+    prompt: "What would happen if you stopped performing strength? If you let people see the exhaustion, the doubt, the not-knowing? The performance of strength is one of the most expensive things you do -- not because strength is bad, but because the performance of it prevents anyone from actually knowing you. And being unknown is the loneliest form of safety.",
+    grounding: "Paul's 'thorn in the flesh' (2 Corinthians 12:7-10) -- whatever it was -- led him to a paradoxical discovery: 'When I am weak, then I am strong.' The Greek word for weakness (astheneia) means 'without strength.' Paul is not celebrating weakness as a virtue. He is reporting a discovery: when the performance drops, something real becomes available that the performance was blocking.",
+    microPractice: "Tell one person today something true that you would normally hide behind competence. Not a trauma dump -- just one honest sentence. Notice what happens in the relationship when you drop the performance.",
+  },
+  {
+    id: "awakening-4",
+    day: 64,
+    category: "awakening",
+    title: "The Fire That Does Not Destroy",
+    prompt: "There is a fire inside you -- a conviction, a knowing, a refusal to accept the world as it is -- that you have been managing, dimming, explaining away. You call it impractical. You call it naive. You file it under 'someday.' But it keeps burning. What if the fire is not the problem? What if managing it is?",
+    grounding: "The burning bush (Exodus 3:2) burned but was not consumed. Moses turned aside to look, and that turning was the beginning of everything. The fire was not destructive -- it was revelatory. It burned away nothing except Moses' idea of who he was and what his life was for. The inner fire works the same way: it does not destroy you. It destroys the version of you that is too small for what you carry.",
+    microPractice: "Name the fire. What conviction, calling, or refusal have you been managing? Write it down without editing or qualifying it. Let it exist on the page without the word 'but' after it.",
+  },
+  {
+    id: "awakening-5",
+    day: 65,
+    category: "awakening",
+    title: "What Dies When You Wake Up",
+    prompt: "Awakening is not addition -- it is subtraction. You do not gain enlightenment. You lose the things that were blocking it. Relationships that required your smallness. Beliefs that required your ignorance. Comforts that required your numbness. What are you afraid to lose? That is exactly what is standing between you and freedom.",
+    grounding: "The grain of wheat metaphor (John 12:24): 'Unless a grain of wheat falls into the earth and dies, it remains just a single grain; but if it dies, it bears much fruit.' The Greek word for 'die' (apothnesko) is unambiguous. Something real ends. The metaphor is not gentle. But the promise is that what emerges from the death is not less than what went in -- it is more. The cost of awakening is real. So is what comes after.",
+    microPractice: "Name one thing you know you need to release but have not yet. Do not release it today. Just acknowledge it. Say to yourself: 'I know this needs to end. I am not ready yet. But I see it.'",
+  },
+  {
+    id: "awakening-6",
+    day: 66,
+    category: "awakening",
+    title: "The World After You See",
+    prompt: "Once you see the systems -- the way religion was weaponized, the way language was controlled, the way your own denials keep you captive -- the world looks different. You cannot go back to not knowing. The question becomes: what do you do with what you see? The temptation is cynicism. The invitation is creation. You did not wake up to despair. You woke up to build.",
+    grounding: "The risen Jesus does not stay in the tomb. He does not stay in heaven. He appears -- to Mary in the garden, to the disciples on the road, to Thomas in the locked room. Resurrection in the New Testament is not escape from the world. It is return to the world with new eyes and a new mandate. The Greek word for 'send' (apostello) -- the root of 'apostle' -- means one who is sent. You wake up not for your own sake but to be sent.",
+    microPractice: "Write one sentence about what you would build if you were not afraid. Not a business plan. Not a strategy. Just the sentence. Let it sit.",
   },
 ];
 

@@ -9,7 +9,7 @@ export function Footer() {
           The Well
         </div>
         <p className="text-text-muted text-xs">
-          Not a church. Not a denomination. Just the original words.
+          No gates. No gatekeepers. Just living water.
         </p>
       </div>
     </footer>
