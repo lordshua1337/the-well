@@ -83,32 +83,21 @@ export default function SectionHook({
             <motion.div variants={itemVariants} className="mb-8">
               <span className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium">
                 <Droplets className="w-4 h-4" />
-                The original words
+                The Well
               </span>
             </motion.div>
 
             <motion.h1 variants={itemVariants} className="mb-6">
-              Before it was religion,{" "}
-              <span className="text-accent italic">it was a well.</span>
+              Restore your soul{" "}
+              <span className="text-accent italic">with living water.</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="text-text-secondary text-lg max-w-xl mx-auto mb-4 leading-relaxed"
+              className="text-text-secondary text-lg max-w-xl mx-auto mb-10 leading-relaxed"
             >
-              The original words of Jesus were about release, trust, and
-              wholeness -- not guilt, fear, and punishment. Somewhere along the
-              way, the message changed. The water is still here.
-            </motion.p>
-
-            <motion.p
-              variants={itemVariants}
-              className="text-text-muted max-w-lg mx-auto mb-10"
-            >
-              &ldquo;Sin&rdquo; meant missing the mark.
-              &ldquo;Repent&rdquo; meant change how you see.
-              &ldquo;Hell&rdquo; was a garbage dump.
-              Come see what was really said.
+              Get to know who Jesus really was, what he offered, and how
+              you can become like him.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 justify-center">
