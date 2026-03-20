@@ -1,0 +1,46 @@
+{
+  "iteration": 1,
+  "session": 1,
+  "project_profile": {
+    "type": "web-app",
+    "stack": ["Next.js", "React 19", "TypeScript", "Supabase", "Tailwind", "Anthropic"],
+    "architecture": "app-router",
+    "maturity": "mid-stage",
+    "test_framework": "none",
+    "conventions": {
+      "naming": "camelCase",
+      "component_pattern": "functional-hooks",
+      "state_management": "useState",
+      "api_style": "manual-route-handlers",
+      "css_approach": "tailwind"
+    },
+    "critical_paths": [
+      "src/app/api/chat/route.ts",
+      "src/components/knowledge-graph.tsx",
+      "src/middleware.ts"
+    ],
+    "known_weak_areas": [
+      "No tests",
+      "knowledge-graph.tsx at 483 lines",
+      "practices/[slug]/page.tsx at 453 lines",
+      "passages/[slug]/page.tsx at 436 lines",
+      "living-words/page.tsx at 410 lines",
+      "5 files over 400 lines",
+      "No rate limiting on API routes"
+    ]
+  },
+  "improvement_velocity": {
+    "cleanup": { "attempts": 3, "successes": 3, "velocity": "high" },
+    "structural": { "attempts": 0, "successes": 0, "velocity": "unknown" },
+    "feature": { "attempts": 0, "successes": 0, "velocity": "unknown" }
+  },
+  "locked_domains": [],
+  "deferred_domains": [],
+  "blocked_items": [],
+  "last_changed_files": [
+    "src/app/ask/page.tsx",
+    "src/app/api/chat/route.ts"
+  ],
+  "blocked_by_head_lock": true,
+  "failure_streak": 0
+}

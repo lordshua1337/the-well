@@ -27,6 +27,7 @@ export interface Wall {
   };
   readonly theWalk: string;
   readonly declarations: readonly WallDeclaration[];
+  readonly gnosis: string;
 }
 
 export const walls: readonly Wall[] = [
@@ -68,6 +69,7 @@ export const walls: readonly Wall[] = [
       { text: "I am not my achievements. I am not my failures. I am." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "When pride falls, you stop building towers and start recognizing the ground you are already standing on. Jesus did not perform divinity to prove his worth -- he demonstrated what every human already carries. The first step toward gnosis is realizing you do not need to earn the right to access it. You were born with it. Pride is the wall that makes you forget.",
   },
 
   {
@@ -108,6 +110,7 @@ export const walls: readonly Wall[] = [
       { text: "My life is not a competition. It is a calling." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "Envy dissolves when you understand abundance as a law, not a wish. Jesus multiplied loaves and fish -- not through magic but through the demonstration that energy multiplies when it is shared, not hoarded. Scarcity is a lie the system taught you. When this wall falls, you stop watching other people's paths because you finally trust your own.",
   },
 
   {
@@ -148,6 +151,7 @@ export const walls: readonly Wall[] = [
       { text: "Peace is not weakness. It is the hardest power there is." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "Wrath is the denial that costs you the promised land. Moses struck the rock instead of speaking to it -- the miracle still happened, but Moses never arrived. Your anger does not block God's power. It blocks your ability to walk in it. When this wall falls, you discover that peace is not passive -- it is the frequency at which consciousness operates at its highest. Peter walked on water until fear disrupted his resonance. Wrath is that same disruption, sustained.",
   },
 
   {
@@ -188,6 +192,7 @@ export const walls: readonly Wall[] = [
       { text: "Enough is not a number. It is a state of the soul." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "Jesus told the Rich Young Ruler to sell everything -- not because wealth is evil but because attachment blocks frequency. You cannot tune to the divine signal while clutching a competing one. The quantum reality is simple: your consciousness goes where your attachment is. If it is locked on accumulation, it cannot expand into gnosis. When this wall falls, your hands open -- and what flows through open hands is infinitely more than what closed fists can hold.",
   },
 
   {
@@ -228,6 +233,7 @@ export const walls: readonly Wall[] = [
       { text: "Fear is not a stop sign. It is a compass pointing toward growth." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "Moses hesitated. Elijah ran. Jonah fled to the sea. Every person called to awakening resists. Sloth is not laziness -- it is the terror of becoming what you actually are. Jesus spent 40 days in the wilderness before beginning his ministry. The delay was not weakness. It was the last gasp of the old self before the new one emerged. When this wall falls, you stop preparing and start walking. The path appears under your feet, not on the map.",
   },
 
   {
@@ -268,6 +274,7 @@ export const walls: readonly Wall[] = [
       { text: "The banquet is already set. I only have to sit down." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "Your body is a tuning fork. Every cell vibrates at a specific frequency. When you flood it with noise, processed food, endless content, and manufactured stimulation, you drown out the signal. Fasting -- from food, from media, from noise -- is not punishment. It is tuning. Jesus fasted 40 days not to suffer but to hear clearly. When this wall falls, you learn that emptiness is not a problem to solve. It is the space where the signal comes through.",
   },
 
   {
@@ -308,6 +315,7 @@ export const walls: readonly Wall[] = [
       { text: "What I long for is not shameful. It is the deepest prayer I know." },
       { text: "I am free. I am free. I am free." },
     ],
+    gnosis: "The Bride and Bridegroom is not a metaphor about marriage. It is the architecture of reunion -- the soul returning to its source. Every mystical tradition teaches this: the deepest human longing for union is a memory of where you came from. The Song of Songs is in the Bible because the rabbis knew that erotic love is the closest human analogy to divine reunion. When this wall falls, you stop performing intimacy and start recognizing it as the sacred technology it always was -- the bridge between the physical and the infinite.",
   },
 ];
 

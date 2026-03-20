@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Clock, BookOpen, Layers } from "lucide-react";
+import { ArrowRight, ArrowLeft, Clock, BookOpen, Layers, Zap, User, Waves } from "lucide-react";
 import { getAllCurrents } from "@/lib/the-deep-data";
 import { staggerContainer, itemVariants } from "@/components/discovery/section-transitions";
 
@@ -160,7 +160,49 @@ function DeepContent() {
           <h2 className="text-xs text-accent uppercase tracking-widest font-semibold mb-6 text-center">
             Also in The Deep
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link
+              href="/the-deep/the-real-jesus"
+              className="group rounded-xl border border-border hover:border-accent/40 bg-surface p-5 transition-all"
+            >
+              <User className="w-5 h-5 text-accent/50 mb-3" />
+              <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors mb-1">
+                The Real Jesus
+              </h3>
+              <p className="text-xs text-text-muted">
+                The lost years. The training. How a human became Christ
+                -- and what that means for you.
+              </p>
+            </Link>
+
+            <Link
+              href="/the-deep/the-frequency"
+              className="group rounded-xl border border-border hover:border-accent/40 bg-surface p-5 transition-all"
+            >
+              <Waves className="w-5 h-5 text-accent/50 mb-3" />
+              <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors mb-1">
+                The Frequency
+              </h3>
+              <p className="text-xs text-text-muted">
+                Everything is vibration. Your body is a tuning fork.
+                &ldquo;Your faith has made you well&rdquo; was literal.
+              </p>
+            </Link>
+
+            <Link
+              href="/the-deep/the-becoming"
+              className="group rounded-xl border border-border hover:border-accent/40 bg-surface p-5 transition-all"
+            >
+              <Zap className="w-5 h-5 text-accent/50 mb-3" />
+              <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors mb-1">
+                The Becoming
+              </h3>
+              <p className="text-xs text-text-muted">
+                Purge. Isolation. Refinement. Mastery. The four phases
+                of awakening -- and what it costs.
+              </p>
+            </Link>
+
             <Link
               href="/the-deep/stolen-legacy"
               className="group rounded-xl border border-border hover:border-accent/40 bg-surface p-5 transition-all"

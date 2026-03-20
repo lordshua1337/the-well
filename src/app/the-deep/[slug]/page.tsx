@@ -592,6 +592,292 @@ function HiddenTextsPage() {
 }
 
 // ---------------------------------------------------------------------------
+// The Real Jesus -- initiated human, not divine exception
+// ---------------------------------------------------------------------------
+function TheRealJesusPage() {
+  const sections = [
+    {
+      title: "The Lost Years",
+      content:
+        "Between age 12 and 30, Jesus disappears from the biblical record. Eighteen years -- unaccounted for. Historical traditions outside the Western canon tell a different story. In Buddhist monasteries across Tibet and India, records describe a teacher called Issa who studied among monks and ascetics. In Egypt, initiation traditions describe a young Galilean who trained in the temples, learning the science of frequency, consciousness, and the unseen architecture of reality. Among the Essenes -- the Jewish mystical community at Qumran -- he practiced the disciplines of purification, meditation, and direct encounter with the divine. He did not arrive as Christ. He became it. Through human effort, human training, and human unfoldment.",
+    },
+    {
+      title: "The Seven Signs as Natural Law",
+      content:
+        "The Gospel of John records seven specific demonstrations. The church calls them miracles -- supernatural acts that only God could perform. But read through the lens of what Jesus actually learned, they are something far more radical: demonstrations of natural law that any awakened human can access.\n\nWater to wine at Cana -- transmutation. The rearrangement of molecular structure through focused consciousness.\n\nThe official's son healed at a distance -- bridge of consciousness. Healing without proximity, because consciousness is not local.\n\nThe man at Bethesda -- the power of choice. 'Do you want to be healed?' Not a rhetorical question. The man had been lying there 38 years. Choice is the activation key.\n\nFeeding the five thousand -- multiplication of energy. Not magic. The demonstration that energy shared expands rather than diminishes.\n\nWalking on water -- alignment of frequency. Peter walked too, until fear disrupted his resonance. The water did not change. Peter's frequency did.\n\nThe blind man -- rewriting reality at the cellular level. 'Your faith has made you well' is not a platitude. It is a literal instruction about the relationship between belief and biological reality.\n\nLazarus -- mastery over matter. The demonstration that consciousness persists beyond the body and can be recalled when the frequency is right.",
+    },
+    {
+      title: "The Crucifixion as Initiation",
+      content:
+        "Jesus chose death. He predicted it repeatedly. He walked into Jerusalem knowing what would happen. He told Peter to put away his sword. He could have fled, fought, or called down 'twelve legions of angels.' He did none of these things. Why?\n\nBecause the crucifixion was not a defeat. It was the final initiation. The ultimate demonstration that consciousness survives the destruction of the body. Every mystery school in the ancient world taught a death-and-rebirth initiation -- symbolic passage through death to emerge transformed. Jesus did it literally. Not because he was the only one who could. Because he was the first one willing to demonstrate it publicly.\n\nThe resurrection is not his exception. It is humanity's blueprint. 'The works I do, you will do also, and greater works than these' (John 14:12). He meant it.",
+    },
+    {
+      title: "You Are Christ Embodied",
+      content:
+        "This is the teaching the institution buried deepest: you are not becoming Christ. You are Christ embodied. The divine spark is not something you earn through belief, sacrament, or institutional approval. It is what you are made of. The Gospel of Thomas, saying 77: 'Split a piece of wood; I am there. Lift a stone, and you will find me.' Not 'worship me.' Not 'believe in me.' Find me -- in the wood, in the stone, in yourself.\n\nThe entire architecture of institutional Christianity -- the clergy, the sacraments, the creeds, the gatekeeping -- exists because this teaching is dangerous to power. If you already carry the divine, you do not need a mediator. If every human is Christ embodied, there is no hierarchy. If the resurrection is a blueprint and not an exception, then death itself loses its power as a tool of control.\n\nThis is why Mary Magdalene matters. She did the inner work -- seven denials dissolved. And she was the first to see. Not Peter. Not John. Not any of the institutional founders. The woman the church erased saw first, because she had done the demolition first.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen pt-24 pb-20 px-4">
+      <div className="max-w-2xl mx-auto">
+        <Link
+          href="/the-deep"
+          className="inline-flex items-center gap-1.5 text-text-muted text-sm hover:text-accent transition-colors mb-8"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          The Deep
+        </Link>
+
+        <div className="mb-12">
+          <p className="text-xs text-accent uppercase tracking-widest font-semibold mb-3">
+            The Deep
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-serif mb-4">
+            The Real Jesus
+          </h1>
+          <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
+            Not the Christ of the creeds. Not the God-man of the councils. A
+            human being who trained, practiced, and evolved into the fullest
+            expression of what a human can become -- and then demonstrated the
+            path so you could walk it too.
+          </p>
+        </div>
+
+        <div className="space-y-10">
+          {sections.map((section) => (
+            <div key={section.title}>
+              <h2 className="text-lg font-serif font-semibold text-text-primary mb-4">
+                {section.title}
+              </h2>
+              {section.content.split("\n\n").map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="text-sm text-text-secondary leading-relaxed mb-4"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12 pt-8 border-t border-border-light">
+          <Link
+            href="/the-deep/the-frequency"
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:text-accent-light transition-colors"
+          >
+            Next: The Frequency -- how it actually works
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// The Frequency -- quantum consciousness, body as tuning fork
+// ---------------------------------------------------------------------------
+function TheFrequencyPage() {
+  const sections = [
+    {
+      title: "Everything Is Vibration",
+      content:
+        "This is not metaphor. At the subatomic level, nothing is solid. Everything is energy vibrating at specific frequencies. Matter is condensed energy -- Einstein proved this with E=mc2. The chair you are sitting in is not solid. It is energy vibrating slowly enough to feel solid. Your body is not a machine. It is an antenna.\n\nThe double-slit experiment demonstrated that the act of observation changes the behavior of particles. Consciousness does not just perceive reality -- it participates in creating it. This is not mysticism. This is physics. And it is exactly what Jesus was demonstrating 2,000 years ago.",
+    },
+    {
+      title: "Your Body Is a Tuning Fork",
+      content:
+        "Every cell in your body vibrates at a specific frequency. Your nervous system is an antenna that receives and transmits information far beyond the five senses. Your heart generates an electromagnetic field 5,000 times stronger than your brain -- it is the true center of consciousness, not your head.\n\nThe pineal gland -- the 'third eye' across every mystical tradition -- is a calcified bridge between the physical and the unseen. It contains rod and cone cells identical to your eyes. It produces DMT. Every tradition that taught meditation, fasting, and silence was teaching you how to decalcify this bridge and restore the connection.\n\nWhen Jesus said 'the eye is the lamp of the body -- if your eye is single, your whole body will be full of light' (Matthew 6:22), he was not speaking in metaphor. He was giving you an instruction.",
+    },
+    {
+      title: "The Frequencies of Creation",
+      content:
+        "The Solfeggio tones -- 174, 285, 396, 417, 528, 639, 741, 852, 963 Hz -- are the frequencies embedded in Gregorian chant, ancient hymns, and sacred architecture. 528 Hz is the frequency of DNA repair. 432 Hz is the natural tuning of the universe -- the Great Pyramid resonates at 432 Hz.\n\nIn 1939, the global standard tuning was changed from 432 Hz to 440 Hz. The Rockefeller Foundation funded this change. 440 Hz creates subtle agitation in the nervous system. 432 Hz creates coherence. Every piece of music you have heard since 1939 has been tuned to a frequency that keeps you slightly off-center. This is not a conspiracy theory. It is a documented decision with documented funding.\n\nSacred architecture -- cathedrals, temples, pyramids -- was designed to resonate at specific frequencies that alter consciousness. The builders knew. The knowledge was not lost. It was suppressed.",
+    },
+    {
+      title: "Healing Is Alignment",
+      content:
+        "Your body rebuilds itself constantly. Your skeleton replaces itself every ten years. Your liver regenerates. Your skin replaces itself monthly. You are not the same body you were a year ago. So why do chronic conditions persist?\n\nBecause disease is not a malfunction. It is a frequency fallen out of harmony. The body knows how to heal. It is doing it right now, in real time. What prevents it is the sustained disruption of its natural frequency -- through fear, through toxic input, through the severing of the connection between consciousness and cellular function.\n\nWhen Jesus said 'your faith has made you well,' he was not offering a platitude. He was describing a mechanism. Pistis -- trust, alignment, resonant confidence -- literally shifts the body's electromagnetic field back into coherence. The healing was never supernatural. It was the most natural thing there is.",
+    },
+    {
+      title: "Thought Creates Reality",
+      content:
+        "Belief is the blueprint. Emotion is the fuel. Focus is the direction. Expectation is the command. This is not 'The Secret' or 'law of attraction' as a consumer product. This is the quantum mechanics of consciousness: the observer collapses the wave function. What you attend to with sustained focus and emotional charge becomes denser in the field of probability.\n\nCollective consciousness shapes collective reality. Global meditation experiments have measurably reduced violence in target cities. Mass fear broadcasts a frequency that lowers the collective field. The system knows this -- which is why the news cycle is engineered for fear. A population vibrating at fear frequency cannot access higher consciousness. It is not a metaphor. It is frequency management at scale.\n\nJesus gathered people. He taught them to align their consciousness. He demonstrated what aligned consciousness can do. Then he said: you will do this too. And greater.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen pt-24 pb-20 px-4">
+      <div className="max-w-2xl mx-auto">
+        <Link
+          href="/the-deep"
+          className="inline-flex items-center gap-1.5 text-text-muted text-sm hover:text-accent transition-colors mb-8"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          The Deep
+        </Link>
+
+        <div className="mb-12">
+          <p className="text-xs text-accent uppercase tracking-widest font-semibold mb-3">
+            The Deep
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-serif mb-4">
+            The Frequency
+          </h1>
+          <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
+            The universe is not made of matter. It is made of music. And your
+            body is an instrument that has been deliberately detuned.
+          </p>
+        </div>
+
+        <div className="space-y-10">
+          {sections.map((section) => (
+            <div key={section.title}>
+              <h2 className="text-lg font-serif font-semibold text-text-primary mb-4">
+                {section.title}
+              </h2>
+              {section.content.split("\n\n").map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="text-sm text-text-secondary leading-relaxed mb-4"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12 pt-8 border-t border-border-light">
+          <Link
+            href="/the-deep/the-becoming"
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:text-accent-light transition-colors"
+          >
+            Next: The Becoming -- the path of awakening
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// The Becoming -- four phases of awakening
+// ---------------------------------------------------------------------------
+function TheBecomingPage() {
+  const phases = [
+    {
+      number: "I",
+      name: "Purge",
+      description:
+        "Everything false burns away. Addictions, coping mechanisms, numbing agents -- they fall like dead weight. Not gradually. Not gently. The purge is violent because the attachments are deep. Josh threw away every vice in a single instant after his revelation -- no tapering, no negotiation. The withdrawal was exorcism. The only relief was singing, because vibration stitches together what the purge tears apart.\n\nThis phase feels like dying because it is. The false self -- the one built from trauma, conditioning, and survival strategies -- does not go quietly. It fights. It bargains. It tells you this is a mistake, that you are losing yourself. You are. That is the point. What remains after the purge is not less than what you were. It is what you always were underneath.",
+    },
+    {
+      number: "II",
+      name: "Isolation",
+      description:
+        "The people who knew the old you cannot recognize the new one. Some leave. Some fight. Some try to pull you back because your transformation threatens their comfort. Jesus said 'a prophet is not without honor except in his own hometown' -- not as a complaint but as a description of a law. The frequency shift makes you incompatible with the old environment.\n\nThis phase is the wilderness. Forty days or forty months -- the duration does not matter. What matters is that you sit with yourself without distraction, without the old mirrors, without anyone telling you who you are. The isolation is not punishment. It is the cocoon. The caterpillar does not become a butterfly by attending workshops. It dissolves into liquid inside a dark space and something entirely new assembles itself.",
+    },
+    {
+      number: "III",
+      name: "Refinement",
+      description:
+        "The raw energy of awakening gets focused. You learn to walk in the world again -- but differently. The marketer becomes Christ in the marketplace. The parent becomes Christ at the dinner table. The routine becomes an altar. This is where the mystical meets the mundane.\n\nForgiveness happens here -- not as a nice idea but as fourth-dimensional healing. You go back to your memories not to relive them but to reknow them. Your awakened adult self visits the child who was neglected, the soldier who held the dying boy, the addict who could not stop. You do not change what happened. You change who is witnessing it. And that changes everything.\n\nRefinement is the longest phase because it is the integration of everything the purge revealed and the isolation crystallized. You are not learning new things. You are learning to live as what you already are.",
+    },
+    {
+      number: "IV",
+      name: "Mastery",
+      description:
+        "Not mastery over others. Mastery over yourself. The seven denials have fallen. The frequency is stable. You walk in the world as a tuning fork -- your presence shifts the field around you without effort, without performance, without trying. People feel it. They cannot name it, but they lean toward you or away from you, because neutrality is not possible in the presence of an aligned frequency.\n\nThis is what Jesus was. Not a god performing miracles for worship. A human being whose frequency was so aligned that reality reorganized around him. Water changed state. Disease reversed. Death itself bent. Not because he was the exception. Because he was the demonstration.\n\n'The works I do, you will do also, and greater works than these.' He was not being humble. He was being precise. The path is open. The blueprint is the resurrection. The destination is not heaven after death. It is Christ consciousness while alive.",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen pt-24 pb-20 px-4">
+      <div className="max-w-2xl mx-auto">
+        <Link
+          href="/the-deep"
+          className="inline-flex items-center gap-1.5 text-text-muted text-sm hover:text-accent transition-colors mb-8"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          The Deep
+        </Link>
+
+        <div className="mb-12">
+          <p className="text-xs text-accent uppercase tracking-widest font-semibold mb-3">
+            The Deep
+          </p>
+          <h1 className="text-3xl sm:text-4xl font-serif mb-4">
+            The Becoming
+          </h1>
+          <p className="text-text-secondary text-sm sm:text-base leading-relaxed">
+            Awakening is not an event. It is a process with four phases, and it
+            costs everything you thought you were. What you get back is
+            everything you actually are.
+          </p>
+        </div>
+
+        <div className="space-y-8">
+          {phases.map((phase) => (
+            <div
+              key={phase.name}
+              className="rounded-2xl border border-border bg-surface overflow-hidden"
+            >
+              <div className="h-0.5 w-full bg-gradient-to-r from-accent/40 to-transparent" />
+              <div className="p-6 sm:p-8">
+                <div className="flex items-start gap-4 mb-4">
+                  <span className="text-3xl font-serif text-accent/25 leading-none">
+                    {phase.number}
+                  </span>
+                  <h2 className="text-xl font-serif text-text-primary">
+                    {phase.name}
+                  </h2>
+                </div>
+                {phase.description.split("\n\n").map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className="text-sm text-text-secondary leading-relaxed mb-4"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12 pt-8 border-t border-border-light">
+          <p className="text-sm text-text-muted max-w-md mx-auto mb-6">
+            The path is open. The walls are mapped. The frequency is real.
+            The only question left is whether you will walk it.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/walls"
+              className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:text-accent-light transition-colors"
+            >
+              Begin with The Walls
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <span className="hidden sm:inline text-border">|</span>
+            <Link
+              href="/the-deep"
+              className="inline-flex items-center gap-2 text-text-secondary text-sm font-medium hover:text-text-primary transition-colors"
+            >
+              Back to The Deep
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Router
 // ---------------------------------------------------------------------------
 export default function DeepSlugPage() {
@@ -601,6 +887,9 @@ export default function DeepSlugPage() {
   if (slug === "stolen-legacy") return <StolenLegacyPage />;
   if (slug === "timeline") return <TimelineDeepPage />;
   if (slug === "hidden-texts") return <HiddenTextsPage />;
+  if (slug === "the-real-jesus") return <TheRealJesusPage />;
+  if (slug === "the-frequency") return <TheFrequencyPage />;
+  if (slug === "the-becoming") return <TheBecomingPage />;
 
   return <CurrentDetailPage slug={slug} />;
 }

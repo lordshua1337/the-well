@@ -212,6 +212,15 @@ export default function WallDetailPage() {
           </p>
         </WallSection>
 
+        {/* Gnosis -- what becomes possible */}
+        <WallSection label="What Becomes Possible">
+          <div className="bg-accent/5 rounded-xl border border-accent/20 p-6">
+            <p className="text-sm text-text-secondary leading-relaxed">
+              {wall.gnosis}
+            </p>
+          </div>
+        </WallSection>
+
         {/* The Declaration */}
         <div className="mt-10 mb-10">
           <div className="bg-background rounded-2xl border border-accent/20 p-8 text-center">

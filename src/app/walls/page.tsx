@@ -47,17 +47,20 @@ export default function WallsPage() {
             variants={itemVariants}
             className="text-text-secondary text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-6"
           >
-            Before the walls of Jericho fell, the people walked around them
-            seven times. These are the walls inside you -- the seven denials of
-            self that keep you captive. Each one must be faced, walked around,
-            and declared free.
+            Mary Magdalene had seven demons. Not possessions -- denials.
+            Seven walls between her and who she actually was. When the
+            walls fell, she became the first person to witness the
+            resurrection. Not by accident. The inner demolition came first.
+            The seeing came after.
           </motion.p>
           <motion.p
             variants={itemVariants}
-            className="text-text-muted text-sm max-w-lg mx-auto italic"
+            className="text-text-secondary text-sm max-w-xl mx-auto leading-relaxed"
           >
-            Mary Magdalene was the first to rise because her seven
-            demons fell first. This is her path. This is yours.
+            These seven walls are inside you too. Each one is a denial
+            of self -- a lie the world taught you that keeps you from
+            gnosis, from direct knowing, from becoming what Jesus
+            demonstrated a human could become.
           </motion.p>
         </motion.div>
 
@@ -112,13 +115,13 @@ export default function WallsPage() {
 
           {/* The "Risen" card -- the 8th position */}
           <motion.div variants={itemVariants}>
-            <div className="rounded-2xl border border-border-light bg-background flex flex-col items-center justify-center p-6 text-center min-h-[220px]">
-              <Droplets className="w-8 h-8 text-accent/30 mb-3" />
-              <p className="text-sm font-serif text-text-muted mb-1">
-                Complete all seven walls
+            <div className="rounded-2xl border border-accent/20 bg-accent/5 flex flex-col items-center justify-center p-6 text-center min-h-[220px]">
+              <Droplets className="w-8 h-8 text-accent/40 mb-3" />
+              <p className="text-sm font-serif text-accent/80 mb-1">
+                Gnosis
               </p>
-              <p className="text-xs text-text-muted">
-                to reach the Risen state
+              <p className="text-xs text-text-muted max-w-[180px]">
+                When all seven walls fall, you see what Mary saw first.
               </p>
             </div>
           </motion.div>
