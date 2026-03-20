@@ -81,7 +81,7 @@ export default function SectionDeepDive({
         <motion.div variants={itemVariants} className="pt-8 border-t border-border-light">
           <Droplets className="w-6 h-6 text-accent mx-auto mb-3 opacity-60" />
           <p className="text-text-muted text-sm">
-            No gates. No gatekeepers. Just living water.
+            No denomination. No agenda. Just the original words.
           </p>
         </motion.div>
       </motion.div>

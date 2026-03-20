@@ -32,7 +32,7 @@ export default function SectionHook({
             <motion.div variants={itemVariants} className="mb-4">
               <span className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium">
                 <Droplets className="w-4 h-4" />
-                You returned to the Well
+                Welcome back
               </span>
             </motion.div>
 
@@ -83,28 +83,32 @@ export default function SectionHook({
             <motion.div variants={itemVariants} className="mb-8">
               <span className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium">
                 <Droplets className="w-4 h-4" />
-                Living Water
+                The original words
               </span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="mb-4">
-              Welcome to the Well.
+            <motion.h1 variants={itemVariants} className="mb-6">
+              Before it was religion,{" "}
+              <span className="text-accent italic">it was a well.</span>
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="text-accent/80 text-xl font-serif italic max-w-xl mx-auto mb-6"
+              className="text-text-secondary text-lg max-w-xl mx-auto mb-4 leading-relaxed"
             >
-              Where you may drink living water.
+              The original words of Jesus were about release, trust, and
+              wholeness -- not guilt, fear, and punishment. Somewhere along the
+              way, the message changed. The water is still here.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
-              className="text-text-secondary text-lg max-w-xl mx-auto mb-10 leading-relaxed"
+              className="text-text-muted max-w-lg mx-auto mb-10"
             >
-              The original words of Jesus were about release, trust, and
-              wholeness. Before they became religion, they were a well
-              -- and anyone could drink.
+              &ldquo;Sin&rdquo; meant missing the mark.
+              &ldquo;Repent&rdquo; meant change how you see.
+              &ldquo;Hell&rdquo; was a garbage dump.
+              Come see what was really said.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -112,14 +116,14 @@ export default function SectionHook({
                 href="/cards"
                 className="bg-accent text-white px-6 py-3 rounded-lg font-medium hover:bg-accent-light transition-colors inline-flex items-center justify-center gap-2"
               >
-                Draw from the Well
+                See What They Changed
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/ask"
                 className="bg-surface border border-border text-text-primary px-6 py-3 rounded-lg font-medium hover:border-accent/30 transition-colors inline-flex items-center justify-center gap-2"
               >
-                Ask a Question
+                Ask About Any Verse
               </Link>
             </motion.div>
           </>
